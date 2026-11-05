@@ -32,11 +32,45 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 #status{position:absolute;top:27px;right:30px;font:600 11px system-ui,sans-serif;color:#e6c79cbb;z-index:7;letter-spacing:.12em}
 @media(max-width:600px){#show:before{inset:7px;border-radius:14px}.scene{padding:45px 17px 95px}h1{font-size:clamp(4.5rem,19vw,8rem)}.big-number{font-size:clamp(9rem,45vw,16rem)}.video-wrap{width:91vw}.frame{width:min(67vw,320px);height:38vh}.reel{width:27vw;height:30vw}#controls{gap:1px;bottom:16px}#controls button{font-size:11px;padding:8px 5px}#status{top:15px;right:18px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Cinematic motion pass */
+#slotOpening .slot-stage{display:flex;flex-direction:column;gap:clamp(12px,2vh,25px);align-items:center}
+.slot-machine{display:flex;gap:clamp(8px,2.5vw,25px);align-items:center;padding:clamp(14px,3vw,35px);border:5px solid var(--gold);border-radius:26px;background:linear-gradient(145deg,#791e83,#2b103d 65%,#5d1c72);box-shadow:0 0 0 8px #b15a72,0 0 0 12px #edc37c,0 16px 50px #0008,inset 0 0 25px #fddc9d77;position:relative}
+.slot-window{height:clamp(120px,23vw,260px);width:clamp(105px,19vw,220px);overflow:hidden;border-radius:13px;background:linear-gradient(#ffdfaa,#fff8e5 36%,#fff8e5 65%,#f4b9cd);border:4px solid #d4a957;box-shadow:inset 0 8px 17px #4d0e4b66,inset 0 -8px 17px #4d0e4b66}
+.slot-strip{display:flex;flex-direction:column;will-change:transform}
+.slot-symbol{height:clamp(112px,22.3vw,252px);display:flex;align-items:center;justify-content:center;color:#5e1a77;font:900 clamp(5.5rem,15vw,11rem) system-ui,sans-serif;text-shadow:3px 4px 0 #faabd9;flex:none}
+.slot-machine.winning{animation:jackpotPulse .6s ease-in-out infinite alternate}
+@keyframes jackpotPulse{to{filter:drop-shadow(0 0 40px #ffe68c);transform:scale(1.03)}}
+#slotResult{min-height:1.25em;opacity:0;transform:scale(.7);transition:opacity .45s,transform .45s}
+#slotResult.revealed{opacity:1;transform:scale(1)}
+#pacTransition{position:absolute;inset:0;z-index:16;pointer-events:none;visibility:hidden;overflow:hidden;background:#12071f}
+#pacTransition.running{visibility:visible}
+#pacTransition .pac-lane{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);display:flex;align-items:center;gap:22px;padding:0 20px}
+.pellet{height:clamp(7px,1.6vw,16px);width:clamp(7px,1.6vw,16px);flex:1;max-width:16px;aspect-ratio:1;border-radius:50%;background:#f6dfae;box-shadow:0 0 10px #f6dfae}
+#pacHero{position:absolute;top:50%;left:-24vw;width:clamp(72px,16vw,180px);height:clamp(72px,16vw,180px);transform:translateY(-50%);z-index:2;filter:drop-shadow(0 0 25px #ffd40099)}
+#pacHero:before,#pacHero:after{content:"";position:absolute;inset:0;background:#ffd71e;border-radius:50%}
+#pacHero:before{clip-path:polygon(50% 50%,100% 3%,100% 100%,0 100%,0 0,50% 0);animation:mouthTop .26s ease-in-out infinite alternate}
+#pacHero:after{clip-path:polygon(50% 50%,100% 97%,0 100%,0 0,50% 0);animation:mouthBottom .26s ease-in-out infinite alternate}
+@keyframes mouthTop{to{clip-path:polygon(50% 50%,100% 44%,100% 100%,0 100%,0 0,50% 0)}}
+@keyframes mouthBottom{to{clip-path:polygon(50% 50%,100% 56%,0 100%,0 0,50% 0)}}
+#pacTransition.running #pacHero{animation:pacCross 1.3s linear forwards}
+@keyframes pacCross{from{left:-24vw}to{left:110vw}}
+#transitionLabel{position:absolute;bottom:17%;left:0;right:0;text-align:center;color:#ffdb92;font:bold clamp(14px,2.4vw,28px) system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.gallery-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenBurns 9s linear both}
+@keyframes kenBurns{from{transform:scale(1.03) translate(-1%,0)}to{transform:scale(1.16) translate(1%,-1%)}}
+.media-photo{width:min(78vw,880px);height:min(57vh,580px);overflow:hidden;border:7px solid var(--gold);border-radius:20px;position:relative;background:#541c70;box-shadow:0 0 45px #e5afee66;transform:rotate(-1deg)}
+.media-photo img{width:100%;height:100%;object-fit:contain;animation:kenBurns 9s linear both}
+.slide-caption{font:600 clamp(15px,2.5vw,27px) system-ui,sans-serif;max-width:80vw}
+#particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6}
+.sparkle{position:absolute;top:-10%;font-size:clamp(15px,2vw,27px);animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(540deg);opacity:0}}
+@media(max-width:600px){.media-photo{width:87vw;height:49vh}.slot-machine{padding:12px;border-width:3px}.slot-window{width:30vw;height:35vw}.slot-symbol{height:calc(35vw - 8px);font-size:23vw}}
+@media(prefers-reduced-motion:reduce){#pacTransition.running #pacHero{animation:pacCross 1.3s linear forwards}}
 </style></head>
 <body>
 <main id="show">
 <div class="stars"></div><div id="status">FABULOUS 55 · THE BIRTHDAY SHOW</div>
-<section class="scene active" data-duration="8000">
+<section class="scene active" id="slotOpening" data-duration="10500"><div class="slot-stage"><div class="eyebrow">Welcome to the Fabulous 55 Casino</div><h2>SPIN TO WIN</h2><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2><p class="subtitle">The birthday queen has hit the jackpot!</p></div></section><section class="scene" data-duration="8000">
 <div class="eyebrow">Tonight's main event</div><h1>FABULOUS<br>55</h1>
 <div class="subtitle">The queen of the night has arrived.</div>
 <div class="pills"><span class="pill">✦ Purple glamour</span><span class="pill">♠ Vegas magic</span><span class="pill">♥ All the love</span></div>
@@ -47,55 +81,192 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 <section class="scene" data-duration="8000"><div class="eyebrow">Vintage sweetheart energy</div><h2>Sweet. Sassy.<br>Unforgettable.</h2><p class="subtitle">A little Betty Boop charm, a whole lot of purple sparkle, and a personality nobody could ever duplicate.</p><div class="pills"><span class="pill">♥</span><span class="pill">✦</span><span class="pill">♥</span></div></section>
 <section class="scene" id="familyScene" data-duration="9000"><div class="eyebrow">Messages from the people who love you</div><h2 id="videoTitle">Love, Your Family</h2><div class="video-wrap" id="videoWrap"><div class="video-placeholder">🎥 Family birthday messages will play here</div></div><div class="sender" id="videoSender">Special moments are coming soon…</div></section>
 <section class="scene" data-duration="9000"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
-<div id="progress"></div>
+<div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
 <div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
 <div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><p class="subtitle" style="font-size:13px;opacity:.8">One click enables video sound. The show loops automatically after that.</p></div>
 </main>
 <script>
 'use strict';
-// CUSTOMIZE: Save her photos to assets/photos/ then add paths here.
-// This first version rotates one main photo whenever its scene appears.
-const PHOTOS = []; // Example: ['assets/photos/mom-01.jpg']
-// CUSTOMIZE: Add the family videos to assets/videos/ after collecting permission.
-// Tip: Compress to MP4 (H.264/AAC) for widest browser/TV compatibility.
-// Video files committed to a public GitHub repo can be accessed by anyone.
-// For large/private videos, use a separate approved hosting setup.
-const FAMILY_VIDEOS = [
- // {name:'From Auntie', src:'assets/videos/auntie.mp4'},
- // {name:'From the Grandkids', src:'assets/videos/grandkids.mp4'}
+// MEDIA CONFIG: Every item plays in this order: photos, then family videos, then optional messages.
+// Add as many as you like. Image paths are relative to this index.html file.
+const PHOTOS = [
+  // { src:'assets/photos/mom-01.jpg', caption:'The birthday queen ✨' },
+  // { src:'assets/photos/mom-02.jpg', caption:'Another iconic moment 💜' },
 ];
+const FAMILY_VIDEOS = [
+  // { src:'assets/videos/auntie.mp4', name:'A birthday wish from Auntie' },
+  // { src:'assets/videos/cousins.mp4', name:'Love from the cousins' },
+];
+const TEXT_MESSAGES = [
+  // {from:'Your family', message:'Happy birthday! We love you so much!'},
+];
+// All videos/photos committed to a PUBLIC repository are publicly accessible.
+// For private or large videos, link to appropriately hosted permitted media instead.
+
+const main=document.querySelector('#show');
 const scenes=[...document.querySelectorAll('.scene')];
-const videoScene=document.getElementById('familyScene'), videoWrap=document.getElementById('videoWrap');
+const familyScene=document.getElementById('familyScene');
+const transition=document.getElementById('pacTransition');
+const particles=document.getElementById('particles');
 const progress=document.getElementById('progress');
-let index=0,playing=false,muted=false,timer=null,startedAt=0,remaining=0,videoIndex=0,activeVideo=null,raf=0,photoIndex=0;
-function duration(){return Number(scenes[index].dataset.duration)||8000}
-function clearPlayback(){clearTimeout(timer);cancelAnimationFrame(raf);if(activeVideo){activeVideo.pause();activeVideo.remove();activeVideo=null}}
-function setVideoPlaceholder(){videoWrap.innerHTML='<div class="video-placeholder">🎥 Family birthday messages will play here</div>';document.getElementById('videoSender').textContent='Special moments are coming soon…'}
-function prepareScene(){
- if(scenes[index]===document.querySelector('#photoFrame')?.closest('.scene')&&PHOTOS.length){const src=PHOTOS[photoIndex++%PHOTOS.length];const img=document.createElement('img');img.src=src;img.alt='Birthday photo of Mom';const f=document.getElementById('photoFrame');f.replaceChildren(img)}
- if(scenes[index]===videoScene){
-  if(!FAMILY_VIDEOS.length){setVideoPlaceholder();return}
-  const item=FAMILY_VIDEOS[videoIndex++%FAMILY_VIDEOS.length];videoWrap.replaceChildren();
-  document.getElementById('videoTitle').textContent='A Birthday Message';
-  document.getElementById('videoSender').textContent=item.name;
-  const v=document.createElement('video');v.src=item.src;v.playsInline=true;v.preload='auto';v.controls=false;v.muted=muted;videoWrap.append(v);activeVideo=v;
-  v.addEventListener('ended',()=>{if(playing)advance(1)},{once:true});
-  v.addEventListener('error',()=>{if(playing)schedule(4500)},{once:true});
-  v.addEventListener('loadedmetadata',()=>{if(playing&&Number.isFinite(v.duration)&&v.duration>0){remaining=Math.max(4000,(v.duration+1)*1000);schedule(remaining)}},{once:true});
-  if(playing)v.play().catch(()=>{v.controls=true});
- }
+const pBtn=document.getElementById('pause');
+let playlist=[], index=0, running=false, muted=false, token=0, timer=0, frame=0;
+let duration=8000, elapsed=0, started=0, activeVideo=null, transitioning=false, spinTimers=[];
+function safeText(el,value){el.textContent=value||''}
+function createScene(){
+  const s=document.createElement('section');s.className='scene';s.dataset.duration='8000';
+  return s;
 }
-function paintProgress(){if(!playing)return;const elapsed=performance.now()-startedAt;progress.style.width=Math.min(100,100*elapsed/remaining)+'%';raf=requestAnimationFrame(paintProgress)}
-function schedule(ms){clearTimeout(timer);cancelAnimationFrame(raf);remaining=ms;startedAt=performance.now();timer=setTimeout(()=>advance(1),ms);paintProgress()}
-function show(n){clearPlayback();index=(n+scenes.length)%scenes.length;scenes.forEach((s,i)=>s.classList.toggle('active',i===index));progress.style.width='0';prepareScene();if(playing)schedule(scenes[index]===videoScene&&FAMILY_VIDEOS.length?60000:duration())}
-function advance(n){show(index+n)}
-function togglePause(){if(!playing){playing=true;if(activeVideo)activeVideo.play().catch(()=>{activeVideo.controls=true});schedule(remaining||duration())}else{playing=false;remaining=Math.max(200,remaining-(performance.now()-startedAt));clearTimeout(timer);cancelAnimationFrame(raf);if(activeVideo)activeVideo.pause()}document.getElementById('pause').textContent=playing?'Ⅱ Pause':'▶ Resume'}
-document.getElementById('start').addEventListener('click',()=>{document.getElementById('startScreen').classList.add('hidden');playing=true;show(0)});
-document.getElementById('prev').addEventListener('click',()=>advance(-1));
-document.getElementById('next').addEventListener('click',()=>advance(1));
-document.getElementById('pause').addEventListener('click',togglePause);
-document.getElementById('sound').addEventListener('click',()=>{muted=!muted;if(activeVideo)activeVideo.muted=muted;document.getElementById('sound').textContent=muted?'♫ Muted':'♫ Sound on'});
-document.getElementById('fullscreen').addEventListener('click',()=>{if(document.fullscreenElement){document.exitFullscreen?.()}else{document.getElementById('show').requestFullscreen?.().catch(()=>{})}});
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')advance(1);if(e.key==='ArrowLeft')advance(-1);if(e.code==='Space'&&document.getElementById('startScreen').classList.contains('hidden')){e.preventDefault();togglePause()}});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)togglePause()});
+function buildPlaylist(){
+  const photoTemplate=scenes.find(s=>s.querySelector('#photoFrame'));
+  const videoTemplate=familyScene;
+  if(PHOTOS.length){
+    for(const photo of PHOTOS){
+      const s=createScene();s.classList.add('photo-scene');
+      const title=document.createElement('div');title.className='eyebrow';title.textContent='Moments to Remember';
+      const frame=document.createElement('div');frame.className='media-photo';
+      const img=document.createElement('img');img.src=typeof photo==='string'?photo:photo.src;img.alt='A special birthday memory';img.loading='eager';
+      const caption=document.createElement('p');caption.className='slide-caption';caption.textContent=typeof photo==='string'?'Beautiful memories':(photo.caption||'Beautiful memories');
+      img.addEventListener('error',()=>{caption.textContent='Add a photo to this frame'});
+      frame.append(img);s.append(title,frame,caption);photoTemplate.before(s);
+    }
+    photoTemplate.remove();
+  }
+  if(FAMILY_VIDEOS.length){
+    for(const item of FAMILY_VIDEOS){
+      const s=createScene();s.classList.add('video-scene');s.dataset.duration='60000';
+      const eyebrow=document.createElement('div');eyebrow.className='eyebrow';eyebrow.textContent='A birthday message';
+      const h=document.createElement('h2');h.textContent=item.name||'With Love';
+      const wrap=document.createElement('div');wrap.className='video-wrap';
+      const video=document.createElement('video');video.src=item.src;video.preload='metadata';video.playsInline=true;video.controls=false;
+      wrap.append(video);s.append(eyebrow,h,wrap);videoTemplate.before(s);
+    }
+    videoTemplate.remove();
+  }
+  for(const item of TEXT_MESSAGES){
+    const s=createScene();s.dataset.duration='7500';
+    const tag=document.createElement('div');tag.className='eyebrow';tag.textContent='A note of love';
+    const h=document.createElement('h2');h.textContent=item.message||'Happy Birthday!';
+    const cap=document.createElement('p');cap.className='subtitle';cap.textContent='— '+(item.from||'Family');
+    s.append(tag,h,cap);videoTemplate.isConnected?videoTemplate.before(s):main.insertBefore(s,document.getElementById('pacTransition'));
+  }
+  playlist=[...document.querySelectorAll('.scene')];
+}
+buildPlaylist();
+
+function clearTimer(){clearTimeout(timer);cancelAnimationFrame(frame);timer=0;frame=0}
+function stopVideo(){if(activeVideo){activeVideo.pause();activeVideo.onended=null;activeVideo.onerror=null;activeVideo=null}}
+function clearSpin(){spinTimers.forEach(clearTimeout);spinTimers=[]}
+function spinOpening(){
+  clearSpin();
+  const machine=document.getElementById('slotMachine');
+  const result=document.getElementById('slotResult');
+  machine.classList.remove('winning');result.classList.remove('revealed');
+  const symbols=['7','♥','★','5','♠','♦','5','★','7','5','♥','5'];
+  ['slotA','slotB'].forEach((id,i)=>{
+    const strip=document.getElementById(id);strip.replaceChildren();
+    for(const value of [...symbols,'5']){const cell=document.createElement('div');cell.className='slot-symbol';cell.textContent=value;strip.append(cell)}
+    strip.style.transition='none';strip.style.transform='translateY(0px)';
+    // The reel spins through multiple symbols, then both columns settle on 5.
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        const h=strip.firstElementChild.getBoundingClientRect().height;
+        strip.style.transition='transform '+(3.2+i*.8)+'s cubic-bezier(.12,.7,.19,1)';
+        strip.style.transform='translateY(-'+(symbols.length*h)+'px)';
+      });
+    });
+  });
+  spinTimers.push(setTimeout(()=>{machine.classList.add('winning');result.classList.add('revealed');confetti(45)},5200));
+}
+function confetti(n=25){
+  const chars=['✦','★','♥','◆','✧'];
+  for(let i=0;i<n;i++){
+    const p=document.createElement('span');p.className='sparkle';p.textContent=chars[i%chars.length];
+    p.style.left=(Math.random()*100)+'%';p.style.color=['#f4cf77','#fa9bd7','#e5c9ff'][i%3];
+    p.style.animationDuration=(3+Math.random()*4)+'s';p.style.animationDelay=(Math.random()*1.4)+'s';
+    particles.append(p);setTimeout(()=>p.remove(),9000);
+  }
+}
+const lane=document.getElementById('pelletLane');
+for(let i=0;i<23;i++){const dot=document.createElement('span');dot.className='pellet';lane.append(dot)}
+function pacCut(next){
+  if(transitioning)return;
+  transitioning=true;clearTimer();stopVideo();clearSpin();
+  transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');
+  // Change scene while Pac-Man crosses, so the new one appears on its exit.
+  setTimeout(()=>{activate(next)},650);
+  setTimeout(()=>{transition.classList.remove('running');transitioning=false;if(running)playCurrent()},1320);
+}
+function activate(n){
+  index=(n+playlist.length)%playlist.length;
+  playlist.forEach((s,i)=>s.classList.toggle('active',i===index));
+  progress.style.width='0';elapsed=0;
+  duration=Number(playlist[index].dataset.duration)||8000;
+}
+function updateProgress(){
+  if(!running||transitioning)return;
+  const nowElapsed=elapsed+(performance.now()-started);
+  progress.style.width=Math.min(100,nowElapsed/duration*100)+'%';
+  frame=requestAnimationFrame(updateProgress);
+}
+function plan(ms){
+  duration=ms;elapsed=0;started=performance.now();
+  clearTimer();timer=setTimeout(()=>pacCut(index+1),duration);
+  updateProgress();
+}
+function playCurrent(){
+  if(!running||transitioning)return;
+  const s=playlist[index];
+  if(s.id==='slotOpening')spinOpening();
+  if(s.classList.contains('video-scene')){
+    const v=s.querySelector('video');activeVideo=v;v.muted=muted;v.currentTime=0;
+    const begin=()=>{
+      if(v.duration&&Number.isFinite(v.duration))duration=Math.max(3500,(v.duration+1)*1000);
+      plan(duration);
+      v.play().catch(()=>{v.controls=true;plan(10000)});
+    };
+    v.onended=()=>{if(running&&!transitioning)pacCut(index+1)};
+    v.onerror=()=>{if(running&&!transitioning)plan(4000)};
+    if(v.readyState>=1)begin();else{v.onloadedmetadata=begin;plan(60000)}
+  }else{
+    if(s.classList.contains('photo-scene')){const img=s.querySelector('img');img.style.animation='none';void img.offsetWidth;img.style.animation=''}
+    if(s===playlist[playlist.length-1])confetti(45);
+    plan(duration);
+  }
+}
+function navigate(step){if(transitioning)return;pacCut(index+step)}
+function setRunning(value){
+  if(value===running)return;
+  running=value;pBtn.textContent=running?'Ⅱ Pause':'▶ Resume';
+  if(running){
+    if(activeVideo){activeVideo.play().catch(()=>{activeVideo.controls=true})}
+    started=performance.now();clearTimer();
+    timer=setTimeout(()=>pacCut(index+1),Math.max(300,duration-elapsed));updateProgress();
+  }else{
+    elapsed+=performance.now()-started;clearTimer();activeVideo?.pause();
+  }
+}
+document.getElementById('start').addEventListener('click',()=>{
+  document.getElementById('startScreen').classList.add('hidden');
+  running=true;activate(0);playCurrent();
+});
+document.getElementById('prev').addEventListener('click',()=>navigate(-1));
+document.getElementById('next').addEventListener('click',()=>navigate(1));
+pBtn.addEventListener('click',()=>setRunning(!running));
+document.getElementById('sound').addEventListener('click',()=>{
+  muted=!muted;if(activeVideo)activeVideo.muted=muted;
+  document.getElementById('sound').textContent=muted?'♫ Muted':'♫ Sound on';
+});
+document.getElementById('fullscreen').addEventListener('click',()=>{
+  if(document.fullscreenElement)document.exitFullscreen?.();
+  else main.requestFullscreen?.().catch(()=>{});
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')navigate(1);
+  if(e.key==='ArrowLeft')navigate(-1);
+  if(e.code==='Space'&&document.getElementById('startScreen').classList.contains('hidden')){
+    e.preventDefault();setRunning(!running);
+  }
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)setRunning(false)});
 </script></body></html>
