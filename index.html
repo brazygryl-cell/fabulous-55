@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#220d36"><title>Fabulous 55 | Mom's Birthday Show</title>
+<style>
+:root{--purple:#4b2075;--mid:#250d3c;--gold:#f4cf77;--pink:#ff83c2;--cream:#fff2db}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#16091f;color:var(--cream);font-family:Georgia,'Times New Roman',serif}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #fff;outline-offset:4px}
+#show{width:100%;height:100dvh;min-height:400px;position:relative;isolation:isolate;background:radial-gradient(circle at 50% 15%,#7730a0 0%,#34124b 43%,#130819 100%)}
+#show:before{content:"";position:absolute;inset:13px;pointer-events:none;border:2px solid #e3ac5c;border-radius:25px;box-shadow:inset 0 0 20px #e6b86744,0 0 22px #bc68ed55;z-index:5}
+.stars{position:absolute;inset:0;overflow:hidden;pointer-events:none;background-image:radial-gradient(circle,#f7d99c 1px,transparent 1.5px),radial-gradient(circle,#ff97df 1px,transparent 1.5px);background-size:91px 97px,157px 161px;background-position:0 0,23px 51px;opacity:.45;animation:twinkle 4s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.13;transform:scale(1.025)}}
+.scene{position:absolute;inset:0;padding:clamp(35px,6vh,80px) clamp(23px,7vw,100px) clamp(80px,10vh,110px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(10px,2vh,24px);opacity:0;visibility:hidden;transform:scale(.97);transition:opacity 1s ease,transform 1s ease,visibility 1s}
+.scene.active{opacity:1;visibility:visible;transform:scale(1)}
+.eyebrow{font:700 clamp(12px,1.6vw,19px) system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+h1,h2,p{margin:0}h1{font-size:clamp(3.8rem,11vw,10rem);font-weight:900;line-height:.87;color:var(--gold);text-shadow:0 4px 0 #9a4e41,0 0 35px #ffcc8f77}
+h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shadow:0 0 25px #f8a6ec77}
+.subtitle{font-family:system-ui,sans-serif;font-size:clamp(1rem,2.4vw,1.65rem);line-height:1.5;max-width:850px}
+.big-number{font-size:clamp(7rem,25vw,22rem);font-weight:900;line-height:.83;color:var(--gold);text-shadow:7px 8px 0 #9e3d99,0 0 70px #eec76888}
+.marquee{border:3px solid var(--gold);background:#1d0b2dcc;padding:clamp(16px,3vw,32px);border-radius:24px;box-shadow:0 0 0 6px #4d2268,0 0 45px #f0be7f55}
+.pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.pill{font:700 clamp(12px,1.6vw,18px) system-ui,sans-serif;border:1px solid #eed39877;border-radius:99px;padding:9px 16px;background:#ffffff15}
+.reels{display:flex;gap:clamp(7px,2vw,24px);justify-content:center}.reel{display:grid;place-items:center;width:clamp(78px,15vw,190px);height:clamp(90px,19vw,210px);border-radius:15px;border:5px solid var(--gold);background:linear-gradient(#fff6dc,#ffb7f0,#fff6dc);font:bold clamp(3rem,8vw,7rem) system-ui,sans-serif;color:#541578;box-shadow:0 8px 0 #9c5b30,0 0 35px #ff9fe355}
+.arcade{position:relative;width:min(820px,85vw);border:3px dashed var(--gold);border-radius:16px;padding:22px;background:#1b092d99;overflow:hidden}.arcade-track{display:flex;justify-content:space-between;align-items:center;font:700 clamp(1rem,3vw,2.5rem) system-ui,sans-serif;color:#ffdb9b;white-space:nowrap}.pac{display:inline-block;font-size:clamp(2rem,6vw,5rem);animation:chomp .45s ease-in-out infinite alternate}@keyframes chomp{to{transform:rotate(-20deg)}}.ghost{color:#ff80c3}.dots{letter-spacing:.4em;overflow:hidden}
+.frame{width:min(54vw,390px);height:min(44vh,440px);border:8px solid #f7d48f;border-radius:14px;transform:rotate(-3deg);background:linear-gradient(135deg,#9c66b3,#3b1b5c);box-shadow:12px 12px 0 #180a2f,0 0 25px #fbe3a26a;display:grid;place-items:center;overflow:hidden}.frame img{width:100%;height:100%;object-fit:cover}.placeholder{font:700 clamp(17px,2.5vw,29px) system-ui,sans-serif;color:#fff0df;padding:20px}
+.video-wrap{position:relative;width:min(75vw,900px);aspect-ratio:16/9;background:#160d25;border:5px solid var(--gold);border-radius:16px;display:grid;place-items:center;overflow:hidden;box-shadow:0 0 55px #cc80ed44}.video-wrap video{width:100%;height:100%;object-fit:contain}.video-placeholder{padding:15px;font:600 clamp(16px,2.2vw,26px) system-ui,sans-serif;color:#f4c9ec}.sender{font-family:system-ui,sans-serif;font-size:clamp(1rem,2vw,1.6rem)}
+#startScreen{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:30px;background:radial-gradient(circle,#61248a,#1c092b 80%)}#startScreen.hidden{display:none}
+.start-btn{border:2px solid #fff1b6;border-radius:99px;background:linear-gradient(145deg,#fbe8aa,#db9b52);color:#301342;font:bold clamp(17px,2vw,24px) system-ui,sans-serif;padding:16px 38px;box-shadow:0 0 45px #fbc17b99}
+#controls{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:10;background:#1b0b2edc;border:1px solid #f4d48d66;border-radius:99px;padding:8px 12px;max-width:calc(100vw - 32px)}
+#controls button{background:transparent;color:#ffedc7;border:0;font:600 13px system-ui,sans-serif;white-space:nowrap;padding:8px 9px;border-radius:8px}#controls button:hover{background:#ffffff22}
+#progress{position:absolute;bottom:0;left:0;height:5px;background:linear-gradient(90deg,#f0b85e,#f888d2);z-index:11;width:0}
+#status{position:absolute;top:27px;right:30px;font:600 11px system-ui,sans-serif;color:#e6c79cbb;z-index:7;letter-spacing:.12em}
+@media(max-width:600px){#show:before{inset:7px;border-radius:14px}.scene{padding:45px 17px 95px}h1{font-size:clamp(4.5rem,19vw,8rem)}.big-number{font-size:clamp(9rem,45vw,16rem)}.video-wrap{width:91vw}.frame{width:min(67vw,320px);height:38vh}.reel{width:27vw;height:30vw}#controls{gap:1px;bottom:16px}#controls button{font-size:11px;padding:8px 5px}#status{top:15px;right:18px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<main id="show">
+<div class="stars"></div><div id="status">FABULOUS 55 · THE BIRTHDAY SHOW</div>
+<section class="scene active" data-duration="8000">
+<div class="eyebrow">Tonight's main event</div><h1>FABULOUS<br>55</h1>
+<div class="subtitle">The queen of the night has arrived.</div>
+<div class="pills"><span class="pill">✦ Purple glamour</span><span class="pill">♠ Vegas magic</span><span class="pill">♥ All the love</span></div>
+</section>
+<section class="scene" data-duration="7500"><div class="eyebrow">Welcome to the celebration</div><div class="marquee"><h2>55 & STILL<br>THE JACKPOT!</h2></div><p class="subtitle">A lifetime of love. A winning hand. One unforgettable woman.</p><div class="reels"><div class="reel">5</div><div class="reel">5</div><div class="reel">♥</div></div></section>
+<section class="scene" data-duration="7000"><div class="eyebrow">Player one is legendary</div><h2>LEVEL</h2><div class="big-number">55</div><div class="arcade"><div class="arcade-track"><span class="pac">◕</span><span class="dots">••••••</span><span class="ghost">♟</span><span>★</span></div></div><p class="subtitle">New level unlocked. More life. More laughter. More adventure.</p></section>
+<section class="scene" data-duration="8500"><div class="eyebrow">A star, then and now</div><h2>Beautiful at Every Age</h2><div class="frame" id="photoFrame"><div class="placeholder">✦ Her favorite photo goes here ✦</div></div><p class="subtitle">Some people just get more iconic every year.</p></section>
+<section class="scene" data-duration="8000"><div class="eyebrow">Vintage sweetheart energy</div><h2>Sweet. Sassy.<br>Unforgettable.</h2><p class="subtitle">A little Betty Boop charm, a whole lot of purple sparkle, and a personality nobody could ever duplicate.</p><div class="pills"><span class="pill">♥</span><span class="pill">✦</span><span class="pill">♥</span></div></section>
+<section class="scene" id="familyScene" data-duration="9000"><div class="eyebrow">Messages from the people who love you</div><h2 id="videoTitle">Love, Your Family</h2><div class="video-wrap" id="videoWrap"><div class="video-placeholder">🎥 Family birthday messages will play here</div></div><div class="sender" id="videoSender">Special moments are coming soon…</div></section>
+<section class="scene" data-duration="9000"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
+<div id="progress"></div>
+<div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
+<div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><p class="subtitle" style="font-size:13px;opacity:.8">One click enables video sound. The show loops automatically after that.</p></div>
+</main>
+<script>
+'use strict';
+// CUSTOMIZE: Save her photos to assets/photos/ then add paths here.
+// This first version rotates one main photo whenever its scene appears.
+const PHOTOS = []; // Example: ['assets/photos/mom-01.jpg']
+// CUSTOMIZE: Add the family videos to assets/videos/ after collecting permission.
+// Tip: Compress to MP4 (H.264/AAC) for widest browser/TV compatibility.
+// Video files committed to a public GitHub repo can be accessed by anyone.
+// For large/private videos, use a separate approved hosting setup.
+const FAMILY_VIDEOS = [
+ // {name:'From Auntie', src:'assets/videos/auntie.mp4'},
+ // {name:'From the Grandkids', src:'assets/videos/grandkids.mp4'}
+];
+const scenes=[...document.querySelectorAll('.scene')];
+const videoScene=document.getElementById('familyScene'), videoWrap=document.getElementById('videoWrap');
+const progress=document.getElementById('progress');
+let index=0,playing=false,muted=false,timer=null,startedAt=0,remaining=0,videoIndex=0,activeVideo=null,raf=0,photoIndex=0;
+function duration(){return Number(scenes[index].dataset.duration)||8000}
+function clearPlayback(){clearTimeout(timer);cancelAnimationFrame(raf);if(activeVideo){activeVideo.pause();activeVideo.remove();activeVideo=null}}
+function setVideoPlaceholder(){videoWrap.innerHTML='<div class="video-placeholder">🎥 Family birthday messages will play here</div>';document.getElementById('videoSender').textContent='Special moments are coming soon…'}
+function prepareScene(){
+ if(scenes[index]===document.querySelector('#photoFrame')?.closest('.scene')&&PHOTOS.length){const src=PHOTOS[photoIndex++%PHOTOS.length];const img=document.createElement('img');img.src=src;img.alt='Birthday photo of Mom';const f=document.getElementById('photoFrame');f.replaceChildren(img)}
+ if(scenes[index]===videoScene){
+  if(!FAMILY_VIDEOS.length){setVideoPlaceholder();return}
+  const item=FAMILY_VIDEOS[videoIndex++%FAMILY_VIDEOS.length];videoWrap.replaceChildren();
+  document.getElementById('videoTitle').textContent='A Birthday Message';
+  document.getElementById('videoSender').textContent=item.name;
+  const v=document.createElement('video');v.src=item.src;v.playsInline=true;v.preload='auto';v.controls=false;v.muted=muted;videoWrap.append(v);activeVideo=v;
+  v.addEventListener('ended',()=>{if(playing)advance(1)},{once:true});
+  v.addEventListener('error',()=>{if(playing)schedule(4500)},{once:true});
+  v.addEventListener('loadedmetadata',()=>{if(playing&&Number.isFinite(v.duration)&&v.duration>0){remaining=Math.max(4000,(v.duration+1)*1000);schedule(remaining)}},{once:true});
+  if(playing)v.play().catch(()=>{v.controls=true});
+ }
+}
+function paintProgress(){if(!playing)return;const elapsed=performance.now()-startedAt;progress.style.width=Math.min(100,100*elapsed/remaining)+'%';raf=requestAnimationFrame(paintProgress)}
+function schedule(ms){clearTimeout(timer);cancelAnimationFrame(raf);remaining=ms;startedAt=performance.now();timer=setTimeout(()=>advance(1),ms);paintProgress()}
+function show(n){clearPlayback();index=(n+scenes.length)%scenes.length;scenes.forEach((s,i)=>s.classList.toggle('active',i===index));progress.style.width='0';prepareScene();if(playing)schedule(scenes[index]===videoScene&&FAMILY_VIDEOS.length?60000:duration())}
+function advance(n){show(index+n)}
+function togglePause(){if(!playing){playing=true;if(activeVideo)activeVideo.play().catch(()=>{activeVideo.controls=true});schedule(remaining||duration())}else{playing=false;remaining=Math.max(200,remaining-(performance.now()-startedAt));clearTimeout(timer);cancelAnimationFrame(raf);if(activeVideo)activeVideo.pause()}document.getElementById('pause').textContent=playing?'Ⅱ Pause':'▶ Resume'}
+document.getElementById('start').addEventListener('click',()=>{document.getElementById('startScreen').classList.add('hidden');playing=true;show(0)});
+document.getElementById('prev').addEventListener('click',()=>advance(-1));
+document.getElementById('next').addEventListener('click',()=>advance(1));
+document.getElementById('pause').addEventListener('click',togglePause);
+document.getElementById('sound').addEventListener('click',()=>{muted=!muted;if(activeVideo)activeVideo.muted=muted;document.getElementById('sound').textContent=muted?'♫ Muted':'♫ Sound on'});
+document.getElementById('fullscreen').addEventListener('click',()=>{if(document.fullscreenElement){document.exitFullscreen?.()}else{document.getElementById('show').requestFullscreen?.().catch(()=>{})}});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')advance(1);if(e.key==='ArrowLeft')advance(-1);if(e.code==='Space'&&document.getElementById('startScreen').classList.contains('hidden')){e.preventDefault();togglePause()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)togglePause()});
+</script></body></html>
