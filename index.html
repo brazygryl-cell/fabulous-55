@@ -125,10 +125,28 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
   .big-number {font-size:clamp(4rem,22vw,7rem);}
   #slotOpening .slot-stage {gap:6px;}
 }
+
+/* v5: full-width precise pellet lane, Ms. Pac-Man styling and responsive slots */
+#pacTransition .pac-lane{position:absolute;inset:0;top:50%;height:20px;transform:translateY(-50%);display:block;padding:0;gap:0;pointer-events:none}
+#pacTransition .pellet{position:absolute;top:50%;left:0;display:block;width:clamp(7px,1.3vw,14px);height:clamp(7px,1.3vw,14px);max-width:none;max-height:none;transform:translate(-50%,-50%);border-radius:50%;transition:opacity .07s ease,scale .07s ease}
+#pacHero{overflow:visible}
+#pacHero .ms-bow{position:absolute;z-index:6;top:-22%;left:7%;width:45%;height:34%;transform:rotate(-25deg);filter:drop-shadow(0 2px 2px #42052499)}
+#pacHero .ms-bow:before,#pacHero .ms-bow:after{content:"";position:absolute;background:#f2467e;border:3px solid #8a0d3a;border-radius:65% 25% 65% 28%;width:52%;height:82%;top:0}
+#pacHero .ms-bow:before{left:0;transform:rotate(-35deg)}#pacHero .ms-bow:after{right:0;transform:rotate(38deg)}
+#pacHero .ms-knot{position:absolute;z-index:8;top:-13%;left:26%;width:14%;height:14%;background:#ff83b2;border:2px solid #8a0d3a;border-radius:50%}
+#pacHero .ms-eye{position:absolute;z-index:7;left:51%;top:7%;width:11%;height:18%;border-radius:50%;background:#10101a;transform:rotate(18deg)}
+#pacHero .ms-lash{position:absolute;z-index:7;left:55%;top:4%;width:15%;height:4%;background:#17111d;border-radius:6px;transform:rotate(-35deg)}
+#pacHero .ms-lips{position:absolute;z-index:7;right:0;top:55%;height:7%;width:23%;background:#ee3970;border-radius:90% 20% 90% 45%;transform:rotate(-16deg)}
+#slotOpening .slot-stage{width:min(100%,860px);min-width:0;max-height:100%;justify-content:center}
+#slotOpening .slot-machine{max-width:calc(100vw - 64px);min-width:0}
+#slotOpening .slot-window{flex:0 1 auto;min-width:0}
+#slotOpening .slot-symbol{line-height:1}
+#slotOpening #slotResult{white-space:normal}
+@media(max-width:768px){#slotOpening .slot-stage{padding:4px 0}#slotOpening .slot-machine{max-width:90vw}#pacHero .ms-bow:before,#pacHero .ms-bow:after{border-width:2px}}
 </style></head>
 <body>
 <main id="show">
-<div class="stars"></div><div id="status">FABULOUS 55 · MS. PAC-MAN AUDIO V4</div>
+<div class="stars"></div><div id="status">FABULOUS 55 · MS. PAC-MAN V5</div>
 <section class="scene active" id="slotOpening" data-duration="10500"><div class="slot-stage"><div class="eyebrow">Welcome to the Fabulous 55 Casino</div><h2>SPIN TO WIN</h2><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2><p class="subtitle">The birthday queen has hit the jackpot!</p></div></section><section class="scene" data-duration="8000">
 <div class="eyebrow">Tonight's main event</div><h1>FABULOUS<br>55</h1>
 <div class="subtitle">The queen of the night has arrived.</div>
@@ -140,7 +158,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 <section class="scene" data-duration="8000"><div class="eyebrow">Vintage sweetheart energy</div><h2>Sweet. Sassy.<br>Unforgettable.</h2><p class="subtitle">A little Betty Boop charm, a whole lot of purple sparkle, and a personality nobody could ever duplicate.</p><div class="pills"><span class="pill">♥</span><span class="pill">✦</span><span class="pill">♥</span></div></section>
 <section class="scene" id="familyScene" data-duration="9000"><div class="eyebrow">Messages from the people who love you</div><h2 id="videoTitle">Love, Your Family</h2><div class="video-wrap" id="videoWrap"><div class="video-placeholder">🎥 Family birthday messages will play here</div></div><div class="sender" id="videoSender">Special moments are coming soon…</div></section>
 <section class="scene" data-duration="9000"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
-<div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
+<div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"><div class="ms-bow"></div><div class="ms-knot"></div><div class="ms-eye"></div><div class="ms-lash"></div><div class="ms-lips"></div></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
 <div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
 <div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><p class="subtitle" style="font-size:13px;opacity:.8">Tap Start to enjoy the birthday show. It loops automatically.</p></div>
 </main>
@@ -149,25 +167,29 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 // MEDIA CONFIG: Every item plays in this order: photos, then family videos, then optional messages.
 // Add as many as you like. Image paths are relative to this index.html file.
 const PHOTOS = [
-  { src:'assets/photos/01-young-mom.jpg', caption:'Where the beautiful memories began ✨' },
-  { src:'assets/photos/02-mom-and-baby.jpg', caption:'The sweetest beginnings ♥' },
+  { src:'assets/photos/01-young-mom.jpg', caption:'A beautiful moment from the early years ✨' },
+  { src:'assets/photos/02-mom-and-baby.jpg', caption:'Mom holding me — one of our earliest memories ♥' },
   { src:'assets/photos/03-disney-family.jpg', caption:'Adventure has always been part of the story' },
   { src:'assets/photos/04-family-living-room.jpg', caption:'All the love, all the memories' },
   { src:'assets/photos/05-vintage-portrait.jpg', caption:'Always a star ✨' },
   { src:'assets/photos/06-pink-look.jpg', caption:'Style is timeless' },
-  { src:'assets/photos/07-mother-daughter.jpg', caption:'Forever connected ♥' },
+  { src:'assets/photos/07-mother-daughter.jpg', caption:'Together through the years ♥' },
   { src:'assets/photos/08-family-adventure.jpg', caption:'Making memories everywhere' },
-  { src:'assets/photos/09-family-fun.jpg', caption:'The little moments mean everything' },
+  { src:'assets/photos/09-family-fun.jpg', caption:'A day worth remembering' },
   { src:'assets/photos/10-graduation.jpg', caption:'Always growing, always glowing 🎓' },
-  { src:'assets/photos/11-generations.jpg', caption:'Generations of love' },
+  { src:'assets/photos/11-generations.jpg', caption:'A special family day' },
   { src:'assets/photos/12-family-portrait.jpg', caption:'Together is the best place to be' },
-  { src:'assets/photos/13-together-again.jpg', caption:'Through every chapter, family is everything' },
-  { src:'assets/photos/14-recent-selfie.jpg', caption:'More laughter, more love, more life 💜' },
+  { src:'assets/photos/13-together-again.jpg', caption:'Another memory to treasure' },
+  { src:'assets/photos/14-recent-selfie.jpg', caption:'More memories, more love, more life 💜' },
 ];
 const FAMILY_VIDEOS = [
   // { src:'assets/videos/auntie.mp4', name:'A birthday wish from Auntie' },
   // { src:'assets/videos/cousins.mp4', name:'Love from the cousins' },
 ];
+// Upcoming: add a slot-machine cue and gentle photo music after those files are chosen.
+// Background music will duck/pause automatically for family video messages in a later pass.
+const SLOT_MUSIC_PATH = null;
+const PHOTO_MUSIC_PATH = null;
 const TEXT_MESSAGES = [
   // {from:'Your family', message:'Happy birthday! We love you so much!'},
 ];
@@ -287,7 +309,8 @@ function spinOpening(){
   const symbols=['7','♥','★','5','♠','♦','5','★','7','5','♥','5'];
   ['slotA','slotB'].forEach((id,i)=>{
     const strip=document.getElementById(id);strip.replaceChildren();
-    for(const value of [...symbols,'5']){const cell=document.createElement('div');cell.className='slot-symbol';cell.textContent=value;strip.append(cell)}
+    const windowHeight=strip.parentElement.clientHeight-8;
+    for(const value of [...symbols,'5']){const cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=windowHeight+'px';cell.textContent=value;strip.append(cell)}
     strip.style.transition='none';strip.style.transform='translateY(0px)';
     // The reel spins through multiple symbols, then both columns settle on 5.
     requestAnimationFrame(()=>{
@@ -310,25 +333,42 @@ function confetti(n=25){
   }
 }
 const lane=document.getElementById('pelletLane');
-for(let i=0;i<23;i++){const dot=document.createElement('span');dot.className='pellet';lane.append(dot)}
-// A line of pellets gets eaten from left to right as Pac-Man crosses.
+const PELLET_COUNT=30;
+for(let i=0;i<PELLET_COUNT;i++){
+  const dot=document.createElement('span');
+  dot.className='pellet';dot.style.left=((i+.5)/PELLET_COUNT*100)+'%';
+  lane.append(dot);
+}
+// Synchronize each pellet with the moving mouth using actual on-screen positions.
+let pelletAnimation=0;
+function stopPellets(){cancelAnimationFrame(pelletAnimation);pelletAnimation=0}
 function animatePellets(){
- const dots=[...lane.querySelectorAll('.pellet')];
- dots.forEach(d=>{d.style.opacity='1';d.style.transform='scale(1)'});
- const timeouts=dots.map((dot,i)=>setTimeout(()=>{
-   dot.style.transition='opacity .12s, transform .12s';
-   dot.style.opacity='0';
-   dot.style.transform='scale(.1)';
- },400+i*(3400/Math.max(1,dots.length-1))));
- return timeouts;
+  stopPellets();
+  const dots=[...lane.querySelectorAll('.pellet')];
+  dots.forEach(dot=>{dot.style.opacity='1';dot.style.scale='1'});
+  const hero=document.getElementById('pacHero');
+  const track=()=>{
+    if(!transitioning)return;
+    const rect=hero.getBoundingClientRect();
+    const mouthX=rect.right-rect.width*.09;
+    for(const dot of dots){
+      if(dot.style.opacity==='0')continue;
+      const d=dot.getBoundingClientRect();
+      if(d.left+d.width*.5 <= mouthX){
+        dot.style.opacity='0';dot.style.scale='.15';
+      }
+    }
+    pelletAnimation=requestAnimationFrame(track);
+  };
+  pelletAnimation=requestAnimationFrame(track);
 }
 function pacCut(next){
   if(transitioning)return;
   transitioning=true;clearTimer();stopVideo();clearSpin();
-  pelletTimers.forEach(clearTimeout);pelletTimers=animatePellets();transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');playPacSound();
+  stopPellets();transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');animatePellets();playPacSound();
   // Change scene while Pac-Man crosses, so the new one appears on its exit.
   setTimeout(()=>{activate(next)},2250);
-  setTimeout(()=>{transition.classList.remove('running');transitioning=false;if(running)playCurrent()},4450);
+  setTimeout(()=>{transition.classList.remove('running');stopPellets();transitioning=false;if(running)playCurrent()},4450);
 }
 function activate(n){
   index=(n+playlist.length)%playlist.length;
