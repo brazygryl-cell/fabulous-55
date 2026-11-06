@@ -128,7 +128,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 </style></head>
 <body>
 <main id="show">
-<div class="stars"></div><div id="status">FABULOUS 55 · THE BIRTHDAY SHOW</div>
+<div class="stars"></div><div id="status">FABULOUS 55 · MS. PAC-MAN AUDIO V4</div>
 <section class="scene active" id="slotOpening" data-duration="10500"><div class="slot-stage"><div class="eyebrow">Welcome to the Fabulous 55 Casino</div><h2>SPIN TO WIN</h2><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2><p class="subtitle">The birthday queen has hit the jackpot!</p></div></section><section class="scene" data-duration="8000">
 <div class="eyebrow">Tonight's main event</div><h1>FABULOUS<br>55</h1>
 <div class="subtitle">The queen of the night has arrived.</div>
@@ -183,53 +183,52 @@ const progress=document.getElementById('progress');
 // Audio from the user's Pac-Man clip; place extracted MP3 at assets/audio/pacman-transition.mp3.
 // No transition audio is played if the file has not been uploaded yet.
 // Replace this path when a better Pac-Man transition sound is selected.
+// Ms. Pac-Man theme provided for this birthday presentation.
+// Decode the file with Web Audio: playback after the initial Start tap is reliable on iOS.
 const PAC_SOUND_PATH='assets/audio/Ms.%20Pac-Man%20Theme%20(1981-1982).mp3';
 const pacAudio=new Audio(PAC_SOUND_PATH);
 pacAudio.preload='auto';
-pacAudio.playsInline=true;
 pacAudio.volume=.85;
 let audioContext=null;
-let audioUnlocked=false;
-let soundRun=0;
+let pacBuffer=null;
+let pacBufferPromise=null;
+let currentPacSource=null;
 function initializeAudio(){
   try{
-    const Ctx=window.AudioContext||window.webkitAudioContext;
-    if(!Ctx)return;
-    if(!audioContext)audioContext=new Ctx();
-    audioContext.resume().then(()=>{audioUnlocked=audioContext.state==='running'}).catch(()=>{});
-  }catch(err){console.warn('WebAudio unavailable',err)}
-}
-// Short arcade chirps are a reliable fallback for browsers that reject media playback.
-// The supplied MP4 remains the primary Pac-Man sound.
-function arcadeChomp(){
-  if(muted||!audioContext)return;
-  audioContext.resume().catch(()=>{});
-  const start=audioContext.currentTime+.015;
-  for(let i=0;i<9;i++){
-    const t=start+i*.13;
-    const osc=audioContext.createOscillator();
-    const env=audioContext.createGain();
-    osc.type='square';
-    osc.frequency.setValueAtTime(i%2===0?440:320,t);
-    osc.frequency.exponentialRampToValueAtTime(i%2===0?240:180,t+.085);
-    env.gain.setValueAtTime(.0001,t);
-    env.gain.exponentialRampToValueAtTime(.045,t+.008);
-    env.gain.exponentialRampToValueAtTime(.0001,t+.11);
-    osc.connect(env).connect(audioContext.destination);
-    osc.start(t);osc.stop(t+.12);
-  }
+    const Context=window.AudioContext||window.webkitAudioContext;
+    if(!Context)return;
+    if(!audioContext)audioContext=new Context();
+    if(audioContext.state==='suspended')audioContext.resume().catch(err=>console.warn('Audio unlock:',err));
+    // Network/decode is initiated on Start and reused across the entire presentation.
+    if(!pacBufferPromise){
+      pacBufferPromise=fetch(PAC_SOUND_PATH,{cache:'no-store'})
+        .then(response=>{if(!response.ok)throw Error('HTTP '+response.status);return response.arrayBuffer()})
+        .then(data=>audioContext.decodeAudioData(data))
+        .then(buffer=>{pacBuffer=buffer;return buffer})
+        .catch(err=>{console.warn('Ms. Pac-Man sound could not load:',err);return null});
+    }
+  }catch(err){console.warn('Audio initialization unavailable:',err)}
 }
 function playPacSound(){
   if(muted)return;
-  initializeAudio();
   try{
-    pacAudio.pause();
-    pacAudio.currentTime=0;
-    const promise=pacAudio.play();
-    if(promise&&typeof promise.catch==='function'){
-      promise.catch(err=>{console.warn('Ms. Pac-Man audio not available:',err);arcadeChomp()});
+    if(audioContext&&pacBuffer&&audioContext.state==='running'){
+      if(currentPacSource){try{currentPacSource.stop()}catch(e){}}
+      pacAudio.pause();
+      const source=audioContext.createBufferSource();
+      const gain=audioContext.createGain();
+      source.buffer=pacBuffer;gain.gain.value=.8;
+      source.connect(gain).connect(audioContext.destination);
+      source.start(0);
+      currentPacSource=source;
+      source.onended=()=>{if(currentPacSource===source)currentPacSource=null};
+      return;
     }
-  }catch(e){console.warn('Audio start failed',e);arcadeChomp()}
+    // Only the actual uploaded track may play. Never substitute the old chomp effect.
+    pacAudio.pause();pacAudio.currentTime=0;
+    const result=pacAudio.play();
+    if(result&&result.catch)result.catch(err=>console.warn('Ms. Pac-Man playback blocked:',err));
+  }catch(err){console.warn('Ms. Pac-Man playback failed:',err)}
 }
 
 const pBtn=document.getElementById('pause');
@@ -389,7 +388,7 @@ document.getElementById('prev').addEventListener('click',()=>navigate(-1));
 document.getElementById('next').addEventListener('click',()=>navigate(1));
 pBtn.addEventListener('click',()=>setRunning(!running));
 document.getElementById('sound').addEventListener('click',()=>{
-  muted=!muted;if(activeVideo)activeVideo.muted=muted;if(muted)pacAudio.pause();
+  muted=!muted;if(activeVideo)activeVideo.muted=muted;if(muted){pacAudio.pause();if(currentPacSource){try{currentPacSource.stop()}catch(e){}currentPacSource=null}}
   document.getElementById('sound').textContent=muted?'♫ Muted':'♫ Sound on';
 });
 document.getElementById('fullscreen').addEventListener('click',()=>{
