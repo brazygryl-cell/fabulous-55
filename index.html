@@ -182,10 +182,10 @@ const particles=document.getElementById('particles');
 const progress=document.getElementById('progress');
 // Audio from the user's Pac-Man clip; place extracted MP3 at assets/audio/pacman-transition.mp3.
 // No transition audio is played if the file has not been uploaded yet.
-const pacAudio=new Audio('assets/audio/pacman-transition.mp3');
+const pacAudio=new Audio('assets/audio/PAC-MAN%20Eating%20The%20Fruit.mp4');
 pacAudio.preload='auto';
 pacAudio.volume=.75;
-pacAudio.addEventListener('error',()=>{pacAudio.dataset.unavailable='true'});
+pacAudio.addEventListener('error',()=>{pacAudio.dataset.unavailable='true';console.warn('Pac-Man audio failed to load or is unsupported by this browser')});
 function playPacSound(){
   if(muted||pacAudio.dataset.unavailable==='true')return;
   pacAudio.pause();
