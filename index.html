@@ -142,7 +142,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 <section class="scene" data-duration="9000"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
 <div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
 <div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
-<div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><p class="subtitle" style="font-size:13px;opacity:.8">One click enables video sound. The show loops automatically after that.</p></div>
+<div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><button class="start-btn" id="testSound" style="font-size:15px;padding:10px 23px;background:transparent;color:#ffe6a6">♫ Test Sound</button><p class="subtitle" style="font-size:13px;opacity:.8">One click enables video sound. The show loops automatically after that.</p></div>
 </main>
 <script>
 'use strict';
@@ -184,13 +184,51 @@ const progress=document.getElementById('progress');
 // No transition audio is played if the file has not been uploaded yet.
 const pacAudio=new Audio('assets/audio/PAC-MAN%20Eating%20The%20Fruit.mp4');
 pacAudio.preload='auto';
-pacAudio.volume=.75;
-pacAudio.addEventListener('error',()=>{pacAudio.dataset.unavailable='true';console.warn('Pac-Man audio failed to load or is unsupported by this browser')});
+pacAudio.playsInline=true;
+pacAudio.volume=.85;
+let audioContext=null;
+let audioUnlocked=false;
+let soundRun=0;
+function initializeAudio(){
+  try{
+    const Ctx=window.AudioContext||window.webkitAudioContext;
+    if(!Ctx)return;
+    if(!audioContext)audioContext=new Ctx();
+    audioContext.resume().then(()=>{audioUnlocked=audioContext.state==='running'}).catch(()=>{});
+  }catch(err){console.warn('WebAudio unavailable',err)}
+}
+// Short arcade chirps are a reliable fallback for browsers that reject media playback.
+// The supplied MP4 remains the primary Pac-Man sound.
+function arcadeChomp(){
+  if(muted||!audioContext)return;
+  audioContext.resume().catch(()=>{});
+  const start=audioContext.currentTime+.015;
+  for(let i=0;i<9;i++){
+    const t=start+i*.13;
+    const osc=audioContext.createOscillator();
+    const env=audioContext.createGain();
+    osc.type='square';
+    osc.frequency.setValueAtTime(i%2===0?440:320,t);
+    osc.frequency.exponentialRampToValueAtTime(i%2===0?240:180,t+.085);
+    env.gain.setValueAtTime(.0001,t);
+    env.gain.exponentialRampToValueAtTime(.045,t+.008);
+    env.gain.exponentialRampToValueAtTime(.0001,t+.11);
+    osc.connect(env).connect(audioContext.destination);
+    osc.start(t);osc.stop(t+.12);
+  }
+}
 function playPacSound(){
-  if(muted||pacAudio.dataset.unavailable==='true')return;
-  pacAudio.pause();
-  pacAudio.currentTime=0;
-  pacAudio.play().catch(()=>{});
+  if(muted)return;
+  initializeAudio();
+  // WebAudio accompanies the supplied clip so iOS silent-video playback never leaves silent transitions.
+  arcadeChomp();
+  try{
+    pacAudio.pause();
+    pacAudio.currentTime=0;
+    const played=pacAudio.play();
+    if(played&&typeof played.catch==='function')played.catch(e=>console.warn('Original Pac-Man clip playback blocked',e));
+    setTimeout(()=>pacAudio.pause(),1550);
+  }catch(e){console.warn('Audio start failed',e)}
 }
 
 const pBtn=document.getElementById('pause');
@@ -341,7 +379,9 @@ function setRunning(value){
     elapsed+=performance.now()-started;clearTimer();activeVideo?.pause();
   }
 }
+document.getElementById('testSound').addEventListener('click',()=>{initializeAudio();playPacSound()});
 document.getElementById('start').addEventListener('click',()=>{
+  initializeAudio();
   document.getElementById('startScreen').classList.add('hidden');
   running=true;activate(0);playCurrent();
 });
