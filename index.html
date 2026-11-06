@@ -141,7 +141,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 <section class="scene" id="familyScene" data-duration="9000"><div class="eyebrow">Messages from the people who love you</div><h2 id="videoTitle">Love, Your Family</h2><div class="video-wrap" id="videoWrap"><div class="video-placeholder">🎥 Family birthday messages will play here</div></div><div class="sender" id="videoSender">Special moments are coming soon…</div></section>
 <section class="scene" data-duration="9000"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
 <div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
-<div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
+<div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="testSoundLive" aria-label="Test Pac-Man sound">🔊 Test</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
 <div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><button class="start-btn" id="testSound" style="font-size:15px;padding:10px 23px;background:transparent;color:#ffe6a6">♫ Test Sound</button><p class="subtitle" style="font-size:13px;opacity:.8">One click enables video sound. The show loops automatically after that.</p></div>
 </main>
 <script>
@@ -380,6 +380,13 @@ function setRunning(value){
   }
 }
 document.getElementById('testSound').addEventListener('click',()=>{initializeAudio();playPacSound()});
+document.getElementById('testSoundLive').addEventListener('click',()=>{
+  if(muted){muted=false;document.getElementById('sound').textContent='♫ Sound on';if(activeVideo)activeVideo.muted=false}
+  initializeAudio();playPacSound();
+  const b=document.getElementById('testSoundLive');
+  b.textContent='🔊 Playing…';
+  setTimeout(()=>{b.textContent='🔊 Test'},1700);
+});
 document.getElementById('start').addEventListener('click',()=>{
   initializeAudio();
   document.getElementById('startScreen').classList.add('hidden');
