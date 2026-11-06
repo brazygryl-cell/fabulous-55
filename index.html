@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#220d36"><title>Fabulous 55 | Mom's Birthday Show</title>
+<meta name="theme-color" content="#220d36"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>Fabulous 55 | Mom's Birthday Show</title>
 <style>
 :root{--purple:#4b2075;--mid:#250d3c;--gold:#f4cf77;--pink:#ff83c2;--cream:#fff2db}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#16091f;color:var(--cream);font-family:Georgia,'Times New Roman',serif}
@@ -128,7 +128,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 </style></head>
 <body>
 <main id="show">
-<div class="stars"></div><div id="status">FABULOUS 55 · THE BIRTHDAY SHOW</div>
+<div class="stars"></div><div id="status">FABULOUS 55 · AUDIO FIX V3</div>
 <section class="scene active" id="slotOpening" data-duration="10500"><div class="slot-stage"><div class="eyebrow">Welcome to the Fabulous 55 Casino</div><h2>SPIN TO WIN</h2><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2><p class="subtitle">The birthday queen has hit the jackpot!</p></div></section><section class="scene" data-duration="8000">
 <div class="eyebrow">Tonight's main event</div><h1>FABULOUS<br>55</h1>
 <div class="subtitle">The queen of the night has arrived.</div>
@@ -141,8 +141,8 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 <section class="scene" id="familyScene" data-duration="9000"><div class="eyebrow">Messages from the people who love you</div><h2 id="videoTitle">Love, Your Family</h2><div class="video-wrap" id="videoWrap"><div class="video-placeholder">🎥 Family birthday messages will play here</div></div><div class="sender" id="videoSender">Special moments are coming soon…</div></section>
 <section class="scene" data-duration="9000"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
 <div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
-<div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="testSoundLive" aria-label="Test Pac-Man sound">🔊 Test</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
-<div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><button class="start-btn" id="testSound" style="font-size:15px;padding:10px 23px;background:transparent;color:#ffe6a6">♫ Test Sound</button><p class="subtitle" style="font-size:13px;opacity:.8">One click enables video sound. The show loops automatically after that.</p></div>
+<div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="testSoundLive" aria-label="Test Pac-Man sound">🔊 Test</button><button id="nativeAudio" aria-label="Open audio troubleshooting">🎵 Audio help</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
+<div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><button class="start-btn" id="testSound" style="font-size:15px;padding:10px 23px;background:transparent;color:#ffe6a6">♫ Test Sound</button><p class="subtitle" style="font-size:13px;opacity:.8">Tap Start to enable audio. Use 🔊 Test at any time.</p></div>
 </main>
 <script>
 'use strict';
@@ -380,6 +380,7 @@ function setRunning(value){
   }
 }
 document.getElementById('testSound').addEventListener('click',()=>{initializeAudio();playPacSound()});
+document.getElementById('nativeAudio').addEventListener('click',()=>{window.location.href='audio-test.html?v=3'});
 document.getElementById('testSoundLive').addEventListener('click',()=>{
   if(muted){muted=false;document.getElementById('sound').textContent='♫ Sound on';if(activeVideo)activeVideo.muted=false}
   initializeAudio();playPacSound();
