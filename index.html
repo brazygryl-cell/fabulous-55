@@ -90,8 +90,20 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 // MEDIA CONFIG: Every item plays in this order: photos, then family videos, then optional messages.
 // Add as many as you like. Image paths are relative to this index.html file.
 const PHOTOS = [
-  // { src:'assets/photos/mom-01.jpg', caption:'The birthday queen ✨' },
-  // { src:'assets/photos/mom-02.jpg', caption:'Another iconic moment 💜' },
+  { src:'assets/photos/01-young-mom.jpg', caption:'Where the beautiful memories began ✨' },
+  { src:'assets/photos/02-mom-and-baby.jpg', caption:'The sweetest beginnings ♥' },
+  { src:'assets/photos/03-disney-family.jpg', caption:'Adventure has always been part of the story' },
+  { src:'assets/photos/04-family-living-room.jpg', caption:'All the love, all the memories' },
+  { src:'assets/photos/05-vintage-portrait.jpg', caption:'Always a star ✨' },
+  { src:'assets/photos/06-pink-look.jpg', caption:'Style is timeless' },
+  { src:'assets/photos/07-mother-daughter.jpg', caption:'Forever connected ♥' },
+  { src:'assets/photos/08-family-adventure.jpg', caption:'Making memories everywhere' },
+  { src:'assets/photos/09-family-fun.jpg', caption:'The little moments mean everything' },
+  { src:'assets/photos/10-graduation.jpg', caption:'Always growing, always glowing 🎓' },
+  { src:'assets/photos/11-generations.jpg', caption:'Generations of love' },
+  { src:'assets/photos/12-family-portrait.jpg', caption:'Together is the best place to be' },
+  { src:'assets/photos/13-together-again.jpg', caption:'Through every chapter, family is everything' },
+  { src:'assets/photos/14-recent-selfie.jpg', caption:'More laughter, more love, more life 💜' },
 ];
 const FAMILY_VIDEOS = [
   // { src:'assets/videos/auntie.mp4', name:'A birthday wish from Auntie' },
@@ -124,7 +136,7 @@ function playPacSound(){
 
 const pBtn=document.getElementById('pause');
 let playlist=[], index=0, running=false, muted=false, token=0, timer=0, frame=0;
-let duration=8000, elapsed=0, started=0, activeVideo=null, transitioning=false, spinTimers=[];
+let duration=8000, elapsed=0, started=0, activeVideo=null, transitioning=false, spinTimers=[], pelletTimers=[];
 function safeText(el,value){el.textContent=value||''}
 function createScene(){
   const s=document.createElement('section');s.className='scene';s.dataset.duration='8000';
@@ -202,10 +214,21 @@ function confetti(n=25){
 }
 const lane=document.getElementById('pelletLane');
 for(let i=0;i<23;i++){const dot=document.createElement('span');dot.className='pellet';lane.append(dot)}
+// A line of pellets gets eaten from left to right as Pac-Man crosses.
+function animatePellets(){
+ const dots=[...lane.querySelectorAll('.pellet')];
+ dots.forEach(d=>{d.style.opacity='1';d.style.transform='scale(1)'});
+ const timeouts=dots.map((dot,i)=>setTimeout(()=>{
+   dot.style.transition='opacity .12s, transform .12s';
+   dot.style.opacity='0';
+   dot.style.transform='scale(.1)';
+ },150+i*(950/Math.max(1,dots.length-1))));
+ return timeouts;
+}
 function pacCut(next){
   if(transitioning)return;
   transitioning=true;clearTimer();stopVideo();clearSpin();
-  transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');playPacSound();
+  pelletTimers.forEach(clearTimeout);pelletTimers=animatePellets();transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');playPacSound();
   // Change scene while Pac-Man crosses, so the new one appears on its exit.
   setTimeout(()=>{activate(next)},650);
   setTimeout(()=>{transition.classList.remove('running');transitioning=false;if(running)playCurrent()},1320);
