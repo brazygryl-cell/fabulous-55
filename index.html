@@ -109,6 +109,19 @@ const familyScene=document.getElementById('familyScene');
 const transition=document.getElementById('pacTransition');
 const particles=document.getElementById('particles');
 const progress=document.getElementById('progress');
+// Audio from the user's Pac-Man clip; place extracted MP3 at assets/audio/pacman-transition.mp3.
+// No transition audio is played if the file has not been uploaded yet.
+const pacAudio=new Audio('assets/audio/pacman-transition.mp3');
+pacAudio.preload='auto';
+pacAudio.volume=.75;
+pacAudio.addEventListener('error',()=>{pacAudio.dataset.unavailable='true'});
+function playPacSound(){
+  if(muted||pacAudio.dataset.unavailable==='true')return;
+  pacAudio.pause();
+  pacAudio.currentTime=0;
+  pacAudio.play().catch(()=>{});
+}
+
 const pBtn=document.getElementById('pause');
 let playlist=[], index=0, running=false, muted=false, token=0, timer=0, frame=0;
 let duration=8000, elapsed=0, started=0, activeVideo=null, transitioning=false, spinTimers=[];
@@ -192,7 +205,7 @@ for(let i=0;i<23;i++){const dot=document.createElement('span');dot.className='pe
 function pacCut(next){
   if(transitioning)return;
   transitioning=true;clearTimer();stopVideo();clearSpin();
-  transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');
+  transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');playPacSound();
   // Change scene while Pac-Man crosses, so the new one appears on its exit.
   setTimeout(()=>{activate(next)},650);
   setTimeout(()=>{transition.classList.remove('running');transitioning=false;if(running)playCurrent()},1320);
@@ -254,7 +267,7 @@ document.getElementById('prev').addEventListener('click',()=>navigate(-1));
 document.getElementById('next').addEventListener('click',()=>navigate(1));
 pBtn.addEventListener('click',()=>setRunning(!running));
 document.getElementById('sound').addEventListener('click',()=>{
-  muted=!muted;if(activeVideo)activeVideo.muted=muted;
+  muted=!muted;if(activeVideo)activeVideo.muted=muted;if(muted)pacAudio.pause();
   document.getElementById('sound').textContent=muted?'♫ Muted':'♫ Sound on';
 });
 document.getElementById('fullscreen').addEventListener('click',()=>{
