@@ -347,7 +347,9 @@ function buildPlaylist(){
   const caption=document.createElement('p');caption.className='slide-caption';
   caption.textContent='Every chapter. Every memory. Every generation. So much love.';
   collage.append(label,heading,grid,caption);
-  if(photoTemplate.isConnected)photoTemplate.before(collage);
+  // Place the collage immediately before the closing birthday finale.
+  const finale=[...main.querySelectorAll('.scene')].find(s=>s.textContent.includes('Happy 55th Birthday!'));
+  if(finale)finale.before(collage);
   else main.insertBefore(collage,document.querySelector('#pacTransition'));
   for(const item of TEXT_MESSAGES){
     const s=createScene();s.dataset.duration='7500';
