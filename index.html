@@ -216,7 +216,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 #pacHero::before,#pacHero::after{display:none!important}
 #pacHero .ms-face{animation:none!important}
 .collage-scene .collage-grid img{animation:none}
-@media(max-width:768px){.memory-grid,.memory-grid.three{width:90vw;height:min(48dvh,460px);gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}.memory-grid.one{width:min(70vw,330px)}.memory-grid.three .memory-card:first-child{grid-row:span 2}.memory-card{padding:5px 5px 22px}.memory-card .photo-sticker{font-size:10px}.memory-scene h2{font-size:clamp(1.65rem,7vw,2.8rem)}}
+@media(max-width:768px){.memory-grid,.memory-grid.three{width:90vw;height:min(48dvh,460px);gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}.memory-grid.one{width:min(70vw,330px)}.memory-grid.three{grid-template-rows:repeat(2,minmax(0,1fr))}.memory-grid.three .memory-card:first-child{grid-row:span 2}.memory-card{padding:5px 5px 22px}.memory-card .photo-sticker{font-size:10px}.memory-scene h2{font-size:clamp(1.65rem,7vw,2.8rem)}}
 @media(max-width:768px) and (max-height:690px){.memory-grid,.memory-grid.three{height:37dvh}}
 </style></head>
 <body>
@@ -450,6 +450,7 @@ function pacCut(next){
  changeTimers.push(setTimeout(()=>activate(target),850));
  changeTimers.push(setTimeout(()=>{
   stopPellets();transition.classList.remove('running');transitioning=false;
+  pacAudio.pause();if(currentPacSource){try{currentPacSource.stop()}catch(e){}currentPacSource=null}
   if(running)playCurrent();
  },1800));
 }
@@ -505,7 +506,7 @@ function playCurrent(){
     v.onerror=()=>{if(running&&!transitioning)plan(4000)};
     if(v.readyState>=1)begin();else{v.onloadedmetadata=begin;plan(60000)}
   }else{
-    if(s.classList.contains('photo-scene')){const img=s.querySelector('img');img.style.animation='none';void img.offsetWidth;img.style.animation=''}
+    if(s.classList.contains('photo-scene')){const img=s.querySelector('.media-photo img');if(img){img.style.animation='none';void img.offsetWidth;img.style.animation=''}}
     if(s===playlist[playlist.length-1])confetti(45);
     plan(duration);
   }
