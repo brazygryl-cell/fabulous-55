@@ -231,6 +231,14 @@ body,#show{background:#15071e}
  .arcade-scene h2{font-size:clamp(23px,6vw,37px)}
  .arcade-help{font-size:12px;max-width:92vw}
 }
+
+#slotOpening{isolation:isolate}
+#slotOpening>.frame,#slotOpening>.eyebrow{position:relative;z-index:2}
+#jackpotFX{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;image-rendering:auto}
+#slotOpening.jackpot-celebrating>.frame{animation:jackpotGlow 1.4s ease-in-out infinite alternate}
+@keyframes jackpotGlow{from{box-shadow:0 0 0 5px #5a287a,0 0 0 9px #f2ce83,0 12px 40px #0c031a,0 0 40px #bb6dab44}
+to{box-shadow:0 0 0 5px #5a287a,0 0 0 9px #f2ce83,0 12px 40px #0c031a,0 0 100px #ffeaa9cc}}
+@media(prefers-reduced-motion:reduce){#slotOpening.jackpot-celebrating>.frame{animation:none}}
 </style>
 </head>
 <body>
@@ -238,7 +246,7 @@ body,#show{background:#15071e}
   <div class="stars"></div>
   <div id="status">FABULOUS 55 · BIRTHDAY EDIT</div>
 
-  <section class="scene active" id="slotOpening" data-duration="9800">
+  <section class="scene active" id="slotOpening" data-duration="9800"><canvas id="jackpotFX" aria-hidden="true"></canvas>
     <div class="eyebrow">A celebration fit for a queen</div><div class="frame"><div class="slot-top"><span>✦</span> FABULOUS FIFTY-FIVE <span>✦</span></div>
       <div class="slot-machine">
         <div class="slot-window"><div class="slot-strip" id="slotA"></div></div>
@@ -345,7 +353,8 @@ const scenes=[...document.querySelectorAll('.scene')], progress=document.getElem
 const pacTransition=document.getElementById('pacTransition'),pauseBtn=document.getElementById('pause'),soundBtn=document.getElementById('sound');
 const slotAudio=document.getElementById('slotAudio'),songMama=document.getElementById('songMama'),pacTheme=document.getElementById('pacTheme');
 const pacLane=document.getElementById('pacLane'),msPac=document.getElementById('msPac'),notice=document.getElementById('audioNotice');
-let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false,audioContext=null,audioGains=null,slotAnim=[],slotRAF=0,starCount=0,matchDeck=[],matchOpen=[],matchFound=0,matchBusy=false,miniAdvanceTimer=0;
+const jackpotCanvas=document.getElementById('jackpotFX'),jackpotCtx=jackpotCanvas.getContext('2d');
+let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false,audioContext=null,audioGains=null,slotAnim=[],slotRAF=0,jackpotRAF=0,jackpotPieces=[],jackpotBursts=[],jackpotStart=0,jackpotLast=0,jackpotLaunch=0,slotSpinStart=0,starCount=0,matchDeck=[],matchOpen=[],matchFound=0,matchBusy=false,miniAdvanceTimer=0;
 const photos=["assets/photos/01-young-mom.jpg","assets/photos/02-mom-and-baby.jpg","assets/photos/03-disney-family.jpg","assets/photos/04-family-living-room.jpg","assets/photos/05-vintage-portrait.jpg","assets/photos/06-pink-look.jpg","assets/photos/07-mother-daughter.jpg","assets/photos/08-family-adventure.jpg","assets/photos/09-family-fun.jpg","assets/photos/10-graduation.jpg","assets/photos/11-generations.jpg","assets/photos/12-family-portrait.jpg","assets/photos/13-together-again.jpg","assets/photos/14-recent-selfie.jpg"];
 songMama.loop=true;slotAudio.loop=false;pacTheme.loop=true;
 songMama.preload='auto';slotAudio.preload='auto';pacTheme.preload='auto';
@@ -408,9 +417,73 @@ function runPacEffect(){
  }
  pacRAF=requestAnimationFrame(frame)
 }
+
+function slotAudioClock(){
+ // Use soundtrack position when available; the fallback is for muted / unsupported playback.
+ return !slotAudio.paused&&slotAudio.currentTime>0?slotAudio.currentTime*1000:performance.now()-slotSpinStart;
+}
+function resetJackpotFX(){
+ cancelAnimationFrame(jackpotRAF);jackpotRAF=0;jackpotPieces=[];jackpotBursts=[];jackpotStart=0;jackpotLast=0;jackpotLaunch=0;
+ jackpotCtx.clearRect(0,0,jackpotCanvas.width,jackpotCanvas.height);
+ document.getElementById('slotOpening').classList.remove('jackpot-celebrating');
+}
+function jackpotSize(){
+ const box=jackpotCanvas.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+ const w=Math.max(1,box.width),h=Math.max(1,box.height);
+ if(jackpotCanvas.width!==Math.round(w*dpr)||jackpotCanvas.height!==Math.round(h*dpr)){
+   jackpotCanvas.width=Math.round(w*dpr);jackpotCanvas.height=Math.round(h*dpr);
+ }
+ jackpotCtx.setTransform(jackpotCanvas.width/w,0,0,jackpotCanvas.height/h,0,0);
+ return {w,h};
+}
+function launchFirework(w,h){
+ const colors=['#ffd86d','#fb86c8','#be94ff','#9df8df','#ffffff'];
+ const x=w*(.15+Math.random()*.7),y=h*(.12+Math.random()*.46),c=colors[Math.floor(Math.random()*colors.length)];
+ for(let j=0;j<36;j++){
+  const a=j/36*Math.PI*2+Math.random()*.1,v=1.5+Math.random()*3.7;
+  jackpotBursts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,max:1,c});
+ }
+}
+function startJackpotFX(){
+ if(jackpotRAF||!running||scenes[index].id!=='slotOpening')return;
+ const token=sceneToken;
+ function tick(now){
+  jackpotRAF=0;
+  if(!running||token!==sceneToken||scenes[index].id!=='slotOpening')return;
+  const elapsed=slotAudioClock();
+  if(elapsed<7000){jackpotRAF=requestAnimationFrame(tick);return}
+  const {w,h}=jackpotSize(),ctx=jackpotCtx;
+  // Time changes pause with the scene. Don't reset effects just because the user pauses.
+  if(!jackpotStart){
+   jackpotStart=now;jackpotLast=now;jackpotLaunch=now;
+   document.getElementById('slotOpening').classList.add('jackpot-celebrating');
+   for(let i=0;i<130;i++)jackpotPieces.push({x:Math.random()*w,y:-Math.random()*h*.9,vx:-.6+Math.random()*1.2,vy:1.5+Math.random()*2.5,w:4+Math.random()*5,h:7+Math.random()*8,a:Math.random()*6.28,c:['#ffda75','#ff8acb','#c9a2ff','#9af3dc','#fdf8e7'][i%5]});
+  }
+  const dt=Math.min(2.4,Math.max(.3,(now-jackpotLast)/16.667));jackpotLast=now;
+  ctx.clearRect(0,0,w,h);
+  if(now-jackpotLaunch>580){jackpotLaunch=now;launchFirework(w,h)}
+  for(const p of jackpotPieces){
+   p.x+=p.vx*dt+Math.sin(now*.002+p.a)*.4;p.y+=p.vy*dt;p.a+=.075*dt;
+   if(p.y>h+12){p.y=-18;p.x=Math.random()*w}
+   if(p.x<0)p.x+=w;if(p.x>w)p.x-=w;
+   ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();
+  }
+  ctx.save();ctx.globalCompositeOperation='lighter';
+  for(let i=jackpotBursts.length-1;i>=0;i--){
+   const p=jackpotBursts[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=.042*dt;p.life-=.014*dt;
+   if(p.life<=0){jackpotBursts.splice(i,1);continue}
+   ctx.globalAlpha=p.life;ctx.fillStyle=p.c;ctx.shadowColor=p.c;ctx.shadowBlur=9;
+   ctx.fillRect(p.x-2,p.y-2,4.5,4.5);
+  }
+  ctx.restore();
+  jackpotRAF=requestAnimationFrame(tick);
+ }
+ jackpotRAF=requestAnimationFrame(tick);
+}
 function spinSlots(){
+ resetJackpotFX();slotSpinStart=performance.now();
  slotComplete=false;cancelAnimationFrame(slotRAF);slotAnim.forEach(a=>a.cancel());slotAnim=[];
- const token=sceneToken,spinStart=performance.now(),spinFor=6000;
+ const token=sceneToken,spinStart=slotSpinStart,spinFor=6000;
  ['slotA','slotB'].forEach((id,i)=>{
   const strip=document.getElementById(id);strip.innerHTML='';
   const h=Math.max(30,strip.parentElement.clientHeight-12);
@@ -449,6 +522,7 @@ function spinSlots(){
   setTimeout(()=>{if(token===sceneToken)document.getElementById('slotResult').classList.add('show')},600);
  }
  slotRAF=requestAnimationFrame(frame);
+ startJackpotFX();
 }
 function isMusicScene(scene){return scene.id==='poemScene'||scene.classList.contains('photo-scene')||scene.classList.contains('finale-scene')}
 function syncMusic(scene){
@@ -544,7 +618,7 @@ function plan(ms){
 }
 function go(next){
  if(!running||transitioning)return;
- const current=scenes[index];resetPhotoCards(current);clearTimeout(timer);clearTimeout(miniAdvanceTimer);cancelAnimationFrame(slotRAF);slotAnim.forEach(a=>a.cancel());slotAnim=[];
+ const current=scenes[index];if(current.id==='slotOpening')resetJackpotFX();resetPhotoCards(current);clearTimeout(timer);clearTimeout(miniAdvanceTimer);cancelAnimationFrame(slotRAF);slotAnim.forEach(a=>a.cancel());slotAnim=[];
  const target=(next+scenes.length)%scenes.length,nextScene=scenes[target];
  if(current.id==='slotOpening')slotAudio.pause();
  if(current.id==='pacScene')audioLevel(pacTheme,0);
@@ -558,11 +632,12 @@ function go(next){
 function togglePause(){
  if(!running){
   running=true;slotAnim.forEach(a=>a.play());pauseBtn.textContent='Ⅱ Pause';
+  if(scenes[index].id==='slotOpening'){slotSpinStart=performance.now()-Math.max(0,slotAudio.currentTime*1000);startJackpotFX()}
   primeAudio();if(scenes[index].id==='slotOpening'&&!muted){safePlay(slotAudio,'slot machine');if(!slotComplete)requestAnimationFrame(function resumeSpin(now){if(!running||scenes[index].id!=='slotOpening'||slotComplete)return;if(slotAudio.currentTime>=6){slotAnim.forEach(a=>a.cancel());slotAnim=[];['slotA','slotB'].forEach((id,i)=>{const el=document.getElementById(id),h=Math.max(30,el.parentElement.clientHeight-12);el.style.transition='transform '+(.38+i*.14)+'s ease-out';el.style.transform='translateY(-'+10*h+'px)'});slotComplete=true;setTimeout(()=>document.getElementById('slotResult').classList.add('show'),550)}else requestAnimationFrame(resumeSpin)})}
   if(scenes[index].id==='pacScene'&&!muted){audioLevel(pacTheme,.45);safePlay(pacTheme,'arcade audio')}
   syncMusic(scenes[index]);plan(Math.max(200,remain||effectiveDuration(scenes[index])));
  }else{
-  running=false;slotAnim.forEach(a=>a.pause());remain=Math.max(200,remain-(performance.now()-startTime));clearTimeout(timer);
+  running=false;cancelAnimationFrame(jackpotRAF);jackpotRAF=0;slotAnim.forEach(a=>a.pause());remain=Math.max(200,remain-(performance.now()-startTime));clearTimeout(timer);
   pauseBtn.textContent='▶ Resume';stopAllAudio();progress.style.transition='none';progress.style.width=getComputedStyle(progress).width;
  }
 }
