@@ -291,22 +291,44 @@ const scenes=[...document.querySelectorAll('.scene')], progress=document.getElem
 const pacTransition=document.getElementById('pacTransition'),pauseBtn=document.getElementById('pause'),soundBtn=document.getElementById('sound');
 const slotAudio=document.getElementById('slotAudio'),songMama=document.getElementById('songMama'),pacTheme=document.getElementById('pacTheme');
 const pacLane=document.getElementById('pacLane'),msPac=document.getElementById('msPac'),notice=document.getElementById('audioNotice');
-let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false;
+let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false,audioContext=null,audioGains=null;
 const photos=["assets/photos/01-young-mom.jpg","assets/photos/02-mom-and-baby.jpg","assets/photos/03-disney-family.jpg","assets/photos/04-family-living-room.jpg","assets/photos/05-vintage-portrait.jpg","assets/photos/06-pink-look.jpg","assets/photos/07-mother-daughter.jpg","assets/photos/08-family-adventure.jpg","assets/photos/09-family-fun.jpg","assets/photos/10-graduation.jpg","assets/photos/11-generations.jpg","assets/photos/12-family-portrait.jpg","assets/photos/13-together-again.jpg","assets/photos/14-recent-selfie.jpg"];
 songMama.loop=true;slotAudio.loop=false;pacTheme.loop=true;
 songMama.preload='auto';slotAudio.preload='auto';pacTheme.preload='auto';
-songMama.volume=0;slotAudio.volume=.92;pacTheme.volume=.45;
+songMama.volume=0;slotAudio.volume=.92;pacTheme.volume=0;
 function audioMessage(msg){if(notice)notice.textContent=msg;}
 function safePlay(el,label){
  if(muted||!running)return Promise.resolve(false);
  try{const p=el.play();if(p&&p.catch)p.catch(err=>{audioMessage('♫ Tap Sound on to enable '+label);console.warn('Fabulous 55 audio '+label,err)});return p||Promise.resolve(true)}
  catch(err){audioMessage('♫ Tap Sound on for '+label);return Promise.resolve(false)}
 }
+function audioLevel(el,value){
+ const n=Math.max(0,Math.min(1,value));
+ if(audioGains&&audioGains.get(el)) audioGains.get(el).gain.value=n;
+ else el.volume=n;
+}
 function primeAudio(){
  unlocked=true;
- // Keep the photo song running silently from the initial button gesture.
- // It is not started later by autoplay, which mobile browsers may block.
- if(!muted&&!songPrimed){songPrimed=true;songMama.volume=0;safePlay(songMama,'birthday music')}
+ if(muted)return;
+ if(!audioContext){
+  try{
+   const AudioCtor=window.AudioContext||window.webkitAudioContext;
+   if(AudioCtor){
+    audioContext=new AudioCtor();audioGains=new Map();
+    for(const el of [slotAudio,songMama,pacTheme]){
+     const source=audioContext.createMediaElementSource(el),gain=audioContext.createGain();
+     gain.gain.value=0;source.connect(gain);gain.connect(audioContext.destination);audioGains.set(el,gain);
+     el.volume=1;
+    }
+   }
+  }catch(err){console.warn('Using direct media playback fallback',err);audioGains=null}
+ }
+ if(audioContext&&audioContext.state==='suspended')audioContext.resume().catch(()=>{});
+ // Begin ALL tracks in the initial user gesture; mix them silently until their scenes.
+ // This avoids the mobile autoplay block on later slide transitions.
+ if(!songPrimed){songPrimed=true;safePlay(songMama,'birthday music');safePlay(pacTheme,'arcade audio')}
+ else{if(songMama.paused)safePlay(songMama,'birthday music');if(pacTheme.paused)safePlay(pacTheme,'arcade audio')}
+ audioLevel(songMama,0);audioLevel(pacTheme,0);
 }
 function fillWrap(selector,indices){
  const wrap=document.querySelector(selector+' .photo-wrap');wrap.innerHTML='';
@@ -352,16 +374,16 @@ function spinSlots(){
 }
 function isMusicScene(scene){return scene.id==='poemScene'||scene.classList.contains('photo-scene')||scene.classList.contains('finale-scene')}
 function syncMusic(scene){
- if(muted||!running){songMama.volume=0;return}
+ if(muted||!running){audioLevel(songMama,0);return}
  if(isMusicScene(scene)){
   if(songMama.paused)safePlay(songMama,'birthday music');
-  songMama.volume=.8;
- }else songMama.volume=0;
+  audioLevel(songMama,.8);
+ }else audioLevel(songMama,0);
 }
 function playSceneAudio(scene){
- slotAudio.pause();pacTheme.pause();
+ slotAudio.pause();audioLevel(slotAudio,muted?0:.92);audioLevel(pacTheme,0);
  if(scene.id==='slotOpening'){spinSlots()}
- if(scene.id==='pacScene'){pacTheme.currentTime=0;runPacEffect()}
+ if(scene.id==='pacScene'){pacTheme.currentTime=0;audioLevel(pacTheme,muted?0:.45);runPacEffect()}
  if(scene.id==='poemScene'){songMama.currentTime=0}
  syncMusic(scene);
 }
@@ -391,8 +413,8 @@ function go(next){
  const current=scenes[index];resetPhotoCards(current);clearTimeout(timer);
  const target=(next+scenes.length)%scenes.length,nextScene=scenes[target];
  if(current.id==='slotOpening')slotAudio.pause();
- if(current.id==='pacScene')pacTheme.pause();
- if(!isMusicScene(nextScene)){songMama.volume=0}
+ if(current.id==='pacScene')audioLevel(pacTheme,0);
+ if(!isMusicScene(nextScene)){audioLevel(songMama,0)}
  const needsTransition=!(current.classList.contains('photo-scene')&&nextScene.classList.contains('photo-scene'));
  if(!needsTransition){activate(target);return}
  transitioning=true;pacTransition.classList.add('running');
@@ -403,7 +425,7 @@ function togglePause(){
  if(!running){
   running=true;pauseBtn.textContent='Ⅱ Pause';
   primeAudio();if(scenes[index].id==='slotOpening'&&!muted)safePlay(slotAudio,'slot machine');
-  if(scenes[index].id==='pacScene'&&!muted)safePlay(pacTheme,'arcade audio');
+  if(scenes[index].id==='pacScene'&&!muted){audioLevel(pacTheme,.45);safePlay(pacTheme,'arcade audio')}
   syncMusic(scenes[index]);plan(Math.max(200,remain||effectiveDuration(scenes[index])));
  }else{
   running=false;remain=Math.max(200,remain-(performance.now()-startTime));clearTimeout(timer);
@@ -420,12 +442,12 @@ document.getElementById('next').addEventListener('click',()=>go(index+1));
 pauseBtn.addEventListener('click',togglePause);
 soundBtn.addEventListener('click',()=>{
  muted=!muted;soundBtn.textContent=muted?'♫ Sound off':'♫ Sound on';
- if(muted){stopAllAudio();songPrimed=false;audioMessage('Sound off')}
+ if(muted){audioLevel(slotAudio,0);audioLevel(songMama,0);audioLevel(pacTheme,0);stopAllAudio();songPrimed=false;audioMessage('Sound off')}
  else{
   audioMessage('♫ Music enabled');primeAudio();
   const scene=scenes[index];
   if(scene.id==='slotOpening')safePlay(slotAudio,'slot machine');
-  if(scene.id==='pacScene')safePlay(pacTheme,'arcade audio');
+  if(scene.id==='pacScene'){audioLevel(pacTheme,.45);safePlay(pacTheme,'arcade audio')}
   syncMusic(scene);
  }
 });
