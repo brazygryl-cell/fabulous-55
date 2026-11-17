@@ -1,551 +1,329 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#220d36"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>Fabulous 55 | Mom's Birthday Show</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#200635" />
+<title>Fabulous 55</title>
 <style>
-:root{--purple:#4b2075;--mid:#250d3c;--gold:#f4cf77;--pink:#ff83c2;--cream:#fff2db}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#16091f;color:var(--cream);font-family:Georgia,'Times New Roman',serif}
-button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #fff;outline-offset:4px}
-#show{width:100%;height:100dvh;min-height:400px;position:relative;isolation:isolate;background:radial-gradient(circle at 50% 15%,#7730a0 0%,#34124b 43%,#130819 100%)}
-#show:before{content:"";position:absolute;inset:13px;pointer-events:none;border:2px solid #e3ac5c;border-radius:25px;box-shadow:inset 0 0 20px #e6b86744,0 0 22px #bc68ed55;z-index:5}
-.stars{position:absolute;inset:0;overflow:hidden;pointer-events:none;background-image:radial-gradient(circle,#f7d99c 1px,transparent 1.5px),radial-gradient(circle,#ff97df 1px,transparent 1.5px);background-size:91px 97px,157px 161px;background-position:0 0,23px 51px;opacity:.45;animation:twinkle 4s ease-in-out infinite alternate}
-@keyframes twinkle{to{opacity:.13;transform:scale(1.025)}}
-.scene{position:absolute;inset:0;padding:clamp(35px,6vh,80px) clamp(23px,7vw,100px) clamp(80px,10vh,110px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(10px,2vh,24px);opacity:0;visibility:hidden;transform:scale(.97);transition:opacity 1s ease,transform 1s ease,visibility 1s}
+:root{
+  --bg1:#180521; --bg2:#36105b; --purple:#8b42d6; --pink:#ff5da8; --gold:#ffd56d;
+  --cream:#fff7ef; --panel:#2a0e44ee; --shadow:0 18px 55px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:radial-gradient(circle at top,#5b2690 0%,#2d0d4e 35%,#120419 100%);color:var(--cream);font-family:Arial,Helvetica,sans-serif;overflow:hidden}
+button{font:inherit;cursor:pointer}
+#show{position:relative;height:100vh;width:100vw;overflow:hidden}
+.stars{position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(#ffd978 1.1px,transparent 1.1px);background-size:82px 82px,82px 82px}
+#status{position:absolute;top:10px;right:15px;z-index:20;color:#f4d68d;font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:clamp(18px,3vw,36px);opacity:0;visibility:hidden;transform:scale(.985);transition:opacity .42s ease,transform .42s ease,visibility .42s;z-index:2;text-align:center}
 .scene.active{opacity:1;visibility:visible;transform:scale(1)}
-.eyebrow{font:700 clamp(12px,1.6vw,19px) system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
-h1,h2,p{margin:0}h1{font-size:clamp(3.8rem,11vw,10rem);font-weight:900;line-height:.87;color:var(--gold);text-shadow:0 4px 0 #9a4e41,0 0 35px #ffcc8f77}
-h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shadow:0 0 25px #f8a6ec77}
-.subtitle{font-family:system-ui,sans-serif;font-size:clamp(1rem,2.4vw,1.65rem);line-height:1.5;max-width:850px}
-.big-number{font-size:clamp(7rem,25vw,22rem);font-weight:900;line-height:.83;color:var(--gold);text-shadow:7px 8px 0 #9e3d99,0 0 70px #eec76888}
-.marquee{border:3px solid var(--gold);background:#1d0b2dcc;padding:clamp(16px,3vw,32px);border-radius:24px;box-shadow:0 0 0 6px #4d2268,0 0 45px #f0be7f55}
-.pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.pill{font:700 clamp(12px,1.6vw,18px) system-ui,sans-serif;border:1px solid #eed39877;border-radius:99px;padding:9px 16px;background:#ffffff15}
-.reels{display:flex;gap:clamp(7px,2vw,24px);justify-content:center}.reel{display:grid;place-items:center;width:clamp(78px,15vw,190px);height:clamp(90px,19vw,210px);border-radius:15px;border:5px solid var(--gold);background:linear-gradient(#fff6dc,#ffb7f0,#fff6dc);font:bold clamp(3rem,8vw,7rem) system-ui,sans-serif;color:#541578;box-shadow:0 8px 0 #9c5b30,0 0 35px #ff9fe355}
-.arcade{position:relative;width:min(820px,85vw);border:3px dashed var(--gold);border-radius:16px;padding:22px;background:#1b092d99;overflow:hidden}.arcade-track{display:flex;justify-content:space-between;align-items:center;font:700 clamp(1rem,3vw,2.5rem) system-ui,sans-serif;color:#ffdb9b;white-space:nowrap}.pac{display:inline-block;font-size:clamp(2rem,6vw,5rem);animation:chomp .45s ease-in-out infinite alternate}@keyframes chomp{to{transform:rotate(-20deg)}}.ghost{color:#ff80c3}.dots{letter-spacing:.4em;overflow:hidden}
-.frame{width:min(54vw,390px);height:min(44vh,440px);border:8px solid #f7d48f;border-radius:14px;transform:rotate(-3deg);background:linear-gradient(135deg,#9c66b3,#3b1b5c);box-shadow:12px 12px 0 #180a2f,0 0 25px #fbe3a26a;display:grid;place-items:center;overflow:hidden}.frame img{width:100%;height:100%;object-fit:cover}.placeholder{font:700 clamp(17px,2.5vw,29px) system-ui,sans-serif;color:#fff0df;padding:20px}
-.video-wrap{position:relative;width:min(75vw,900px);aspect-ratio:16/9;background:#160d25;border:5px solid var(--gold);border-radius:16px;display:grid;place-items:center;overflow:hidden;box-shadow:0 0 55px #cc80ed44}.video-wrap video{width:100%;height:100%;object-fit:contain}.video-placeholder{padding:15px;font:600 clamp(16px,2.2vw,26px) system-ui,sans-serif;color:#f4c9ec}.sender{font-family:system-ui,sans-serif;font-size:clamp(1rem,2vw,1.6rem)}
-#startScreen{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:30px;background:radial-gradient(circle,#61248a,#1c092b 80%)}#startScreen.hidden{display:none}
-.start-btn{border:2px solid #fff1b6;border-radius:99px;background:linear-gradient(145deg,#fbe8aa,#db9b52);color:#301342;font:bold clamp(17px,2vw,24px) system-ui,sans-serif;padding:16px 38px;box-shadow:0 0 45px #fbc17b99}
-#controls{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:10;background:#1b0b2edc;border:1px solid #f4d48d66;border-radius:99px;padding:8px 12px;max-width:calc(100vw - 32px)}
-#controls button{background:transparent;color:#ffedc7;border:0;font:600 13px system-ui,sans-serif;white-space:nowrap;padding:8px 9px;border-radius:8px}#controls button:hover{background:#ffffff22}
-#progress{position:absolute;bottom:0;left:0;height:5px;background:linear-gradient(90deg,#f0b85e,#f888d2);z-index:11;width:0}
-#status{position:absolute;top:27px;right:30px;font:600 11px system-ui,sans-serif;color:#e6c79cbb;z-index:7;letter-spacing:.12em}
-@media(max-width:600px){#show:before{inset:7px;border-radius:14px}.scene{padding:45px 17px 95px}h1{font-size:clamp(4.5rem,19vw,8rem)}.big-number{font-size:clamp(9rem,45vw,16rem)}.video-wrap{width:91vw}.frame{width:min(67vw,320px);height:38vh}.reel{width:27vw;height:30vw}#controls{gap:1px;bottom:16px}#controls button{font-size:11px;padding:8px 5px}#status{top:15px;right:18px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
-
-/* Cinematic motion pass */
-#slotOpening .slot-stage{display:flex;flex-direction:column;gap:clamp(12px,2vh,25px);align-items:center}
-.slot-machine{display:flex;gap:clamp(8px,2.5vw,25px);align-items:center;padding:clamp(14px,3vw,35px);border:5px solid var(--gold);border-radius:26px;background:linear-gradient(145deg,#791e83,#2b103d 65%,#5d1c72);box-shadow:0 0 0 8px #b15a72,0 0 0 12px #edc37c,0 16px 50px #0008,inset 0 0 25px #fddc9d77;position:relative}
-.slot-window{height:clamp(120px,23vw,260px);width:clamp(105px,19vw,220px);overflow:hidden;border-radius:13px;background:linear-gradient(#ffdfaa,#fff8e5 36%,#fff8e5 65%,#f4b9cd);border:4px solid #d4a957;box-shadow:inset 0 8px 17px #4d0e4b66,inset 0 -8px 17px #4d0e4b66}
-.slot-strip{display:flex;flex-direction:column;will-change:transform}
-.slot-symbol{height:clamp(112px,22.3vw,252px);display:flex;align-items:center;justify-content:center;color:#5e1a77;font:900 clamp(5.5rem,15vw,11rem) system-ui,sans-serif;text-shadow:3px 4px 0 #faabd9;flex:none}
-.slot-machine.winning{animation:jackpotPulse .6s ease-in-out infinite alternate}
-@keyframes jackpotPulse{to{filter:drop-shadow(0 0 40px #ffe68c);transform:scale(1.03)}}
-#slotResult{min-height:1.25em;opacity:0;transform:scale(.7);transition:opacity .45s,transform .45s}
-#slotResult.revealed{opacity:1;transform:scale(1)}
-#pacTransition{position:absolute;inset:0;z-index:16;pointer-events:none;visibility:hidden;overflow:hidden;background:#12071f}
-#pacTransition.running{visibility:visible}
-#pacTransition .pac-lane{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);display:flex;align-items:center;gap:22px;padding:0 20px}
-.pellet{height:clamp(7px,1.6vw,16px);width:clamp(7px,1.6vw,16px);flex:1;max-width:16px;aspect-ratio:1;border-radius:50%;background:#f6dfae;box-shadow:0 0 10px #f6dfae}
-#pacHero{position:absolute;top:50%;left:-24vw;width:clamp(72px,16vw,180px);height:clamp(72px,16vw,180px);transform:translateY(-50%);z-index:2;filter:drop-shadow(0 0 25px #ffd40099)}
-#pacHero:before,#pacHero:after{content:"";position:absolute;inset:0;background:#ffd71e;border-radius:50%}
-#pacHero:before{clip-path:polygon(50% 50%,100% 3%,100% 100%,0 100%,0 0,50% 0);animation:mouthTop .26s ease-in-out infinite alternate}
-#pacHero:after{clip-path:polygon(50% 50%,100% 97%,0 100%,0 0,50% 0);animation:mouthBottom .26s ease-in-out infinite alternate}
-@keyframes mouthTop{to{clip-path:polygon(50% 50%,100% 44%,100% 100%,0 100%,0 0,50% 0)}}
-@keyframes mouthBottom{to{clip-path:polygon(50% 50%,100% 56%,0 100%,0 0,50% 0)}}
-#pacTransition.running #pacHero{animation:pacCross 4.4s linear forwards}
-@keyframes pacCross{from{left:-24vw}to{left:110vw}}
-#transitionLabel{position:absolute;bottom:17%;left:0;right:0;text-align:center;color:#ffdb92;font:bold clamp(14px,2.4vw,28px) system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
-.gallery-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kenBurns 9s linear both}
-@keyframes kenBurns{from{transform:scale(1.03) translate(-1%,0)}to{transform:scale(1.16) translate(1%,-1%)}}
-.media-photo{width:min(78vw,880px);height:min(57vh,580px);overflow:hidden;border:7px solid var(--gold);border-radius:20px;position:relative;background:#541c70;box-shadow:0 0 45px #e5afee66;transform:rotate(-1deg)}
-.media-photo img{width:100%;height:100%;object-fit:contain;animation:kenBurns 9s linear both}
-.slide-caption{font:600 clamp(15px,2.5vw,27px) system-ui,sans-serif;max-width:80vw}
-#particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:6}
-.sparkle{position:absolute;top:-10%;font-size:clamp(15px,2vw,27px);animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(115vh) rotate(540deg);opacity:0}}
-@media(max-width:600px){.media-photo{width:87vw;height:49vh}.slot-machine{padding:12px;border-width:3px}.slot-window{width:30vw;height:35vw}.slot-symbol{height:calc(35vw - 8px);font-size:23vw}}
-@media(prefers-reduced-motion:reduce){#pacTransition.running #pacHero{animation:pacCross 1.3s linear forwards}}
-
-/* Dedicated phone layout: vertical-safe scene frames, controls and media. */
-@media (max-width: 768px) {
-  html,body { width:100%; height:100%; overflow:hidden; }
-  #show { width:100%; height:100dvh; min-height:0; overflow:hidden; }
-  #show::before { inset:6px; border-radius:16px; }
-  .scene {
-    inset:0; min-height:0; justify-content:center; align-items:center;
-    padding:calc(48px + env(safe-area-inset-top)) 18px
-            calc(100px + env(safe-area-inset-bottom));
-    gap:clamp(7px,1.5dvh,15px);
-    overflow-x:hidden; overflow-y:auto;
-    overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
-  }
-  .eyebrow { font-size:clamp(10px,2.6vw,13px); letter-spacing:.14em; }
-  h1 { font-size:clamp(2.9rem,15vw,5.5rem); line-height:.95; }
-  h2 { font-size:clamp(1.7rem,8vw,3.3rem); line-height:1.04; }
-  .subtitle { font-size:clamp(13px,3.7vw,17px); line-height:1.37; max-width:95%; }
-  .big-number { font-size:clamp(5rem,28vw,10rem); }
-  .marquee { width:min(92vw,420px); padding:clamp(11px,3vw,18px); }
-  .pills { gap:6px; }
-  .pill { font-size:clamp(10px,2.6vw,13px); padding:6px 9px; }
-  #slotOpening .slot-stage { width:100%; gap:clamp(7px,1.5dvh,15px); }
-  .slot-machine { max-width:94vw; gap:clamp(8px,2vw,13px); padding:12px; border-width:3px; }
-  .slot-window { width:min(32vw,140px); height:min(37vw,160px); max-height:none; }
-  .slot-symbol { height:calc(min(37vw,160px) - 8px); font-size:clamp(3.7rem,18vw,6rem); }
-  #slotResult { font-size:clamp(1.8rem,8.5vw,3rem); }
-  .frame,.media-photo {
-    width:min(84vw,380px); height:min(46dvh,460px); max-width:100%;
-    aspect-ratio:auto; margin:0 auto; transform:none;
-  }
-  .frame img,.media-photo img { object-fit:contain; }
-  .slide-caption { font-size:clamp(13px,3.5vw,17px); max-width:90vw; }
-  .video-wrap { width:min(91vw,460px); aspect-ratio:16/9; max-height:45dvh; }
-  .video-placeholder { font-size:clamp(13px,3.5vw,17px); }
-  .sender { font-size:14px; }
-  #controls {
-    left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));
-    transform:none; max-width:none; width:auto;
-    flex-wrap:wrap; justify-content:center; gap:3px;
-    border-radius:16px; padding:7px 5px;
-  }
-  #controls button { font-size:11px; padding:9px 6px; }
-  #status { top:calc(12px + env(safe-area-inset-top)); right:14px; font-size:9px; letter-spacing:.06em; }
-  #pacHero { width:clamp(65px,20vw,100px);height:clamp(65px,20vw,100px); }
-  #transitionLabel { bottom:16%;font-size:12px;letter-spacing:.12em;padding:0 14px; }
-  .pellet {max-width:9px;max-height:9px;}
-  #startScreen {padding:calc(24px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));overflow-y:auto;}
-  .start-btn { width:min(86vw,320px);font-size:18px;padding:13px 18px; }
+.eyebrow{font-size:clamp(12px,1.8vw,16px);letter-spacing:.28em;text-transform:uppercase;color:#f8c569;font-weight:700}
+h1,h2,p{margin:0}
+h1{font-family:Georgia,serif;font-size:clamp(3rem,8vw,6.5rem);line-height:.95;color:var(--gold);text-shadow:0 0 28px rgba(255,214,120,.35)}
+h2{font-family:Georgia,serif;font-size:clamp(2rem,6vw,4.8rem);line-height:1}
+.subtitle{font-size:clamp(16px,2.2vw,24px);max-width:900px;line-height:1.35}
+.frame{width:min(92vw,1080px);border:2px solid rgba(255,213,109,.6);border-radius:28px;background:linear-gradient(180deg,#46186b55,#240a3850);box-shadow:var(--shadow);padding:18px}
+#slotOpening .frame{width:min(88vw,650px);padding:30px}
+.slot-machine{display:flex;gap:12px;justify-content:center;margin:8px auto 10px}
+.slot-window{width:min(20vw,110px);height:min(24vw,130px);max-width:110px;max-height:130px;border-radius:16px;background:#fff3e3;color:#2a0e44;border:6px solid #f2ca69;display:grid;place-items:center;overflow:hidden;box-shadow:inset 0 4px 10px rgba(0,0,0,.12)}
+.slot-strip{display:flex;flex-direction:column;align-items:center;transform:translateY(0)}
+.slot-symbol{width:100%;height:118px;display:grid;place-items:center;font-size:54px;font-weight:700;font-family:Georgia,serif}
+#slotResult{opacity:0;transform:translateY(12px);transition:.35s}
+#slotResult.show{opacity:1;transform:translateY(0)}
+.level-scene .big-number{font-family:Georgia,serif;color:var(--gold);font-size:clamp(6rem,16vw,12rem);line-height:.85;text-shadow:0 0 26px rgba(255,213,109,.35)}
+.betty-tag{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;background:#4e175f;border:1px solid rgba(255,213,109,.45);font-weight:700;color:#ffdce9}
+.betty-tag .kiss{font-size:28px}
+#pacScene .frame{padding:28px 18px}
+.pac-lane{position:relative;width:min(92vw,1100px);height:110px;margin:8px auto 0;overflow:hidden}
+.pellet{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:#ffefc1;box-shadow:0 0 12px rgba(255,239,193,.9);transform:translate(-50%,-50%)}
+#msPac{position:absolute;top:50%;left:-140px;width:88px;height:88px;transform:translateY(-50%);filter:drop-shadow(0 0 15px rgba(255,204,80,.38))}
+#msPac .face{width:88px;height:88px;background:#ffd733;border-radius:50%;clip-path:polygon(100% 0,100% 38%,52% 50%,100% 62%,100% 100%,0 100%,0 0);position:relative}
+#msPac .eye{position:absolute;top:20px;left:49px;width:8px;height:14px;border-radius:50%;background:#17101d;transform:rotate(20deg)}
+#msPac .lash1,#msPac .lash2{position:absolute;top:12px;left:55px;width:12px;height:2px;background:#17101d;border-radius:3px}
+#msPac .lash1{transform:rotate(-28deg)}
+#msPac .lash2{top:17px;transform:rotate(-10deg)}
+#msPac .lip{position:absolute;left:61px;top:57px;width:18px;height:8px;background:#ff5f90;border-radius:999px;transform:rotate(8deg)}
+#msPac .bow{position:absolute;left:18px;top:-11px;width:38px;height:30px}
+#msPac .bow:before,#msPac .bow:after{content:"";position:absolute;width:16px;height:16px;background:#ff5ba2;border:2px solid #b1125c;border-radius:3px 14px 3px 14px;top:5px}
+#msPac .bow:before{left:0;transform:rotate(-18deg)}
+#msPac .bow:after{right:0;transform:rotate(18deg)}
+#msPac .bow i{position:absolute;left:13px;top:8px;width:12px;height:12px;background:#ffb2cf;border:2px solid #b1125c;border-radius:50%}
+.poem{max-width:min(90vw,850px);font-size:clamp(18px,2.3vw,28px);line-height:1.55;background:rgba(20,5,34,.45);border:1px solid rgba(255,213,109,.32);border-radius:24px;padding:clamp(18px,3vw,34px);box-shadow:var(--shadow);white-space:pre-line}
+.photo-scene{gap:14px}
+.photo-wrap{position:relative;width:min(92vw,1120px);height:min(72vh,720px)}
+.photo-card{position:absolute;background:#fff6ee;padding:10px 10px 34px;border-radius:5px;box-shadow:0 16px 35px rgba(0,0,0,.34);opacity:0;transform:translateY(18px) scale(.96) rotate(var(--rot));transition:opacity .55s ease,transform .55s ease;overflow:hidden}
+.photo-card.show{opacity:1;transform:translateY(0) scale(1) rotate(var(--rot))}
+.photo-card img{display:block;width:100%;height:100%;object-fit:cover;background:#34104f}
+.photo-card .label{position:absolute;left:0;right:0;bottom:9px;text-align:center;color:#6e3e63;font-weight:700;font-size:12px;letter-spacing:.08em}
+.layout-a .photo-card:nth-child(1){left:4%;top:7%;width:32%;height:44%}
+.layout-a .photo-card:nth-child(2){left:36%;top:2%;width:28%;height:36%}
+.layout-a .photo-card:nth-child(3){right:4%;top:10%;width:29%;height:45%}
+.layout-a .photo-card:nth-child(4){left:19%;bottom:6%;width:30%;height:42%}
+.layout-a .photo-card:nth-child(5){right:12%;bottom:3%;width:31%;height:39%}
+.layout-b .photo-card:nth-child(1){left:6%;top:7%;width:38%;height:56%}
+.layout-b .photo-card:nth-child(2){right:10%;top:4%;width:28%;height:37%}
+.layout-b .photo-card:nth-child(3){right:4%;bottom:6%;width:34%;height:48%}
+.layout-b .photo-card:nth-child(4){left:22%;bottom:1%;width:24%;height:30%}
+.layout-c .photo-card:nth-child(1){left:4%;top:6%;width:29%;height:43%}
+.layout-c .photo-card:nth-child(2){left:34%;top:12%;width:31%;height:46%}
+.layout-c .photo-card:nth-child(3){right:4%;top:4%;width:28%;height:34%}
+.layout-c .photo-card:nth-child(4){left:11%;bottom:5%;width:26%;height:34%}
+.layout-c .photo-card:nth-child(5){right:9%;bottom:2%;width:34%;height:45%}
+.layout-c .photo-card:nth-child(6){left:40%;bottom:1%;width:20%;height:26%}
+.finale-scene .heart{font-size:clamp(36px,8vw,88px);color:#ff8cc2}
+.finale-scene h2{color:var(--gold);text-shadow:0 0 22px rgba(255,213,109,.35)}
+#progress{position:absolute;left:0;bottom:0;height:5px;width:0;background:linear-gradient(90deg,#ff87b7,#ffd56d);z-index:25;transition:width linear}
+#controls{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;width:min(96vw,980px);z-index:30;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:22px;background:rgba(17,4,28,.72);border:1px solid rgba(255,213,109,.28);backdrop-filter:blur(10px)}
+#controls button{background:none;color:#fff6ef;border:none;padding:6px 10px}
+#startScreen{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(circle at top,#4f1e80 0%,#260b41 45%,#120419 100%);padding:24px;text-align:center}
+#startScreen.hidden{display:none}
+.start-btn{border:none;border-radius:999px;padding:18px 34px;background:linear-gradient(90deg,#fff0b5,#f6c05f);color:#260a3d;font-weight:800;font-size:clamp(18px,2vw,26px);box-shadow:0 10px 30px rgba(246,192,95,.3)}
+#pacTransition{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;opacity:0;z-index:18;background:radial-gradient(circle at center,#341050 0%,#120419 70%);transition:opacity .18s}
+#pacTransition.running{opacity:1}
+#transitionLabel{position:absolute;bottom:16%;font-size:clamp(18px,2vw,28px);letter-spacing:.18em;text-transform:uppercase;color:#ffe39b}
+@media (max-width:780px){
+  .photo-wrap{height:min(62vh,600px)}
+  .layout-a .photo-card:nth-child(1){left:3%;top:8%;width:42%;height:31%}
+  .layout-a .photo-card:nth-child(2){right:3%;top:4%;width:42%;height:26%}
+  .layout-a .photo-card:nth-child(3){left:7%;top:42%;width:42%;height:31%}
+  .layout-a .photo-card:nth-child(4){right:7%;top:36%;width:38%;height:24%}
+  .layout-a .photo-card:nth-child(5){left:22%;bottom:5%;width:56%;height:25%}
+  .layout-b .photo-card:nth-child(1){left:4%;top:7%;width:48%;height:39%}
+  .layout-b .photo-card:nth-child(2){right:5%;top:10%;width:36%;height:23%}
+  .layout-b .photo-card:nth-child(3){right:3%;top:42%;width:44%;height:32%}
+  .layout-b .photo-card:nth-child(4){left:16%;bottom:6%;width:36%;height:20%}
+  .layout-c .photo-card:nth-child(1){left:3%;top:8%;width:38%;height:24%}
+  .layout-c .photo-card:nth-child(2){right:4%;top:5%;width:44%;height:28%}
+  .layout-c .photo-card:nth-child(3){left:11%;top:37%;width:34%;height:21%}
+  .layout-c .photo-card:nth-child(4){right:7%;top:39%;width:35%;height:20%}
+  .layout-c .photo-card:nth-child(5){left:17%;bottom:5%;width:40%;height:26%}
+  .layout-c .photo-card:nth-child(6){right:12%;bottom:10%;width:24%;height:15%}
+  #controls{font-size:14px}
 }
-/* Very short phones and landscape phones must remain readable. */
-@media (max-width: 768px) and (max-height: 690px) {
-  .scene { justify-content:flex-start; padding-top:calc(39px + env(safe-area-inset-top)); }
-  .slot-window { height:min(29vw,118px); }
-  .slot-symbol { height:calc(min(29vw,118px) - 8px); }
-  .frame,.media-photo {height:36dvh;}
-  .big-number {font-size:clamp(4rem,22vw,7rem);}
-  #slotOpening .slot-stage {gap:6px;}
-}
-
-/* v5: full-width precise pellet lane, Ms. Pac-Man styling and responsive slots */
-#pacTransition .pac-lane{position:absolute;inset:0;top:50%;height:20px;transform:translateY(-50%);display:block;padding:0;gap:0;pointer-events:none}
-#pacTransition .pellet{position:absolute;top:50%;left:0;display:block;width:clamp(7px,1.3vw,14px);height:clamp(7px,1.3vw,14px);max-width:none;max-height:none;transform:translate(-50%,-50%);border-radius:50%;transition:opacity .07s ease,scale .07s ease}
-#pacHero{overflow:visible}
-#pacHero .ms-bow{position:absolute;z-index:6;top:-22%;left:7%;width:45%;height:34%;transform:rotate(-25deg);filter:drop-shadow(0 2px 2px #42052499)}
-#pacHero .ms-bow:before,#pacHero .ms-bow:after{content:"";position:absolute;background:#f2467e;border:3px solid #8a0d3a;border-radius:65% 25% 65% 28%;width:52%;height:82%;top:0}
-#pacHero .ms-bow:before{left:0;transform:rotate(-35deg)}#pacHero .ms-bow:after{right:0;transform:rotate(38deg)}
-#pacHero .ms-knot{position:absolute;z-index:8;top:-13%;left:26%;width:14%;height:14%;background:#ff83b2;border:2px solid #8a0d3a;border-radius:50%}
-#pacHero .ms-eye{position:absolute;z-index:7;left:51%;top:7%;width:11%;height:18%;border-radius:50%;background:#10101a;transform:rotate(18deg)}
-#pacHero .ms-lash{position:absolute;z-index:7;left:55%;top:4%;width:15%;height:4%;background:#17111d;border-radius:6px;transform:rotate(-35deg)}
-#pacHero .ms-lips{position:absolute;z-index:7;right:0;top:55%;height:7%;width:23%;background:#ee3970;border-radius:90% 20% 90% 45%;transform:rotate(-16deg)}
-#slotOpening .slot-stage{width:min(100%,860px);min-width:0;max-height:100%;justify-content:center}
-#slotOpening .slot-machine{max-width:calc(100vw - 64px);min-width:0}
-#slotOpening .slot-window{flex:0 1 auto;min-width:0}
-#slotOpening .slot-symbol{line-height:1}
-#slotOpening #slotResult{white-space:normal}
-@media(max-width:768px){#slotOpening .slot-stage{padding:4px 0}#slotOpening .slot-machine{max-width:90vw}#pacHero .ms-bow:before,#pacHero .ms-bow:after{border-width:2px}}
-
-/* Level 55 responsive composition: no overlap between number and arcade. */
-.level-scene{gap:clamp(10px,2.3vh,25px)}
-.level-heading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(3px,1vh,12px);flex-shrink:0}
-.level-heading h2{font-size:clamp(2rem,5.5vw,4rem);line-height:1}
-.level-heading .big-number{font-size:clamp(5.8rem,17vh,12rem);line-height:1.05;display:block;padding:0 .16em .07em;text-shadow:5px 6px 0 #9e3d99,0 0 45px #eec76855}
-.level-scene .arcade{flex-shrink:0;width:min(760px,87vw);padding:clamp(11px,2vw,20px);border-radius:20px}
-.level-scene .arcade-track{display:flex;justify-content:space-between;align-items:center;gap:clamp(8px,2vw,22px);min-height:clamp(42px,6vw,75px)}
-.level-pac{width:clamp(30px,5.2vw,64px);height:clamp(30px,5.2vw,64px);border-radius:50%;background:#ffda25;clip-path:polygon(50% 50%,100% 8%,100% 100%,0 100%,0 0);flex-shrink:0;animation:levelChew .45s ease-in-out infinite alternate}
-@keyframes levelChew{to{clip-path:polygon(50% 50%,100% 45%,100% 100%,0 100%,0 0)}}
-.level-dots{color:#ffdf9e;white-space:nowrap;font:700 clamp(12px,2vw,23px) system-ui,sans-serif;letter-spacing:clamp(0px,.8vw,9px)}
-.level-ghost{display:grid;place-items:center;flex-shrink:0;width:clamp(29px,4.4vw,55px);height:clamp(33px,5vw,60px);border-radius:50% 50% 18% 18%;background:#ff8abd;color:#722454;font:700 clamp(13px,2.2vw,25px) system-ui,sans-serif}
-.level-star{color:#f7ca66;font-size:clamp(26px,4vw,50px);flex-shrink:0}
-.level-scene>.subtitle{max-width:780px}
-@media(max-width:768px){
- .level-scene{gap:clamp(8px,2dvh,18px)}
- .level-heading{gap:2px}
- .level-heading h2{font-size:clamp(2rem,8vw,3rem)}
- .level-heading .big-number{font-size:clamp(5.5rem,22vw,9rem);line-height:1.1;padding-bottom:.08em}
- .level-scene .arcade{width:min(88vw,460px);padding:12px}
- .level-scene .arcade-track{gap:6px;min-height:48px}
- .level-pac{width:32px;height:32px}
- .level-dots{font-size:11px;letter-spacing:0}
- .level-ghost{width:32px;height:36px;font-size:15px}
- .level-star{font-size:26px}
- .level-scene>.subtitle{font-size:clamp(13px,3.5vw,17px);line-height:1.35}
-}
-@media(max-width:768px) and (max-height:690px){
- .level-heading .big-number{font-size:clamp(4.5rem,16vh,6.5rem)}
- .level-scene{gap:8px}
-}
-
-/* v6: smooth crisp Ms. Pac-Man SVG and guaranteed full-width eaten-dot wipe */
-#pacHero::before,#pacHero::after{display:none!important}
-#pacHero{overflow:visible;filter:drop-shadow(0 0 12px #f8c959b0)}
-#pacHero .ms-pac-svg{position:absolute;inset:-10% 0 0 -10%;width:120%;height:130%;overflow:visible}
-#pacHero .ms-face{transform-origin:50px 50px;animation:msPacChomp .24s ease-in-out infinite alternate}
-@keyframes msPacChomp{from{d:path('M 50 50 L 96 16 A 48 48 0 1 0 96 84 Z')}to{d:path('M 50 50 L 98 42 A 48 48 0 1 0 98 58 Z')}}
-#pacTransition .pac-lane{clip-path:inset(0 0 0 0);will-change:clip-path}
-#pacTransition .pellet{transition:none!important;opacity:1!important;scale:1!important}
-@media(prefers-reduced-motion:reduce){#pacHero .ms-face{animation:none}}
-
-/* Final family collage, fit on phone and television */
-.collage-scene{gap:clamp(9px,1.8vh,18px)}
-.collage-scene h2{font-size:clamp(1.8rem,5vw,4rem)}
-.collage-grid{width:min(86vw,930px);height:min(52vh,530px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:10px;border:4px solid #f4cf77;padding:9px;border-radius:20px;background:#2b1142;box-shadow:0 0 35px #e0a5ff44}
-.collage-grid img{width:100%;height:100%;min-width:0;min-height:0;object-fit:cover;border-radius:9px;animation:collageIn 1s ease both}
-.collage-grid img:nth-child(even){animation-delay:.25s}
-@keyframes collageIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-@media(max-width:768px){.collage-grid{width:89vw;height:min(47dvh,440px);grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:6px}.collage-scene h2{font-size:clamp(1.8rem,7vw,2.8rem)}}
-@media(max-width:768px) and (max-height:690px){.collage-grid{height:37dvh}}
-
-/* v7: fast polished slideshow */
-.scene{transition:opacity .45s ease,transform .45s ease,visibility .45s}
-#slotOpening .slot-stage{gap:clamp(8px,1.5vh,17px)}
-.memory-scene{gap:clamp(8px,1.6vh,18px)}
-.memory-grid{width:min(88vw,1000px);height:min(56vh,560px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.8vw,22px);align-items:stretch}
-.memory-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.memory-grid.one{grid-template-columns:1fr;width:min(65vw,440px)}
-.memory-card{--tilt:-3deg;min-width:0;min-height:0;padding:8px 8px 28px;background:#fff3e7;box-shadow:0 12px 30px #0c0519bb,0 0 18px #f5cf9c55;position:relative;transform:translateY(55px) rotate(var(--tilt));opacity:0;transition:transform .65s cubic-bezier(.18,.8,.3,1),opacity .65s}
-.memory-card:nth-child(even){--tilt:3deg;transition-delay:.16s}
-.memory-card:nth-child(3){--tilt:-1deg;transition-delay:.3s}
-.memory-scene.active .memory-card{opacity:1;transform:translateY(0) rotate(var(--tilt))}
-.memory-card img{width:100%;height:100%;object-fit:contain;background:#371b4f;display:block}
-.memory-card .photo-sticker{position:absolute;bottom:4px;left:0;right:0;text-align:center;color:#81446e;font:700 13px system-ui,sans-serif}
-.memory-scene h2{font-size:clamp(2.1rem,5vw,4.2rem)}
-.memory-scene .slide-caption{max-width:88vw;font-size:clamp(14px,2.3vw,23px);line-height:1.3}
-#pacTransition .pac-lane{inset:0!important;top:50%!important;height:20px!important;transform:translateY(-50%)!important;display:block!important;width:100%!important;padding:0!important;gap:0!important;clip-path:none!important}
-#pacTransition .pellet{position:absolute!important;top:50%;width:clamp(8px,1.2vw,13px)!important;height:clamp(8px,1.2vw,13px)!important;max-width:none!important;opacity:1;transform:translate(-50%,-50%);scale:1}
-#pacHero{animation:none!important;left:-200px}
-#pacHero::before,#pacHero::after{display:none!important}
-#pacHero .ms-face{animation:none!important}
-.collage-scene .collage-grid img{animation:none}
-@media(max-width:768px){.memory-grid,.memory-grid.three{width:90vw;height:min(48dvh,460px);gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}.memory-grid.one{width:min(70vw,330px)}.memory-grid.three{grid-template-rows:repeat(2,minmax(0,1fr))}.memory-grid.three .memory-card:first-child{grid-row:span 2}.memory-card{padding:5px 5px 22px}.memory-card .photo-sticker{font-size:10px}.memory-scene h2{font-size:clamp(1.65rem,7vw,2.8rem)}}
-@media(max-width:768px) and (max-height:690px){.memory-grid,.memory-grid.three{height:37dvh}}
-
-/* FAST MINIMAL CUT: images first, no additional editorial text */
-#slotOpening .slot-stage{gap:clamp(6px,1.4vh,12px)}
-#slotOpening #slotResult{font-size:clamp(1.8rem,5.5vw,4.3rem)}
-.memory-scene{gap:0;justify-content:center}
-.memory-grid{height:min(73vh,710px);width:min(91vw,1150px)}
-.memory-grid.one{width:min(70vw,550px)}
-.memory-card{padding:clamp(5px,.7vw,9px);border-bottom:0;background:#fff3e7}
-.memory-card img{object-fit:contain}
-.collage-scene .collage-grid{height:min(75vh,720px)}
-.finale-scene{gap:clamp(12px,4vh,40px)}
-.finale-scene h2{font-size:clamp(2.6rem,8vw,7rem)}
-@media(max-width:768px){
- .memory-grid,.memory-grid.three{height:min(64dvh,610px);width:93vw}
- .memory-grid.one{width:min(79vw,370px)}
- .collage-scene .collage-grid{height:min(65dvh,600px)}
- .finale-scene h2{font-size:clamp(2.4rem,10vw,4.4rem)}
-}
-</style></head>
+</style>
+</head>
 <body>
-<main id="show">
-<div class="stars"></div><div id="status">FABULOUS 55</div>
-<section class="scene active" id="slotOpening" data-duration="3900"><div class="slot-stage"><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2></div></section><section class="scene level-scene" data-duration="1900"><div class="level-heading"><h2>LEVEL</h2><div class="big-number">55</div></div></section>
-<section class="scene" id="photoAnchor" data-duration="1000"></section>
-<section class="scene finale-scene" data-duration="3700"><h2>Happy 55th Birthday!</h2><div class="marquee"><h2>♥</h2></div></section>
-<div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"><svg class="ms-pac-svg" viewBox="-8 -25 125 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<path class="ms-face" d="M 50 50 L 96 16 A 48 48 0 1 0 96 84 Z" fill="#ffdb19" stroke="#c68b00" stroke-width="1.6"/>
-<ellipse cx="64" cy="25" rx="5" ry="8" transform="rotate(17 64 25)" fill="#161023"/>
-<path d="M 64 17 L 71 10 M 67 18 L 75 14" stroke="#151020" stroke-width="2.5" stroke-linecap="round"/>
-<g class="ms-pac-bow" stroke="#a40c46" stroke-width="2.8"><path d="M 45 2 C 8 -36 4 8 41 13 Z" fill="#ff4e8d"/><path d="M 46 3 C 78 -36 92 -4 52 16 Z" fill="#f63378"/><ellipse cx="47" cy="8" rx="9" ry="9" fill="#ff9fba"/></g>
-<path d="M 88 69 Q 100 67 106 73 Q 96 79 86 75 Z" fill="#ed3270" stroke="#9c1446" stroke-width="2"/>
-<path d="M 104 74 Q 108 80 103 84" fill="none" stroke="#9c1446" stroke-width="1.5"/>
-</svg></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
-<div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
-<div id="startScreen"><h1>FABULOUS<br>55</h1><button class="start-btn" id="start">▶ START THE SHOW</button></div>
-</main>
+<div id="show">
+  <div class="stars"></div>
+  <div id="status">FABULOUS 55 · BIRTHDAY EDIT</div>
+
+  <section class="scene active" id="slotOpening" data-duration="3300">
+    <div class="frame">
+      <div class="slot-machine">
+        <div class="slot-window"><div class="slot-strip" id="slotA"></div></div>
+        <div class="slot-window"><div class="slot-strip" id="slotB"></div></div>
+      </div>
+      <h2 id="slotResult">JACKPOT! 55!</h2>
+    </div>
+  </section>
+
+  <section class="scene level-scene" id="pacScene" data-duration="2700">
+    <div class="betty-tag"><span class="kiss">💋</span><span>Betty Boop glam</span><span class="kiss">🎀</span></div>
+    <div class="big-number">55</div>
+    <div class="frame">
+      <div class="pac-lane" id="pacLane">
+        <div id="msPac"><div class="face"></div><div class="eye"></div><div class="lash1"></div><div class="lash2"></div><div class="lip"></div><div class="bow"><i></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="poemScene" data-duration="12000">
+    <div class="eyebrow">For Mom</div>
+    <div class="poem">You held my hand when I was small,
+And caught me every time I’d fall.
+Through every season, thick and thin,
+You knew the battles I would win.
+Now looking back as years go by,
+I see the strength behind your eye.
+The quiet grace, the steady art
+Of giving all your loving heart.
+I am the woman here today
+Because you showed me how to stay
+So kind, so fierce, so full of light—
+You made my crooked pathways straight.
+So celebrate yourself today,
+And let me give some love back, too.
+Happy birthday, Mom, my dearest friend—
+I'm proud to be a part of you.</div>
+  </section>
+
+  <section class="scene photo-scene" id="carouselA" data-duration="6500">
+    <div class="betty-tag"><span class="kiss">💋</span><span>Betty Boop energy</span><span class="kiss">💜</span></div>
+    <div class="photo-wrap layout-a"></div>
+  </section>
+
+  <section class="scene photo-scene" id="carouselB" data-duration="6500">
+    <div class="betty-tag"><span class="kiss">🎀</span><span>Mother & daughter memories</span><span class="kiss">💋</span></div>
+    <div class="photo-wrap layout-b"></div>
+  </section>
+
+  <section class="scene photo-scene" id="carouselC" data-duration="7000">
+    <div class="betty-tag"><span class="kiss">♥</span><span>Family love</span><span class="kiss">♥</span></div>
+    <div class="photo-wrap layout-c"></div>
+  </section>
+
+  <section class="scene finale-scene" data-duration="4200">
+    <div class="heart">♥</div>
+    <h2>Happy Birthday Mom</h2>
+    <div class="subtitle">55 and fabulous.</div>
+  </section>
+
+  <div id="pacTransition" aria-hidden="true">
+    <div id="transitionLabel">Next Level</div>
+  </div>
+
+  <div id="progress"></div>
+  <div id="controls">
+    <button id="prev">◀ Back</button>
+    <button id="pause">Ⅱ Pause</button>
+    <button id="next">Next ▶</button>
+    <button id="sound">♫ Sound on</button>
+    <button id="fullscreen">⛶ Fullscreen</button>
+  </div>
+
+  <div id="startScreen">
+    <h1>FABULOUS<br>55</h1>
+    <button class="start-btn" id="start">▶ START THE SHOW</button>
+  </div>
+</div>
+
+<audio id="slotAudio" src="assets/audio/slot-jackpot.mp3" preload="auto"></audio>
+<audio id="songMama" src="assets/audio/song-for-mama.mp3" preload="auto"></audio>
+<audio id="pacTheme" src="assets/audio/Ms.%20Pac-Man%20Theme%20(1981-1982).mp3" preload="auto"></audio>
+
 <script>
-'use strict';
-// MEDIA CONFIG: Every item plays in this order: photos, then family videos, then optional messages.
-// Add as many as you like. Image paths are relative to this index.html file.
-const PHOTOS = [
-  { src:'assets/photos/01-young-mom.jpg', caption:'A beautiful moment from the early years ✨' },
-  { src:'assets/photos/02-mom-and-baby.jpg', caption:'Mom holding me — one of our earliest memories ♥' },
-  { src:'assets/photos/03-disney-family.jpg', caption:'Adventure has always been part of the story' },
-  { src:'assets/photos/04-family-living-room.jpg', caption:'All the love, all the memories' },
-  { src:'assets/photos/05-vintage-portrait.jpg', caption:'Always a star ✨' },
-  { src:'assets/photos/06-pink-look.jpg', caption:'Style is timeless' },
-  { src:'assets/photos/07-mother-daughter.jpg', caption:'Together through the years ♥' },
-  { src:'assets/photos/08-family-adventure.jpg', caption:'Making memories everywhere' },
-  { src:'assets/photos/09-family-fun.jpg', caption:'A day worth remembering' },
-  { src:'assets/photos/10-graduation.jpg', caption:'Always growing, always glowing 🎓' },
-  { src:'assets/photos/11-generations.jpg', caption:'A special family day' },
-  { src:'assets/photos/12-family-portrait.jpg', caption:'Together is the best place to be' },
-  { src:'assets/photos/13-together-again.jpg', caption:'Another memory to treasure' },
-  { src:'assets/photos/14-recent-selfie.jpg', caption:'More memories, more love, more life 💜' },
-];
-const FAMILY_VIDEOS = []; // No video submissions; final show is photos only.
-// Upcoming: add a slot-machine cue and gentle photo music after those files are chosen.
-// Background music will duck/pause automatically for family video messages in a later pass.
-const SLOT_MUSIC_PATH = null;
-const PHOTO_MUSIC_PATH = null;
-const TEXT_MESSAGES = [];
-// All videos/photos committed to a PUBLIC repository are publicly accessible.
-// For private or large videos, link to appropriately hosted permitted media instead.
-
-const main=document.querySelector('#show');
 const scenes=[...document.querySelectorAll('.scene')];
-const familyScene=null;
-const transition=document.getElementById('pacTransition');
-const particles=document.getElementById('particles');
 const progress=document.getElementById('progress');
-// Audio from the user's Pac-Man clip; place extracted MP3 at assets/audio/pacman-transition.mp3.
-// No transition audio is played if the file has not been uploaded yet.
-// Replace this path when a better Pac-Man transition sound is selected.
-// Ms. Pac-Man theme provided for this birthday presentation.
-// Decode the file with Web Audio: playback after the initial Start tap is reliable on iOS.
-const PAC_SOUND_PATH='assets/audio/Ms.%20Pac-Man%20Theme%20(1981-1982).mp3';
-const pacAudio=new Audio(PAC_SOUND_PATH);
-pacAudio.preload='auto';
-pacAudio.volume=.85;
-let audioContext=null;
-let pacBuffer=null;
-let pacBufferPromise=null;
-let currentPacSource=null;
-function initializeAudio(){
-  try{
-    const Context=window.AudioContext||window.webkitAudioContext;
-    if(!Context)return;
-    if(!audioContext)audioContext=new Context();
-    if(audioContext.state==='suspended')audioContext.resume().catch(err=>console.warn('Audio unlock:',err));
-    // Network/decode is initiated on Start and reused across the entire presentation.
-    if(!pacBufferPromise){
-      pacBufferPromise=fetch(PAC_SOUND_PATH,{cache:'no-store'})
-        .then(response=>{if(!response.ok)throw Error('HTTP '+response.status);return response.arrayBuffer()})
-        .then(data=>audioContext.decodeAudioData(data))
-        .then(buffer=>{pacBuffer=buffer;return buffer})
-        .catch(err=>{console.warn('Ms. Pac-Man sound could not load:',err);return null});
-    }
-  }catch(err){console.warn('Audio initialization unavailable:',err)}
-}
-function playPacSound(){
-  if(muted)return;
-  try{
-    if(audioContext&&pacBuffer&&audioContext.state==='running'){
-      if(currentPacSource){try{currentPacSource.stop()}catch(e){}}
-      pacAudio.pause();
-      const source=audioContext.createBufferSource();
-      const gain=audioContext.createGain();
-      source.buffer=pacBuffer;gain.gain.value=.8;
-      source.connect(gain).connect(audioContext.destination);
-      source.start(0);
-      currentPacSource=source;
-      source.onended=()=>{if(currentPacSource===source)currentPacSource=null};
-      return;
-    }
-    // Only the actual uploaded track may play. Never substitute the old chomp effect.
-    pacAudio.pause();pacAudio.currentTime=0;
-    const result=pacAudio.play();
-    if(result&&result.catch)result.catch(err=>console.warn('Ms. Pac-Man playback blocked:',err));
-  }catch(err){console.warn('Ms. Pac-Man playback failed:',err)}
-}
-
-const pBtn=document.getElementById('pause');
-let playlist=[], index=0, running=false, muted=false, token=0, timer=0, frame=0;
-let duration=8000, elapsed=0, started=0, activeVideo=null, transitioning=false, spinTimers=[], pelletTimers=[];
-function safeText(el,value){el.textContent=value||''}
-function createScene(){
-  const s=document.createElement('section');s.className='scene';s.dataset.duration='8000';
-  return s;
-}
-function buildPlaylist(){
- const anchor=document.getElementById('photoAnchor');
- if(!anchor)throw Error('Photo anchor unavailable');
- const groups=[[4,1],[2,3,6],[0,5,13],[7,8],[9],[10,11,12]];
- for(const ids of groups){
-  const s=createScene();
-  s.classList.add('memory-scene','photo-scene');
-  s.dataset.duration=ids.length===3?'3000':'2700';
-  const grid=document.createElement('div');
-  grid.className='memory-grid '+(ids.length===3?'three':ids.length===1?'one':'two');
-  for(let i=0;i<ids.length;i++){
-   const item=PHOTOS[ids[i]];
-   const card=document.createElement('div');card.className='memory-card';
-   const img=document.createElement('img');img.src=item.src;img.alt='Family photograph';img.loading='eager';
-   card.append(img);grid.append(card);
-  }
-  s.append(grid);
-  anchor.before(s);
- }
- anchor.remove();
- const collage=createScene();collage.classList.add('collage-scene','photo-scene');
- collage.dataset.duration='3500';
- const grid=document.createElement('div');grid.className='collage-grid';
- for(const name of ['03-disney-family','04-family-living-room','08-family-adventure','11-generations','12-family-portrait','13-together-again']){
-  const img=document.createElement('img');img.src='assets/photos/'+name+'.jpg';img.alt='Family photograph';img.loading='eager';grid.append(img);
- }
- collage.append(grid);
- document.querySelector('.finale-scene').before(collage);
- playlist=[...document.querySelectorAll('.scene')];
-}
-buildPlaylist();
-
-function clearTimer(){clearTimeout(timer);cancelAnimationFrame(frame);timer=0;frame=0}
-function stopVideo(){if(activeVideo){activeVideo.pause();activeVideo.onended=null;activeVideo.onerror=null;activeVideo=null}}
-function clearSpin(){spinTimers.forEach(clearTimeout);spinTimers=[]}
-function spinOpening(){
-  clearSpin();
-  const machine=document.getElementById('slotMachine');
-  const result=document.getElementById('slotResult');
-  machine.classList.remove('winning');result.classList.remove('revealed');
-  const symbols=['7','♥','★','5','♠','♦','5','★','7','5'];
-  ['slotA','slotB'].forEach((id,i)=>{
-    const strip=document.getElementById(id);strip.replaceChildren();
-    const windowHeight=strip.parentElement.clientHeight-8;
-    for(const value of [...symbols,'5']){const cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=windowHeight+'px';cell.textContent=value;strip.append(cell)}
-    strip.style.transition='none';strip.style.transform='translateY(0px)';
-    // The reel spins through multiple symbols, then both columns settle on 5.
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        const h=strip.firstElementChild.getBoundingClientRect().height;
-        strip.style.transition='transform '+(1.5+i*.35)+'s cubic-bezier(.12,.7,.19,1)';
-        strip.style.transform='translateY(-'+(symbols.length*h)+'px)';
-      });
-    });
+const pacTransition=document.getElementById('pacTransition');
+const pauseBtn=document.getElementById('pause');
+const soundBtn=document.getElementById('sound');
+const slotAudio=document.getElementById('slotAudio');
+const songMama=document.getElementById('songMama');
+const pacTheme=document.getElementById('pacTheme');
+const pacLane=document.getElementById('pacLane');
+const msPac=document.getElementById('msPac');
+let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0;
+const photos=[
+  'assets/photos/05-vintage-portrait.jpg','assets/photos/02-mom-and-baby.jpg','assets/photos/03-disney-family.jpg','assets/photos/04-family-living-room.jpg','assets/photos/06-pink-look.jpg',
+  'assets/photos/07-mother-daughter.jpg','assets/photos/08-family-adventure.jpg','assets/photos/09-family-fun.jpg','assets/photos/10-graduation.jpg','assets/photos/11-generations.jpg'
+];
+function fillWrap(selector, photoIndexes){
+  const wrap=document.querySelector(selector+' .photo-wrap');
+  wrap.innerHTML='';
+  photoIndexes.forEach((p,i)=>{
+    const card=document.createElement('div');card.className='photo-card';card.style.setProperty('--rot', ((i%2?1:-1)*(Math.random()*5+1)).toFixed(1)+'deg');
+    const img=document.createElement('img');img.src=photos[p];img.alt='Family photo';
+    const label=document.createElement('div');label.className='label';label.textContent=['LOVE','FAMILY','55','MOM','QUEEN','US'][i%6];
+    card.append(img,label);wrap.append(card);
   });
-  spinTimers.push(setTimeout(()=>{machine.classList.add('winning');result.classList.add('revealed');confetti(45)},2350));
 }
-function confetti(n=25){
-  const chars=['✦','★','♥','◆','✧'];
-  for(let i=0;i<n;i++){
-    const p=document.createElement('span');p.className='sparkle';p.textContent=chars[i%chars.length];
-    p.style.left=(Math.random()*100)+'%';p.style.color=['#f4cf77','#fa9bd7','#e5c9ff'][i%3];
-    p.style.animationDuration=(3+Math.random()*4)+'s';p.style.animationDelay=(Math.random()*1.4)+'s';
-    particles.append(p);setTimeout(()=>p.remove(),9000);
+fillWrap('#carouselA',[0,1,2,3,4]);
+fillWrap('#carouselB',[5,6,7,8]);
+fillWrap('#carouselC',[1,3,4,6,8,9]);
+function showPhotoCards(scene){
+  scene.querySelectorAll('.photo-card').forEach((card,i)=>{
+    setTimeout(()=>card.classList.add('show'), 110*i);
+  });
+}
+function resetPhotoCards(scene){
+  scene?.querySelectorAll('.photo-card').forEach(card=>card.classList.remove('show'));
+}
+function fillPacLane(){
+  pacLane.querySelectorAll('.pellet').forEach(p=>p.remove());
+  for(let i=0;i<24;i++){
+    const d=document.createElement('span');d.className='pellet';d.style.left=((i+1)/(25)*100)+'%';pacLane.appendChild(d);
   }
 }
-const lane=document.getElementById('pelletLane');
-const hero=document.getElementById('pacHero');
-const dots=[];
-for(let i=0;i<34;i++){const d=document.createElement('span');d.className='pellet';d.style.left=((i+.55)/34*100)+'%';lane.append(d);dots.push(d)}
-let pelletAnimation=0;
-function stopPellets(){cancelAnimationFrame(pelletAnimation);pelletAnimation=0}
-function animatePellets(){
- stopPellets();dots.forEach(d=>{d.style.opacity='1';d.style.scale='1'});
- const start=performance.now();const width=transition.clientWidth;const hw=hero.offsetWidth;
- hero.style.animation='none';
- const draw=now=>{
-  if(!transitioning)return;
-  const fraction=Math.min(1,(now-start)/850);
-  const x=-hw+(width+hw*2)*fraction;
-  hero.style.left=x+'px';
-  const mouth=x+hw*.9;
-  dots.forEach(d=>{if(d.style.opacity!=='0'&&d.offsetLeft<=mouth)d.style.opacity='0'});
-  if(fraction<1)pelletAnimation=requestAnimationFrame(draw);
- };
- pelletAnimation=requestAnimationFrame(draw);
+fillPacLane();
+function runPacEffect(){
+  pacLane.querySelectorAll('.pellet').forEach(p=>p.style.opacity='1');
+  const pellets=[...pacLane.querySelectorAll('.pellet')];
+  const width=pacLane.clientWidth; const heroWidth=88; const total=1650; const start=performance.now();
+  msPac.style.left='-120px';
+  pacTheme.currentTime=0; if(!muted) pacTheme.play().catch(()=>{});
+  cancelAnimationFrame(pacRAF);
+  function frame(now){
+    const t=Math.min(1,(now-start)/total);
+    const x=-120 + (width+140)*t;
+    msPac.style.left=x+'px';
+    const mouth=x+70;
+    pellets.forEach(p=>{ if(p.style.opacity!=='0' && p.offsetLeft<=mouth){ p.style.opacity='0'; }});
+    if(t<1) pacRAF=requestAnimationFrame(frame);
+  }
+  pacRAF=requestAnimationFrame(frame);
 }
-let changeTimers=[];
-function pacCut(next){
- if(transitioning)return;
- const target=(next+playlist.length)%playlist.length;
- clearTimer();clearSpin();
- const current=playlist[index],dest=playlist[target];
- if(current?.classList.contains('photo-scene')&&dest?.classList.contains('photo-scene')){
-  activate(target);if(running)playCurrent();return;
- }
- stopPhotoMusic();transitioning=true;
- changeTimers.forEach(clearTimeout);changeTimers=[];
- transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');
- animatePellets();playPacSound();
- changeTimers.push(setTimeout(()=>activate(target),430));
- changeTimers.push(setTimeout(()=>{
-  stopPellets();transition.classList.remove('running');transitioning=false;
-  pacAudio.pause();if(currentPacSource){try{currentPacSource.stop()}catch(e){}currentPacSource=null}
-  if(running)playCurrent();
- },900));
+function spinSlots(){
+  const symbols=['7','♥','★','5','♦','♠','5','★','7','5'];
+  ['slotA','slotB'].forEach((id,idx)=>{
+    const strip=document.getElementById(id); strip.innerHTML='';
+    const h=strip.parentElement.clientHeight-12;
+    symbols.concat(['5']).forEach(sym=>{const cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=h+'px';cell.textContent=sym;strip.appendChild(cell);});
+    strip.style.transition='none'; strip.style.transform='translateY(0px)';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      strip.style.transition='transform '+(1.55+idx*.25)+'s cubic-bezier(.14,.76,.18,1)';
+      strip.style.transform='translateY(-'+(symbols.length*(strip.parentElement.clientHeight-12))+'px)';
+    }));
+  });
+  if(!muted){slotAudio.currentTime=0;slotAudio.play().catch(()=>{});}
+  setTimeout(()=>{document.getElementById('slotResult').classList.add('show');},1800);
 }
+function playSceneAudio(scene){
+  pacTheme.pause(); slotAudio.pause();
+  if(scene.classList.contains('photo-scene')){ if(!muted && songMama.paused){songMama.play().catch(()=>{});} }
+  else songMama.pause();
+  if(scene.id==='pacScene'){ runPacEffect(); }
+  if(scene.id==='slotOpening'){ spinSlots(); }
+}
+function stopAllAudio(){ [songMama,pacTheme,slotAudio].forEach(a=>{a.pause();}); }
 function activate(n){
-  index=(n+playlist.length)%playlist.length;
-  playlist.forEach((s,i)=>s.classList.toggle('active',i===index));
-  progress.style.width='0';elapsed=0;
-  duration=Number(playlist[index].dataset.duration)||8000;
-}
-function updateProgress(){
-  if(!running||transitioning)return;
-  const nowElapsed=elapsed+(performance.now()-started);
-  progress.style.width=Math.min(100,nowElapsed/duration*100)+'%';
-  frame=requestAnimationFrame(updateProgress);
+  scenes.forEach((s,i)=>s.classList.toggle('active',i===n));
+  index=n; progress.style.transition='none'; progress.style.width='0';
+  const scene=scenes[index];
+  if(scene.classList.contains('photo-scene')) showPhotoCards(scene);
+  playSceneAudio(scene);
+  plan(Number(scene.dataset.duration)||3000);
 }
 function plan(ms){
-  duration=ms;elapsed=0;started=performance.now();
-  clearTimer();timer=setTimeout(()=>pacCut(index+1),duration);
-  updateProgress();
+  clearTimeout(timer); remain=ms; startTime=performance.now();
+  if(!running) return;
+  progress.style.transition='width '+ms+'ms linear'; progress.style.width='100%';
+  timer=setTimeout(()=>go(index+1),ms);
 }
-let photoMusicInterval=null,photoMusicStep=0;
-function stopPhotoMusic(){if(photoMusicInterval!==null){clearInterval(photoMusicInterval);photoMusicInterval=null}}
-function startPhotoMusic(){
-  if(muted||photoMusicInterval!==null)return;
-  initializeAudio();
-  const notes=[392,440,523.25,440,349.23,392,440,392,329.63,392,440,523.25,587.33,523.25,440,392];
-  const tick=()=>{
-    if(!running||muted||!playlist[index]?.classList.contains('photo-scene')){stopPhotoMusic();return}
-    if(!audioContext||audioContext.state!=='running')return;
-    const at=audioContext.currentTime+.02;
-    const osc=audioContext.createOscillator(),env=audioContext.createGain();
-    osc.type='sine';osc.frequency.value=notes[photoMusicStep++%notes.length];
-    env.gain.setValueAtTime(.0001,at);
-    env.gain.exponentialRampToValueAtTime(.017,at+.08);
-    env.gain.exponentialRampToValueAtTime(.0001,at+.58);
-    osc.connect(env).connect(audioContext.destination);osc.start(at);osc.stop(at+.6);
-  };
-  tick();photoMusicInterval=setInterval(tick,650);
+function go(next){
+  if(transitioning) return;
+  const current=scenes[index];
+  resetPhotoCards(current);
+  clearTimeout(timer);
+  const target=(next+scenes.length)%scenes.length;
+  if(!(current.classList.contains('photo-scene')&&scenes[target].classList.contains('photo-scene')))stopAllAudio();
+  const needsPacTransition = !(current.id==='pacScene' && scenes[target].id==='poemScene') && !(current.classList.contains('photo-scene') && scenes[target].classList.contains('photo-scene'));
+  if(!needsPacTransition){ activate(target); return; }
+  transitioning=true; pacTransition.classList.add('running');
+  setTimeout(()=>activate(target),320);
+  setTimeout(()=>{ pacTransition.classList.remove('running'); transitioning=false; },760);
 }
-function playCurrent(){
-  if(!running||transitioning)return;
-  const s=playlist[index];
-  if(s.id==='slotOpening')spinOpening();
-  if(s.classList.contains('photo-scene'))startPhotoMusic();else stopPhotoMusic();
-  if(false && s.classList.contains('video-scene')){
-    const v=s.querySelector('video');activeVideo=v;v.muted=muted;v.currentTime=0;
-    const begin=()=>{
-      if(v.duration&&Number.isFinite(v.duration))duration=Math.max(3500,(v.duration+1)*1000);
-      plan(duration);
-      v.play().catch(()=>{v.controls=true;plan(10000)});
-    };
-    v.onended=()=>{if(running&&!transitioning)pacCut(index+1)};
-    v.onerror=()=>{if(running&&!transitioning)plan(4000)};
-    if(v.readyState>=1)begin();else{v.onloadedmetadata=begin;plan(60000)}
-  }else{
-    if(s.classList.contains('photo-scene')){const img=s.querySelector('.media-photo img');if(img){img.style.animation='none';void img.offsetWidth;img.style.animation=''}}
-    if(s===playlist[playlist.length-1])confetti(45);
-    plan(duration);
+function togglePause(){
+  if(!running){
+    running=true; pauseBtn.textContent='Ⅱ Pause';
+    plan(Math.max(200, remain || Number(scenes[index].dataset.duration)||3000));
+    playSceneAudio(scenes[index]);
+  } else {
+    running=false; remain=Math.max(200, remain-(performance.now()-startTime));
+    clearTimeout(timer); pauseBtn.textContent='▶ Resume'; stopAllAudio(); progress.style.transition='none';
+    const computed=getComputedStyle(progress).width; progress.style.width=computed;
   }
 }
-function navigate(step){if(transitioning)return;pacCut(index+step)}
-function setRunning(value){
-  if(value===running)return;
-  running=value;pBtn.textContent=running?'Ⅱ Pause':'▶ Resume';
-  if(running){
-    if(playlist[index]?.classList.contains('photo-scene'))startPhotoMusic();
-    started=performance.now();clearTimer();
-    timer=setTimeout(()=>pacCut(index+1),Math.max(300,duration-elapsed));updateProgress();
-  }else{
-    elapsed+=performance.now()-started;clearTimer();stopPhotoMusic();activeVideo?.pause();
-  }
+function startShow(){
+  document.getElementById('startScreen').classList.add('hidden'); running=true; activate(0);
 }
-document.getElementById('start').addEventListener('click',()=>{
-  initializeAudio();
-  document.getElementById('startScreen').classList.add('hidden');
-  running=true;activate(0);playCurrent();
-});
-document.getElementById('prev').addEventListener('click',()=>navigate(-1));
-document.getElementById('next').addEventListener('click',()=>navigate(1));
-pBtn.addEventListener('click',()=>setRunning(!running));
-document.getElementById('sound').addEventListener('click',()=>{
-  muted=!muted;if(activeVideo)activeVideo.muted=muted;if(muted)stopPhotoMusic();else if(running&&playlist[index]?.classList.contains('photo-scene'))startPhotoMusic();if(muted){pacAudio.pause();if(currentPacSource){try{currentPacSource.stop()}catch(e){}currentPacSource=null}}
-  document.getElementById('sound').textContent=muted?'♫ Muted':'♫ Sound on';
-});
-document.getElementById('fullscreen').addEventListener('click',()=>{
-  if(document.fullscreenElement)document.exitFullscreen?.();
-  else main.requestFullscreen?.().catch(()=>{});
-});
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight')navigate(1);
-  if(e.key==='ArrowLeft')navigate(-1);
-  if(e.code==='Space'&&document.getElementById('startScreen').classList.contains('hidden')){
-    e.preventDefault();setRunning(!running);
-  }
-});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)setRunning(false)});
-</script></body></html>
+document.getElementById('start').addEventListener('click', startShow);
+document.getElementById('prev').addEventListener('click',()=>go(index-1));
+document.getElementById('next').addEventListener('click',()=>go(index+1));
+pauseBtn.addEventListener('click',togglePause);
+soundBtn.addEventListener('click',()=>{ muted=!muted; soundBtn.textContent=muted?'♫ Muted':'♫ Sound on'; if(muted) stopAllAudio(); else playSceneAudio(scenes[index]); });
+document.getElementById('fullscreen').addEventListener('click',()=>{ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.(); });
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(index+1); if(e.key==='ArrowLeft') go(index-1); if(e.code==='Space' && document.getElementById('startScreen').classList.contains('hidden')) {e.preventDefault(); togglePause();} });
+</script>
+</body>
+</html>
