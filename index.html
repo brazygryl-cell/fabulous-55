@@ -557,12 +557,12 @@ function go(next){
 }
 function togglePause(){
  if(!running){
-  running=true;pauseBtn.textContent='Ⅱ Pause';
-  primeAudio();if(scenes[index].id==='slotOpening'&&!muted)safePlay(slotAudio,'slot machine');
+  running=true;slotAnim.forEach(a=>a.play());pauseBtn.textContent='Ⅱ Pause';
+  primeAudio();if(scenes[index].id==='slotOpening'&&!muted){safePlay(slotAudio,'slot machine');if(!slotComplete)requestAnimationFrame(function resumeSpin(now){if(!running||scenes[index].id!=='slotOpening'||slotComplete)return;if(slotAudio.currentTime>=6){slotAnim.forEach(a=>a.cancel());slotAnim=[];['slotA','slotB'].forEach((id,i)=>{const el=document.getElementById(id),h=Math.max(30,el.parentElement.clientHeight-12);el.style.transition='transform '+(.38+i*.14)+'s ease-out';el.style.transform='translateY(-'+10*h+'px)'});slotComplete=true;setTimeout(()=>document.getElementById('slotResult').classList.add('show'),550)}else requestAnimationFrame(resumeSpin)})}
   if(scenes[index].id==='pacScene'&&!muted){audioLevel(pacTheme,.45);safePlay(pacTheme,'arcade audio')}
   syncMusic(scenes[index]);plan(Math.max(200,remain||effectiveDuration(scenes[index])));
  }else{
-  running=false;remain=Math.max(200,remain-(performance.now()-startTime));clearTimeout(timer);
+  running=false;slotAnim.forEach(a=>a.pause());remain=Math.max(200,remain-(performance.now()-startTime));clearTimeout(timer);
   pauseBtn.textContent='▶ Resume';stopAllAudio();progress.style.transition='none';progress.style.width=getComputedStyle(progress).width;
  }
 }
