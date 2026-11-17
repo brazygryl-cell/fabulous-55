@@ -132,6 +132,72 @@ body{background:#14051e}
  #poemScene{padding-top:25px;padding-bottom:70px}
  .photo-card{padding:4px}
 }
+
+/* Fabulous 55 • birthday-evening redesign */
+:root{--gold:#f5d188;--plum:#260c41;--lilac:#ae72ce}
+body,#show{background:#15071e}
+#show:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,#77409a55,transparent 55%),radial-gradient(ellipse at 85% 85%,#cf629322,transparent 48%)}
+.stars{background-image:radial-gradient(#ffe8b6 1.5px,transparent 1.5px),radial-gradient(#e8bfff .8px,transparent .8px);background-size:79px 79px,127px 127px;background-position:12px 30px,43px 13px;opacity:.36;animation:starPulse 6s ease-in-out infinite alternate}
+@keyframes starPulse{from{opacity:.24}to{opacity:.55}}
+.scene{padding:clamp(70px,8vh,100px) clamp(18px,4vw,70px) clamp(92px,13vh,120px);gap:clamp(10px,2vh,22px);transform:translateY(14px);transition:opacity .7s ease,transform .7s ease,visibility .7s}
+.scene.active{transform:translateY(0)}
+.eyebrow{font-family:Arial,sans-serif;letter-spacing:.24em;font-weight:800;color:#f6d58e;text-shadow:0 3px 20px #200728;font-size:clamp(10px,1.4vw,16px)}
+.frame{background:linear-gradient(145deg,#482263aa,#1b0a34bb);border:1px solid #e7bb7888;box-shadow:0 0 40px #b360a533,0 22px 55px #0a0415aa}
+#slotOpening .frame{width:min(92vw,720px);padding:clamp(18px,3.2vw,36px);border:5px solid #d9a55b;box-shadow:0 0 0 5px #5a287a,0 0 0 9px #f2ce83,0 12px 40px #0c031a,0 0 60px #bb6dab44;border-radius:30px}
+.slot-top{display:flex;align-items:center;justify-content:center;gap:18px;font-size:clamp(18px,3vw,27px);font-weight:900;letter-spacing:.11em;color:#ffe4aa;margin-bottom:18px}
+.slot-top span{color:#f8c9e3;text-shadow:0 0 12px #ff9dce}
+.slot-machine{gap:clamp(12px,4vw,30px);margin:12px auto 19px}
+.slot-window{width:clamp(100px,15vw,142px);height:clamp(118px,18vw,160px);max-width:none;max-height:none;border:6px solid #f6d58e;border-radius:15px;background:linear-gradient(#fff6de,#ffefdb);box-shadow:inset 0 4px 15px #5d27663b,0 0 0 3px #a36b9a,0 7px 14px #180725}
+.slot-symbol{font-family:Georgia,serif;color:#9d267e;text-shadow:1px 2px 0 #ffb4da}
+#slotResult{font:900 clamp(32px,5vw,55px) Georgia,serif;letter-spacing:.05em}
+.slot-footer{font-size:clamp(12px,1.8vw,17px);color:#f3d8ed;margin-top:15px;letter-spacing:.05em}
+.level-scene .big-number{font-size:clamp(7rem,26vw,20rem);font-weight:900;text-shadow:0 4px 0 #9e6b37,0 8px 0 #5d3082,0 0 35px #ffd59a88}
+#pacScene .betty-tag,.photo-scene .betty-tag{display:none}
+#pacScene .frame{border:0;background:none;box-shadow:none;padding:5px;width:min(94vw,1150px)}
+.pac-lane{height:96px}
+#pacScene .subtitle{font-family:Georgia,serif;font-style:italic;color:#ffe1e9}
+.poem{width:min(92vw,940px);background:linear-gradient(145deg,#52265ec9,#1f0c31e0);border:1px solid #f2d49a;box-shadow:0 14px 45px #080315, inset 0 0 0 6px #a875be33;border-radius:19px}
+#poemScene .poem{font-size:clamp(13px,1.65vw,21px);line-height:1.52;padding:clamp(20px,3vw,32px);max-height:70dvh;overflow:auto;scrollbar-width:thin}
+.photo-wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(8px,1.4vw,16px);width:min(95vw,1130px);height:min(69dvh,680px);filter:none}
+.photo-card,.photo-card.show{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto!important;height:auto!important;transform:none!important;--rot:0deg!important;min-width:0;min-height:0;border:5px solid #f8e6c3;background:#28133b;box-shadow:0 10px 30px #0803117d,0 0 0 1px #d49ca6;border-radius:13px;padding:0}
+.photo-card img{width:100%;height:100%;object-fit:contain;background:linear-gradient(140deg,#391b4b,#160a27);border-radius:7px}
+.photo-card:first-child{grid-row:span 2}
+.layout-b{grid-template-columns:1.3fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr))}
+.layout-b .photo-card:first-child{grid-row:span 2}.layout-b .photo-card:nth-child(4){grid-column:2}
+.layout-c{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+.layout-c .photo-card:first-child{grid-row:auto}
+.photo-scene .eyebrow{margin-bottom:6px}
+.finale-scene .heart{font-size:clamp(60px,9vw,120px);filter:drop-shadow(0 0 18px #e87bbd)}
+.finale-scene h2{font-size:clamp(38px,6.9vw,88px);max-width:950px}
+.finale-copy{font:italic clamp(18px,2.8vw,29px)/1.6 Georgia,serif;color:#f5e1e8}
+#startScreen{background:radial-gradient(ellipse at 50% 25%,#7b3993 0%,#321045 50%,#15071e 100%)}
+#startScreen:before{content:"✦  ✦  ✦";color:#ffdda1;letter-spacing:2em;opacity:.6;font-size:24px}
+#startScreen h1{font-size:clamp(4rem,14vw,10rem);text-shadow:0 5px 0 #78418c,0 0 35px #f0b66b66}
+.start-subtitle{font:italic clamp(15px,2.2vw,24px) Georgia,serif;color:#ffe4f1;margin:0 0 15px}
+.start-btn{border:3px solid #fff2c2;box-shadow:0 0 0 4px #8f4fb2,0 10px 30px #0d0517;transition:transform .2s,box-shadow .2s}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 0 0 4px #8f4fb2,0 15px 40px #f8c88155}
+#controls{width:max-content;max-width:96vw;gap:6px;padding:8px 12px;bottom:12px;border-radius:999px;background:#190b2aee;border:1px solid #e7bd7a88;box-shadow:0 7px 25px #0007}
+#controls button{font-size:13px;white-space:nowrap;padding:7px 10px;border-radius:20px}
+#controls button:hover{background:#60316b}
+#audioNotice{font-size:11px;color:#f8cfa6;align-self:center;max-width:230px}
+#status{font-size:11px;top:12px;right:15px;letter-spacing:.13em}
+@media(max-width:740px){
+ .scene{padding:60px 10px 105px;gap:10px}
+ .photo-wrap{height:min(67dvh,560px);gap:7px;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+ .photo-card:first-child{grid-row:span 2}
+ .layout-b{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+ .layout-c{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+ .layout-c .photo-card:first-child{grid-row:auto}
+ .photo-card{border-width:3px;border-radius:8px}
+ #poemScene .poem{font-size:clamp(12px,3.2vw,16px);line-height:1.42;padding:13px;max-height:65dvh}
+ #controls{bottom:8px;gap:0;padding:5px 8px}
+ #controls button{font-size:11px;padding:7px 6px}
+ #audioNotice{position:absolute;bottom:110%;font-size:10px;right:0;background:#280a35ee;padding:4px 8px;border-radius:8px}
+ .slot-top{font-size:17px;gap:9px}
+ .slot-window{width:105px;height:127px}
+ .slot-machine{gap:18px}
+}
+@media(max-height:650px){#poemScene .poem{max-height:65dvh}.scene{padding-top:55px;padding-bottom:75px}.photo-wrap{height:65dvh}}
 </style>
 </head>
 <body>
@@ -139,19 +205,19 @@ body{background:#14051e}
   <div class="stars"></div>
   <div id="status">FABULOUS 55 · BIRTHDAY EDIT</div>
 
-  <section class="scene active" id="slotOpening" data-duration="3300">
-    <div class="frame">
+  <section class="scene active" id="slotOpening" data-duration="9800">
+    <div class="eyebrow">A celebration fit for a queen</div><div class="frame"><div class="slot-top"><span>✦</span> FABULOUS FIFTY-FIVE <span>✦</span></div>
       <div class="slot-machine">
         <div class="slot-window"><div class="slot-strip" id="slotA"></div></div>
         <div class="slot-window"><div class="slot-strip" id="slotB"></div></div>
       </div>
-      <h2 id="slotResult">JACKPOT! 55!</h2>
+      <h2 id="slotResult">JACKPOT! 55!</h2><div class="slot-footer">55 years of love, laughter & legendary style</div>
     </div>
   </section>
 
-  <section class="scene level-scene" id="pacScene" data-duration="2700">
+  <section class="scene level-scene" id="pacScene" data-duration="4600">
     <div class="betty-tag"><span class="kiss">💋</span><span>♥</span><span class="kiss">🎀</span></div>
-    <div class="big-number">55</div>
+    <div class="eyebrow">Player One · Forever Iconic</div><div class="big-number">55</div><div class="subtitle">A whole new level of fabulous.</div>
     <div class="frame">
       <div class="pac-lane" id="pacLane">
         <div id="msPac"><div class="face"></div><div class="eye"></div><div class="lash1"></div><div class="lash2"></div><div class="lip"></div><div class="bow"><i></i></div></div>
@@ -159,8 +225,8 @@ body{background:#14051e}
     </div>
   </section>
 
-  <section class="scene" id="poemScene" data-duration="12000">
-    <div class="eyebrow">For Mom</div>
+  <section class="scene" id="poemScene" data-duration="28000">
+    <div class="eyebrow">To My First Best Friend</div>
     <div class="poem">You held my hand when I was small,
 And caught me every time I’d fall.
 Through every season, thick and thin,
@@ -179,24 +245,21 @@ Happy birthday, Mom, my dearest friend—
 I'm proud to be a part of you.</div>
   </section>
 
-  <section class="scene photo-scene" id="carouselA" data-duration="6500">
-    <div class="betty-tag"><span class="kiss">💋</span><span>♥</span><span class="kiss">💜</span></div>
-    <div class="photo-wrap layout-a"></div>
+  <section class="scene photo-scene" id="carouselA" data-duration="10500">
+    <div class="eyebrow">Through every chapter · Our favorite memories</div><div class="photo-wrap layout-a"></div>
   </section>
 
-  <section class="scene photo-scene" id="carouselB" data-duration="6500">
-    <div class="betty-tag"><span class="kiss">🎀</span><span>♥</span><span class="kiss">💋</span></div>
-    <div class="photo-wrap layout-b"></div>
+  <section class="scene photo-scene" id="carouselB" data-duration="10500">
+    <div class="eyebrow">A lifetime of beautiful moments</div><div class="photo-wrap layout-b"></div>
   </section>
 
-  <section class="scene photo-scene" id="carouselC" data-duration="7000">
-    <div class="betty-tag"><span class="kiss">♥</span><span>♥</span><span class="kiss">♥</span></div>
-    <div class="photo-wrap layout-c"></div>
+  <section class="scene photo-scene" id="carouselC" data-duration="11500">
+    <div class="eyebrow">Loved beyond words · Family forever</div><div class="photo-wrap layout-c"></div>
   </section>
 
-  <section class="scene finale-scene" data-duration="4200">
+  <section class="scene finale-scene" data-duration="8500">
     <div class="heart">♥</div>
-    <h2>Happy Birthday Mom</h2>
+    <div class="eyebrow">The best is yet to come</div><h2>Happy 55th Birthday, Mom!</h2><p class="finale-copy">You are loved more than words could ever say.<br>Here’s to your most fabulous chapter yet.</p>
     
   </section>
 
@@ -209,148 +272,172 @@ I'm proud to be a part of you.</div>
     <button id="prev">◀ Back</button>
     <button id="pause">Ⅱ Pause</button>
     <button id="next">Next ▶</button>
-    <button id="sound">♫ Sound on</button>
+    <button id="sound">♫ Sound on</button><span id="audioNotice" role="status" aria-live="polite"></span>
     <button id="fullscreen">⛶ Fullscreen</button>
   </div>
 
   <div id="startScreen">
-    <h1>FABULOUS<br>55</h1>
+    <div class="eyebrow">A special birthday celebration</div><h1>FABULOUS<br>55</h1><div class="start-subtitle">A little Vegas. A little arcade. A whole lot of love.</div>
     <button class="start-btn" id="start">▶ START THE SHOW</button>
   </div>
 </div>
 
-<audio id="slotAudio" src="assets/audio/slot-jackpot.mp3" preload="auto"></audio>
-<audio id="songMama" src="assets/audio/song-for-mama.mp3" preload="auto"></audio>
+<audio id="slotAudio" src="assets/audio/slot-jackpot.mp3" preload="auto" playsinline></audio>
+<audio id="songMama" src="assets/audio/song-for-mama.mp3" preload="auto" playsinline></audio>
 <audio id="pacTheme" src="assets/audio/Ms.%20Pac-Man%20Theme%20(1981-1982).mp3" preload="auto"></audio>
 
 <script>
-const scenes=[...document.querySelectorAll('.scene')];
-const progress=document.getElementById('progress');
-const pacTransition=document.getElementById('pacTransition');
-const pauseBtn=document.getElementById('pause');
-const soundBtn=document.getElementById('sound');
-const slotAudio=document.getElementById('slotAudio');
-const songMama=document.getElementById('songMama');
-const pacTheme=document.getElementById('pacTheme');
-const pacLane=document.getElementById('pacLane');
-const msPac=document.getElementById('msPac');
-let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0;
+const scenes=[...document.querySelectorAll('.scene')], progress=document.getElementById('progress');
+const pacTransition=document.getElementById('pacTransition'),pauseBtn=document.getElementById('pause'),soundBtn=document.getElementById('sound');
+const slotAudio=document.getElementById('slotAudio'),songMama=document.getElementById('songMama'),pacTheme=document.getElementById('pacTheme');
+const pacLane=document.getElementById('pacLane'),msPac=document.getElementById('msPac'),notice=document.getElementById('audioNotice');
+let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false;
 const photos=["assets/photos/01-young-mom.jpg","assets/photos/02-mom-and-baby.jpg","assets/photos/03-disney-family.jpg","assets/photos/04-family-living-room.jpg","assets/photos/05-vintage-portrait.jpg","assets/photos/06-pink-look.jpg","assets/photos/07-mother-daughter.jpg","assets/photos/08-family-adventure.jpg","assets/photos/09-family-fun.jpg","assets/photos/10-graduation.jpg","assets/photos/11-generations.jpg","assets/photos/12-family-portrait.jpg","assets/photos/13-together-again.jpg","assets/photos/14-recent-selfie.jpg"];
-function fillWrap(selector, photoIndexes){
-  const wrap=document.querySelector(selector+' .photo-wrap');
-  wrap.innerHTML='';
-  photoIndexes.forEach((p,i)=>{
-    const card=document.createElement('div');card.className='photo-card';card.style.setProperty('--rot', ((i%2?1:-1)*(Math.random()*5+1)).toFixed(1)+'deg');
-    const img=document.createElement('img');img.src=photos[p];img.alt='Family photo';
-    card.append(img);wrap.append(card);
-  });
+songMama.loop=true;slotAudio.loop=false;pacTheme.loop=true;
+songMama.preload='auto';slotAudio.preload='auto';pacTheme.preload='auto';
+songMama.volume=0;slotAudio.volume=.92;pacTheme.volume=.45;
+function audioMessage(msg){if(notice)notice.textContent=msg;}
+function safePlay(el,label){
+ if(muted||!running)return Promise.resolve(false);
+ try{const p=el.play();if(p&&p.catch)p.catch(err=>{audioMessage('♫ Tap Sound on to enable '+label);console.warn('Fabulous 55 audio '+label,err)});return p||Promise.resolve(true)}
+ catch(err){audioMessage('♫ Tap Sound on for '+label);return Promise.resolve(false)}
 }
-fillWrap('#carouselA',[0,1,4,5,6]);
-fillWrap('#carouselB',[2,3,7,8]);
-fillWrap('#carouselC',[9,10,11,12,13,1]);
-function showPhotoCards(scene){
-  scene.querySelectorAll('.photo-card').forEach((card,i)=>{
-    setTimeout(()=>card.classList.add('show'), 110*i);
-  });
+function primeAudio(){
+ unlocked=true;
+ // Keep the photo song running silently from the initial button gesture.
+ // It is not started later by autoplay, which mobile browsers may block.
+ if(!muted&&!songPrimed){songPrimed=true;songMama.volume=0;safePlay(songMama,'birthday music')}
 }
-function resetPhotoCards(scene){
-  scene?.querySelectorAll('.photo-card').forEach(card=>card.classList.remove('show'));
+function fillWrap(selector,indices){
+ const wrap=document.querySelector(selector+' .photo-wrap');wrap.innerHTML='';
+ indices.forEach((n,i)=>{const card=document.createElement('div');card.className='photo-card';const img=document.createElement('img');
+ img.src=photos[n];img.alt='A treasured family memory';img.loading='eager';img.decoding='async';
+ card.append(img);wrap.append(card)});
 }
-function fillPacLane(){
-  pacLane.querySelectorAll('.pellet').forEach(p=>p.remove());
-  for(let i=0;i<24;i++){
-    const d=document.createElement('span');d.className='pellet';d.style.left=((i+1)/(25)*100)+'%';pacLane.appendChild(d);
-  }
-}
+fillWrap('#carouselA',[0,1,4,5,6]);fillWrap('#carouselB',[2,3,7,8]);fillWrap('#carouselC',[9,10,11,12,13,1]);
+function showPhotoCards(scene){scene.querySelectorAll('.photo-card').forEach((card,i)=>{card.classList.remove('show');setTimeout(()=>{if(scene.classList.contains('active'))card.classList.add('show')},i*140)})}
+function resetPhotoCards(scene){scene?.querySelectorAll('.photo-card').forEach(c=>c.classList.remove('show'))}
+function fillPacLane(){pacLane.querySelectorAll('.pellet').forEach(p=>p.remove());for(let i=0;i<24;i++){const d=document.createElement('span');d.className='pellet';d.style.left=((i+1)/25*100)+'%';pacLane.appendChild(d)}}
 fillPacLane();
 function runPacEffect(){
-  pacLane.querySelectorAll('.pellet').forEach(p=>p.style.opacity='1');
-  const pellets=[...pacLane.querySelectorAll('.pellet')];
-  const width=pacLane.clientWidth; const heroWidth=88; const total=1650; const start=performance.now();
-  msPac.style.left='-120px';
-  pacTheme.currentTime=0; if(!muted) pacTheme.play().catch(()=>{});
-  cancelAnimationFrame(pacRAF);
-  function frame(now){
-    const t=Math.min(1,(now-start)/total);
-    const x=-120 + (width+140)*t;
-    msPac.style.left=x+'px';
-    const mouth=x+70;
-    pellets.forEach(p=>{ if(p.style.opacity!=='0' && p.offsetLeft<=mouth){ p.style.opacity='0'; }});
-    if(t<1) pacRAF=requestAnimationFrame(frame);
-  }
-  pacRAF=requestAnimationFrame(frame);
+ pacLane.querySelectorAll('.pellet').forEach(p=>p.style.opacity='1');
+ const pellets=[...pacLane.querySelectorAll('.pellet')],width=pacLane.clientWidth,total=3100,start=performance.now();
+ msPac.style.left='-120px';if(!muted)safePlay(pacTheme,'arcade audio');
+ cancelAnimationFrame(pacRAF);
+ function frame(now){
+  if(scenes[index].id!=='pacScene'||!running)return;
+  const t=Math.min(1,(now-start)/total),x=-120+(width+150)*t;msPac.style.left=x+'px';
+  const mouth=x+76;pellets.forEach(p=>{if(p.style.opacity!=='0'&&p.offsetLeft<=mouth&&mouth>=p.offsetLeft-3)p.style.opacity='0'});
+  if(t<1)pacRAF=requestAnimationFrame(frame);
+ }
+ pacRAF=requestAnimationFrame(frame)
 }
 function spinSlots(){
-  const symbols=['7','♥','★','5','♦','♠','5','★','7','5'];
-  ['slotA','slotB'].forEach((id,idx)=>{
-    const strip=document.getElementById(id); strip.innerHTML='';
-    const h=strip.parentElement.clientHeight-12;
-    symbols.concat(['5']).forEach(sym=>{const cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=h+'px';cell.textContent=sym;strip.appendChild(cell);});
-    strip.style.transition='none'; strip.style.transform='translateY(0px)';
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      strip.style.transition='transform '+(1.55+idx*.25)+'s cubic-bezier(.14,.76,.18,1)';
-      strip.style.transform='translateY(-'+(symbols.length*(strip.parentElement.clientHeight-12))+'px)';
-    }));
-  });
-  if(!muted){slotAudio.currentTime=0;slotAudio.play().catch(()=>{});}
-  setTimeout(()=>{document.getElementById('slotResult').classList.add('show');},1800);
+ slotComplete=false;
+ const symbols=['7','♥','★','5','♦','♠','5','★','7','5'];
+ ['slotA','slotB'].forEach((id,i)=>{
+  const strip=document.getElementById(id);strip.innerHTML='';
+  const h=strip.parentElement.clientHeight-12;
+  symbols.concat(['5']).forEach(sym=>{let cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=h+'px';cell.textContent=sym;strip.appendChild(cell)});
+  strip.style.transition='none';strip.style.transform='translateY(0px)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   strip.style.transition='transform '+(2.1+i*.3)+'s cubic-bezier(.12,.73,.16,1)';
+   strip.style.transform='translateY(-'+(symbols.length*h)+'px)';
+  }));
+ });
+ document.getElementById('slotResult').classList.remove('show');
+ const token=sceneToken;
+ setTimeout(()=>{if(token===sceneToken)document.getElementById('slotResult').classList.add('show')},2700);
+ if(!muted){slotAudio.currentTime=0;safePlay(slotAudio,'slot machine')}
+}
+function isMusicScene(scene){return scene.id==='poemScene'||scene.classList.contains('photo-scene')||scene.classList.contains('finale-scene')}
+function syncMusic(scene){
+ if(muted||!running){songMama.volume=0;return}
+ if(isMusicScene(scene)){
+  if(songMama.paused)safePlay(songMama,'birthday music');
+  songMama.volume=.8;
+ }else songMama.volume=0;
 }
 function playSceneAudio(scene){
-  pacTheme.pause(); slotAudio.pause();
-  if(scene.classList.contains('photo-scene')){ if(!muted && songMama.paused){songMama.play().catch(()=>{});} }
-  else songMama.pause();
-  if(scene.id==='pacScene'){ runPacEffect(); }
-  if(scene.id==='slotOpening'){ spinSlots(); }
+ slotAudio.pause();pacTheme.pause();
+ if(scene.id==='slotOpening'){spinSlots()}
+ if(scene.id==='pacScene'){pacTheme.currentTime=0;runPacEffect()}
+ if(scene.id==='poemScene'&&songMama.currentTime>20){songMama.currentTime=0}
+ syncMusic(scene);
 }
-function stopAllAudio(){ [songMama,pacTheme,slotAudio].forEach(a=>{a.pause();}); }
+function stopAllAudio(){[slotAudio,pacTheme,songMama].forEach(a=>a.pause())}
+function effectiveDuration(scene){
+ let ms=Number(scene.dataset.duration)||5000;
+ if(scene.id==='slotOpening'&&Number.isFinite(slotAudio.duration)&&slotAudio.duration>0)ms=Math.max(ms,Math.ceil(slotAudio.duration*1000)+850);
+ return ms;
+}
 function activate(n){
-  scenes.forEach((s,i)=>s.classList.toggle('active',i===n));
-  index=n; progress.style.transition='none'; progress.style.width='0';
-  const scene=scenes[index];
-  if(scene.classList.contains('photo-scene')) showPhotoCards(scene);
-  playSceneAudio(scene);
-  plan(Number(scene.dataset.duration)||3000);
+ sceneToken++;
+ scenes.forEach((s,i)=>s.classList.toggle('active',i===n));
+ index=n;progress.style.transition='none';progress.style.width='0';
+ const scene=scenes[index];
+ if(scene.classList.contains('photo-scene'))showPhotoCards(scene);
+ playSceneAudio(scene);plan(effectiveDuration(scene));
 }
 function plan(ms){
-  clearTimeout(timer); remain=ms; startTime=performance.now();
-  if(!running) return;
-  progress.style.transition='width '+ms+'ms linear'; progress.style.width='100%';
-  timer=setTimeout(()=>go(index+1),ms);
+ clearTimeout(timer);remain=ms;startTime=performance.now();
+ if(!running)return;
+ progress.style.transition='none';progress.style.width='0';
+ requestAnimationFrame(()=>{if(running){progress.style.transition='width '+ms+'ms linear';progress.style.width='100%'}});
+ timer=setTimeout(()=>go(index+1),ms);
 }
 function go(next){
-  if(transitioning) return;
-  const current=scenes[index];
-  resetPhotoCards(current);
-  clearTimeout(timer);
-  const target=(next+scenes.length)%scenes.length;
-  if(!(current.classList.contains('photo-scene')&&scenes[target].classList.contains('photo-scene')))stopAllAudio();
-  const needsPacTransition = !(current.id==='pacScene' && scenes[target].id==='poemScene') && !(current.classList.contains('photo-scene') && scenes[target].classList.contains('photo-scene'));
-  if(!needsPacTransition){ activate(target); return; }
-  transitioning=true; pacTransition.classList.add('running');
-  setTimeout(()=>activate(target),320);
-  setTimeout(()=>{ pacTransition.classList.remove('running'); transitioning=false; },760);
+ if(!running||transitioning)return;
+ const current=scenes[index];resetPhotoCards(current);clearTimeout(timer);
+ const target=(next+scenes.length)%scenes.length,nextScene=scenes[target];
+ if(current.id==='slotOpening')slotAudio.pause();
+ if(current.id==='pacScene')pacTheme.pause();
+ if(!isMusicScene(nextScene)){songMama.volume=0}
+ const needsTransition=!(current.classList.contains('photo-scene')&&nextScene.classList.contains('photo-scene'));
+ if(!needsTransition){activate(target);return}
+ transitioning=true;pacTransition.classList.add('running');
+ setTimeout(()=>activate(target),240);
+ setTimeout(()=>{pacTransition.classList.remove('running');transitioning=false},650)
 }
 function togglePause(){
-  if(!running){
-    running=true; pauseBtn.textContent='Ⅱ Pause';
-    plan(Math.max(200, remain || Number(scenes[index].dataset.duration)||3000));
-    playSceneAudio(scenes[index]);
-  } else {
-    running=false; remain=Math.max(200, remain-(performance.now()-startTime));
-    clearTimeout(timer); pauseBtn.textContent='▶ Resume'; stopAllAudio(); progress.style.transition='none';
-    const computed=getComputedStyle(progress).width; progress.style.width=computed;
-  }
+ if(!running){
+  running=true;pauseBtn.textContent='Ⅱ Pause';
+  primeAudio();if(scenes[index].id==='slotOpening'&&!muted)safePlay(slotAudio,'slot machine');
+  if(scenes[index].id==='pacScene'&&!muted)safePlay(pacTheme,'arcade audio');
+  syncMusic(scenes[index]);plan(Math.max(200,remain||effectiveDuration(scenes[index])));
+ }else{
+  running=false;remain=Math.max(200,remain-(performance.now()-startTime));clearTimeout(timer);
+  pauseBtn.textContent='▶ Resume';stopAllAudio();progress.style.transition='none';progress.style.width=getComputedStyle(progress).width;
+ }
 }
 function startShow(){
-  document.getElementById('startScreen').classList.add('hidden'); running=true; activate(0);
+ document.getElementById('startScreen').classList.add('hidden');
+ running=true;audioMessage('♫ Music enabled');primeAudio();activate(0);
 }
-document.getElementById('start').addEventListener('click', startShow);
+document.getElementById('start').addEventListener('click',startShow);
 document.getElementById('prev').addEventListener('click',()=>go(index-1));
 document.getElementById('next').addEventListener('click',()=>go(index+1));
 pauseBtn.addEventListener('click',togglePause);
-soundBtn.addEventListener('click',()=>{ muted=!muted; soundBtn.textContent=muted?'♫ Muted':'♫ Sound on'; if(muted) stopAllAudio(); else playSceneAudio(scenes[index]); });
-document.getElementById('fullscreen').addEventListener('click',()=>{ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.(); });
-document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(index+1); if(e.key==='ArrowLeft') go(index-1); if(e.code==='Space' && document.getElementById('startScreen').classList.contains('hidden')) {e.preventDefault(); togglePause();} });
+soundBtn.addEventListener('click',()=>{
+ muted=!muted;soundBtn.textContent=muted?'♫ Sound off':'♫ Sound on';
+ if(muted){stopAllAudio();songPrimed=false;audioMessage('Sound off')}
+ else{
+  audioMessage('♫ Music enabled');primeAudio();
+  const scene=scenes[index];
+  if(scene.id==='slotOpening')safePlay(slotAudio,'slot machine');
+  if(scene.id==='pacScene')safePlay(pacTheme,'arcade audio');
+  syncMusic(scene);
+ }
+});
+document.getElementById('fullscreen').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.()});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(index+1);if(e.key==='ArrowLeft')go(index-1);if(e.code==='Space'&&document.getElementById('startScreen').classList.contains('hidden')){e.preventDefault();togglePause()}});
+slotAudio.addEventListener('loadedmetadata',()=>{
+ if(running&&scenes[index].id==='slotOpening'&&slotAudio.duration>0){
+  const played=performance.now()-startTime;const desired=effectiveDuration(scenes[index]);
+  if(desired>remain){clearTimeout(timer);plan(Math.max(500,desired-played))}
+ }
+});
+slotAudio.addEventListener('ended',()=>{slotComplete=true});
 </script>
 </body>
 </html>
