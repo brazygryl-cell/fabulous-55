@@ -455,7 +455,7 @@ function startJackpotFX(){
   const {w,h}=jackpotSize(),ctx=jackpotCtx;
   // Time changes pause with the scene. Don't reset effects just because the user pauses.
   if(!jackpotStart){
-   jackpotStart=now;jackpotLast=now;jackpotLaunch=now;
+   jackpotStart=now;jackpotLast=now;jackpotLaunch=now-650;
    document.getElementById('slotOpening').classList.add('jackpot-celebrating');
    for(let i=0;i<130;i++)jackpotPieces.push({x:Math.random()*w,y:-Math.random()*h*.9,vx:-.6+Math.random()*1.2,vy:1.5+Math.random()*2.5,w:4+Math.random()*5,h:7+Math.random()*8,a:Math.random()*6.28,c:['#ffda75','#ff8acb','#c9a2ff','#9af3dc','#fdf8e7'][i%5]});
   }
