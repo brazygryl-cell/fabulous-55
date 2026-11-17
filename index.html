@@ -198,6 +198,39 @@ body,#show{background:#15071e}
  .slot-machine{gap:18px}
 }
 @media(max-height:650px){#poemScene .poem{max-height:65dvh}.scene{padding-top:55px;padding-bottom:75px}.photo-wrap{height:65dvh}}
+
+/* Two playable birthday bonus levels: large mobile targets, vivid nostalgic arcade styling */
+.arcade-scene{gap:clamp(8px,1.9vh,20px)}
+.arcade-scene h2{font:900 clamp(24px,4.7vw,52px)/1.12 Georgia,serif;color:#ffe092;text-shadow:0 4px #773a92,0 0 22px #df74c16b}
+.arcade-scene .subtitle{font-size:clamp(14px,2vw,20px);padding:0 9px;color:#fce9f5}
+.arcade-heading{font:900 clamp(13px,2vw,19px) monospace;letter-spacing:.15em;color:#a7fce0;text-shadow:0 0 10px #38cead}
+.arcade-cabinet{width:min(92vw,640px);padding:13px;border:6px solid #a75fc5;border-radius:24px;background:linear-gradient(130deg,#f1b7db,#72368a);box-shadow:0 0 0 5px #f3ce7e,0 12px 36px #070212aa}
+.arcade-screen{position:relative;min-height:clamp(190px,34vh,295px);border:4px solid #2b1644;border-radius:13px;overflow:hidden;background:radial-gradient(ellipse at center,#532c7f,#201333 78%);box-shadow:inset 0 0 30px #160b2d}
+.arcade-screen:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff08 0,#ffffff08 1px,transparent 1px,transparent 5px);pointer-events:none}
+.collect-star{position:absolute;left:40%;top:24%;display:grid;place-items:center;width:88px;height:88px;border:0;border-radius:50%;background:radial-gradient(circle,#fff8bf 0%,#ffe49b 38%,#d987b8 73%,#863fa9 100%);box-shadow:0 0 23px #ffe991,0 0 52px #e16fcb;color:#9c4283;font-size:64px;line-height:1;touch-action:manipulation;user-select:none;animation:starBounce 1.05s ease-in-out infinite alternate}
+.collect-star:active{transform:scale(.92)}
+@keyframes starBounce{from{filter:brightness(.95)}to{filter:brightness(1.25)}}
+.arcade-score{position:absolute;bottom:10px;left:0;right:0;font:900 clamp(14px,2vw,20px) monospace;letter-spacing:.08em;color:#b5fbe8;text-shadow:0 0 9px #68dec4;pointer-events:none}
+.arcade-help{font:700 clamp(11px,1.5vw,14px) Arial,sans-serif;color:#f4d9eb}
+.match-screen{padding:16px 15px 45px;min-height:clamp(245px,40vh,370px)}
+.match-grid{height:100%;display:grid;grid-template-columns:repeat(3,minmax(70px,1fr));grid-template-rows:repeat(2,1fr);gap:clamp(7px,1.4vw,13px);max-width:475px;margin:0 auto}
+.match-card{width:100%;height:clamp(68px,12vh,125px);font-size:clamp(28px,5vw,45px);color:#ffd98b;background:linear-gradient(145deg,#6e3391,#3c175f);border:3px solid #d9a3e5;border-radius:10px;box-shadow:inset 0 0 0 3px #ffffff0b,0 4px 0 #2b123e;touch-action:manipulation;transition:background .15s,transform .15s}
+.match-card.is-flipped{background:linear-gradient(135deg,#fff7e0,#f9b9db);color:#722c78;transform:translateY(-2px)}
+.match-card.is-matched{border-color:#a4ffe6;background:#e2fff4;color:#7d3d86;box-shadow:0 0 18px #8afce688}
+.match-card:disabled{cursor:default}
+#slotOpening .slot-strip{will-change:transform}
+#slotResult.show{animation:jackpotPop .65s ease-out}
+@keyframes jackpotPop{0%{transform:scale(.55);opacity:0}65%{transform:scale(1.09);opacity:1}100%{transform:scale(1);opacity:1}}
+@media(max-width:550px){
+ .arcade-cabinet{width:min(95vw,460px);padding:8px;border-width:4px}
+ .arcade-screen{min-height:230px}
+ .collect-star{width:78px;height:78px;font-size:56px}
+ .match-screen{padding:9px 8px 41px}
+ .match-grid{gap:7px}
+ .match-card{height:79px;font-size:34px;border-width:2px}
+ .arcade-scene h2{font-size:clamp(23px,6vw,37px)}
+ .arcade-help{font-size:12px;max-width:92vw}
+}
 </style>
 </head>
 <body>
@@ -223,6 +256,17 @@ body,#show{background:#15071e}
         <div id="msPac"><div class="face"></div><div class="eye"></div><div class="lash1"></div><div class="lash2"></div><div class="lip"></div><div class="bow"><i></i></div></div>
       </div>
     </div>
+  </section>
+
+  <section class="scene arcade-scene" id="starQuest" data-duration="26000" data-interactive="1">
+    <div class="arcade-heading">★ BONUS STAGE 01 ★</div>
+    <h2>COLLECT 5 STARS!</h2>
+    <p class="subtitle">Tap the glowing stars to unlock Mom's next memory!</p>
+    <div class="arcade-cabinet"><div class="arcade-screen" id="starField" aria-label="Tap the moving stars">
+      <button class="collect-star" id="starTap" aria-label="Collect a star" type="button">★</button>
+      <div class="arcade-score" id="starScore">0 / 5 STARS</div>
+    </div></div>
+    <div class="arcade-help">Tap the big star five times · Or skip using Next ▶</div>
   </section>
 
   <section class="scene" id="poemScene" data-duration="28000">
@@ -251,6 +295,16 @@ I'm proud to be a part of you.</div>
 
   <section class="scene photo-scene" id="carouselB" data-duration="10500">
     <div class="eyebrow">A lifetime of beautiful moments</div><div class="photo-wrap layout-b"></div>
+  </section>
+
+  <section class="scene arcade-scene" id="memoryQuest" data-duration="32000" data-interactive="1">
+    <div class="arcade-heading">♥ BONUS STAGE 02 ♥</div>
+    <h2>MATCH THE MEMORIES!</h2>
+    <p class="subtitle">Flip the cards. Find all three matching pairs to advance!</p>
+    <div class="arcade-cabinet"><div class="arcade-screen match-screen"><div id="matchGrid" class="match-grid" aria-label="Memory matching game"></div>
+      <div class="arcade-score" id="matchScore">0 / 3 MATCHED</div>
+    </div></div>
+    <div class="arcade-help">Tap two cards at a time · Or skip using Next ▶</div>
   </section>
 
   <section class="scene photo-scene" id="carouselC" data-duration="11500">
@@ -291,7 +345,7 @@ const scenes=[...document.querySelectorAll('.scene')], progress=document.getElem
 const pacTransition=document.getElementById('pacTransition'),pauseBtn=document.getElementById('pause'),soundBtn=document.getElementById('sound');
 const slotAudio=document.getElementById('slotAudio'),songMama=document.getElementById('songMama'),pacTheme=document.getElementById('pacTheme');
 const pacLane=document.getElementById('pacLane'),msPac=document.getElementById('msPac'),notice=document.getElementById('audioNotice');
-let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false,audioContext=null,audioGains=null;
+let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0,sceneToken=0,unlocked=false,songPrimed=false,slotComplete=false,audioContext=null,audioGains=null,slotAnim=[],slotRAF=0,starCount=0,matchDeck=[],matchOpen=[],matchFound=0,matchBusy=false,miniAdvanceTimer=0;
 const photos=["assets/photos/01-young-mom.jpg","assets/photos/02-mom-and-baby.jpg","assets/photos/03-disney-family.jpg","assets/photos/04-family-living-room.jpg","assets/photos/05-vintage-portrait.jpg","assets/photos/06-pink-look.jpg","assets/photos/07-mother-daughter.jpg","assets/photos/08-family-adventure.jpg","assets/photos/09-family-fun.jpg","assets/photos/10-graduation.jpg","assets/photos/11-generations.jpg","assets/photos/12-family-portrait.jpg","assets/photos/13-together-again.jpg","assets/photos/14-recent-selfie.jpg"];
 songMama.loop=true;slotAudio.loop=false;pacTheme.loop=true;
 songMama.preload='auto';slotAudio.preload='auto';pacTheme.preload='auto';
@@ -355,22 +409,46 @@ function runPacEffect(){
  pacRAF=requestAnimationFrame(frame)
 }
 function spinSlots(){
- slotComplete=false;
- const symbols=['7','♥','★','5','♦','♠','5','★','7','5'];
+ slotComplete=false;cancelAnimationFrame(slotRAF);slotAnim.forEach(a=>a.cancel());slotAnim=[];
+ const token=sceneToken,spinStart=performance.now(),spinFor=6000;
  ['slotA','slotB'].forEach((id,i)=>{
   const strip=document.getElementById(id);strip.innerHTML='';
-  const h=strip.parentElement.clientHeight-12;
-  symbols.concat(['5']).forEach(sym=>{let cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=h+'px';cell.textContent=sym;strip.appendChild(cell)});
+  const h=Math.max(30,strip.parentElement.clientHeight-12);
+  // The final cell is 5; all frames remain in the strip until the jackpot beat.
+  const symbols=['7','♥','★','5','♦','♠','7','★','♥','5','5'];
+  symbols.forEach(sym=>{const cell=document.createElement('div');cell.className='slot-symbol';cell.style.height=h+'px';cell.textContent=sym;strip.appendChild(cell)});
   strip.style.transition='none';strip.style.transform='translateY(0px)';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-   strip.style.transition='transform '+(2.1+i*.3)+'s cubic-bezier(.12,.73,.16,1)';
-   strip.style.transform='translateY(-'+(symbols.length*h)+'px)';
-  }));
+  if(strip.animate){
+   const a=strip.animate([{transform:'translateY(0px)'},{transform:'translateY(-'+(9*h)+'px)'}],
+     {duration:900+i*135,iterations:Infinity,easing:'linear'});
+   slotAnim.push(a);
+  }
  });
  document.getElementById('slotResult').classList.remove('show');
- const token=sceneToken;
- setTimeout(()=>{if(token===sceneToken)document.getElementById('slotResult').classList.add('show')},2700);
  if(!muted){slotAudio.currentTime=0;safePlay(slotAudio,'slot machine')}
+ function frame(now){
+  if(token!==sceneToken||!running)return;
+  // Prefer the actual soundtrack clock; fall back to performance timing if muted or blocked.
+  const timeInSound=!slotAudio.paused&&slotAudio.currentTime>0?slotAudio.currentTime*1000:now-spinStart;
+  if(timeInSound<spinFor){
+   if(!slotAnim.length){
+    ['slotA','slotB'].forEach((id,i)=>{
+     const strip=document.getElementById(id),h=Math.max(30,strip.parentElement.clientHeight-12);
+     strip.style.transform='translateY(-'+(Math.floor((timeInSound/(100+i*15))%10)*h)+'px)';
+    });
+   }
+   slotRAF=requestAnimationFrame(frame);return;
+  }
+  slotAnim.forEach(a=>a.cancel());slotAnim=[];
+  ['slotA','slotB'].forEach((id,i)=>{
+   const strip=document.getElementById(id),h=Math.max(30,strip.parentElement.clientHeight-12);
+   strip.style.transition='transform '+(.38+i*.14)+'s cubic-bezier(.12,.85,.2,1)';
+   strip.style.transform='translateY(-'+(10*h)+'px)';
+  });
+  slotComplete=true;
+  setTimeout(()=>{if(token===sceneToken)document.getElementById('slotResult').classList.add('show')},600);
+ }
+ slotRAF=requestAnimationFrame(frame);
 }
 function isMusicScene(scene){return scene.id==='poemScene'||scene.classList.contains('photo-scene')||scene.classList.contains('finale-scene')}
 function syncMusic(scene){
@@ -393,11 +471,67 @@ function effectiveDuration(scene){
  if(scene.id==='slotOpening'&&Number.isFinite(slotAudio.duration)&&slotAudio.duration>0)ms=Math.max(ms,Math.ceil(slotAudio.duration*1000)+850);
  return ms;
 }
+function smallArcadeTone(freq=650){
+ if(muted||!running||!audioContext)return;
+ try{const o=audioContext.createOscillator(),g=audioContext.createGain();o.type='square';o.frequency.value=freq;g.gain.value=.045;o.connect(g);g.connect(audioContext.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.12);o.stop(audioContext.currentTime+.13)}catch(e){}
+}
+function arcadeWin(){
+ const token=sceneToken;audioMessage('★ Bonus level cleared!');
+ miniAdvanceTimer=setTimeout(()=>{if(token===sceneToken&&running)go(index+1)},1150);
+}
+function beginStars(){
+ starCount=0;document.getElementById('starScore').textContent='0 / 5 STARS';
+ document.getElementById('starTap').disabled=false;
+ positionStar();
+}
+function positionStar(){
+ const star=document.getElementById('starTap'),field=document.getElementById('starField');
+ const w=Math.max(120,field.clientWidth-110),h=Math.max(90,field.clientHeight-140);
+ const x=10+Math.random()*w,y=8+Math.random()*h;
+ star.style.left=x+'px';star.style.top=y+'px';
+}
+document.getElementById('starTap').addEventListener('click',()=>{
+ if(!running||scenes[index].id!=='starQuest'||starCount>=5)return;
+ starCount++;smallArcadeTone(480+starCount*95);
+ document.getElementById('starScore').textContent=starCount+' / 5 STARS';
+ if(starCount===5){document.getElementById('starTap').disabled=true;document.getElementById('starScore').textContent='★ LEVEL CLEARED! ★';arcadeWin()}
+ else positionStar();
+});
+function beginMemory(){
+ matchFound=0;matchBusy=false;matchOpen=[];
+ const symbols=['💜','💎','🎰','💜','💎','🎰'];
+ for(let i=symbols.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[symbols[i],symbols[j]]=[symbols[j],symbols[i]]}
+ matchDeck=symbols;
+ const grid=document.getElementById('matchGrid');grid.innerHTML='';
+ symbols.forEach((symbol,i)=>{
+  const btn=document.createElement('button');btn.type='button';btn.className='match-card';btn.dataset.index=String(i);
+  btn.textContent='?';btn.setAttribute('aria-label','Reveal mystery card '+(i+1));grid.appendChild(btn);
+ });
+ document.getElementById('matchScore').textContent='0 / 3 MATCHED';
+}
+document.getElementById('matchGrid').addEventListener('click',event=>{
+ const btn=event.target.closest('.match-card');
+ if(!btn||matchBusy||!running||scenes[index].id!=='memoryQuest'||btn.disabled||btn.classList.contains('is-flipped'))return;
+ const i=Number(btn.dataset.index);btn.textContent=matchDeck[i];btn.classList.add('is-flipped');matchOpen.push(btn);smallArcadeTone(700);
+ if(matchOpen.length<2)return;
+ const [a,b]=matchOpen;matchBusy=true;
+ if(matchDeck[Number(a.dataset.index)]===matchDeck[Number(b.dataset.index)]){
+  a.classList.add('is-matched');b.classList.add('is-matched');a.disabled=true;b.disabled=true;
+  matchFound++;document.getElementById('matchScore').textContent=matchFound+' / 3 MATCHED';matchOpen=[];matchBusy=false;
+  smallArcadeTone(850+matchFound*90);
+  if(matchFound===3){document.getElementById('matchScore').textContent='♥ PERFECT MATCH! ♥';arcadeWin()}
+ }else{
+  const token=sceneToken;
+  setTimeout(()=>{if(token!==sceneToken)return;a.textContent='?';b.textContent='?';a.classList.remove('is-flipped');b.classList.remove('is-flipped');matchOpen=[];matchBusy=false},700);
+ }
+});
 function activate(n){
  sceneToken++;
  scenes.forEach((s,i)=>s.classList.toggle('active',i===n));
  index=n;progress.style.transition='none';progress.style.width='0';
  const scene=scenes[index];
+ if(scene.id==='starQuest')beginStars();
+ if(scene.id==='memoryQuest')beginMemory();
  if(scene.classList.contains('photo-scene'))showPhotoCards(scene);
  playSceneAudio(scene);plan(effectiveDuration(scene));
 }
@@ -410,7 +544,7 @@ function plan(ms){
 }
 function go(next){
  if(!running||transitioning)return;
- const current=scenes[index];resetPhotoCards(current);clearTimeout(timer);
+ const current=scenes[index];resetPhotoCards(current);clearTimeout(timer);clearTimeout(miniAdvanceTimer);cancelAnimationFrame(slotRAF);slotAnim.forEach(a=>a.cancel());slotAnim=[];
  const target=(next+scenes.length)%scenes.length,nextScene=scenes[target];
  if(current.id==='slotOpening')slotAudio.pause();
  if(current.id==='pacScene')audioLevel(pacTheme,0);
