@@ -101,6 +101,37 @@ h2{font-family:Georgia,serif;font-size:clamp(2rem,6vw,4.8rem);line-height:1}
   .layout-c .photo-card:nth-child(6){right:12%;bottom:10%;width:24%;height:15%}
   #controls{font-size:14px}
 }
+
+/* Refinement: generous photography, simple elegant purple-and-gold presentation */
+body{background:#14051e}
+#show{background:radial-gradient(ellipse at 50% 22%,#6f2a8d 0%,#351044 48%,#14051e 100%)}
+.scene{padding:clamp(32px,5vh,70px) clamp(18px,5vw,70px) clamp(70px,12vh,110px)}
+.photo-scene{gap:8px}
+.photo-wrap{width:min(94vw,1250px);height:min(78vh,760px);filter:drop-shadow(0 16px 32px #09020d66)}
+.photo-card{border-radius:13px;padding:7px;background:linear-gradient(135deg,#ffebbf,#fff7e8);box-shadow:0 10px 35px #14021c99,0 0 0 1px #ffcc8466;overflow:hidden}
+.photo-card img{object-fit:contain;background:#291238;border-radius:8px}
+.photo-card .label{display:none}
+.photo-card:nth-child(1){z-index:2}.photo-card:nth-child(2){z-index:3}.photo-card:nth-child(3){z-index:4}
+.photo-card:nth-child(4){z-index:5}.photo-card:nth-child(5){z-index:6}.photo-card:nth-child(6){z-index:7}
+.betty-tag{padding:7px 19px;background:transparent;border:0;box-shadow:none}
+.betty-tag span:not(.kiss){display:none}
+.betty-tag .kiss{font-size:clamp(24px,4vw,38px)}
+#pacScene .betty-tag{position:absolute;top:9%;right:10%}
+#pacScene .frame{background:transparent;border:0;box-shadow:none;max-width:1150px}
+#slotOpening .frame{background:linear-gradient(145deg,#601f7a,#2b0a44);border:5px solid #ffd676;box-shadow:0 0 0 8px #af5da5,0 0 44px #f5bd7e75}
+#slotResult{color:#ffe08a;text-shadow:0 0 23px #efc276cc}
+#startScreen{background:radial-gradient(circle,#753194,#210931 74%)}
+#startScreen h1{font-size:clamp(4rem,13vw,10rem)}
+#poemScene .poem{font-family:Georgia,serif;max-width:min(91vw,1050px);font-size:clamp(15px,1.8vw,23px);line-height:1.52;padding:clamp(14px,2vw,30px);white-space:pre-line}
+#poemScene{padding-top:30px;padding-bottom:65px;gap:10px}
+#poemScene .eyebrow{letter-spacing:.18em}
+#controls{padding:7px 10px;gap:5px;max-width:96vw}
+@media(max-width:780px){
+ .photo-wrap{height:min(64dvh,610px)}
+ #poemScene .poem{font-size:clamp(12px,2.9vw,16px);line-height:1.46;padding:13px}
+ #poemScene{padding-top:25px;padding-bottom:70px}
+ .photo-card{padding:4px}
+}
 </style>
 </head>
 <body>
@@ -119,7 +150,7 @@ h2{font-family:Georgia,serif;font-size:clamp(2rem,6vw,4.8rem);line-height:1}
   </section>
 
   <section class="scene level-scene" id="pacScene" data-duration="2700">
-    <div class="betty-tag"><span class="kiss">💋</span><span>Betty Boop glam</span><span class="kiss">🎀</span></div>
+    <div class="betty-tag"><span class="kiss">💋</span><span>♥</span><span class="kiss">🎀</span></div>
     <div class="big-number">55</div>
     <div class="frame">
       <div class="pac-lane" id="pacLane">
@@ -149,24 +180,24 @@ I'm proud to be a part of you.</div>
   </section>
 
   <section class="scene photo-scene" id="carouselA" data-duration="6500">
-    <div class="betty-tag"><span class="kiss">💋</span><span>Betty Boop energy</span><span class="kiss">💜</span></div>
+    <div class="betty-tag"><span class="kiss">💋</span><span>♥</span><span class="kiss">💜</span></div>
     <div class="photo-wrap layout-a"></div>
   </section>
 
   <section class="scene photo-scene" id="carouselB" data-duration="6500">
-    <div class="betty-tag"><span class="kiss">🎀</span><span>Mother & daughter memories</span><span class="kiss">💋</span></div>
+    <div class="betty-tag"><span class="kiss">🎀</span><span>♥</span><span class="kiss">💋</span></div>
     <div class="photo-wrap layout-b"></div>
   </section>
 
   <section class="scene photo-scene" id="carouselC" data-duration="7000">
-    <div class="betty-tag"><span class="kiss">♥</span><span>Family love</span><span class="kiss">♥</span></div>
+    <div class="betty-tag"><span class="kiss">♥</span><span>♥</span><span class="kiss">♥</span></div>
     <div class="photo-wrap layout-c"></div>
   </section>
 
   <section class="scene finale-scene" data-duration="4200">
     <div class="heart">♥</div>
     <h2>Happy Birthday Mom</h2>
-    <div class="subtitle">55 and fabulous.</div>
+    
   </section>
 
   <div id="pacTransition" aria-hidden="true">
@@ -204,23 +235,19 @@ const pacTheme=document.getElementById('pacTheme');
 const pacLane=document.getElementById('pacLane');
 const msPac=document.getElementById('msPac');
 let index=0,running=false,transitioning=false,muted=false,timer=0,startTime=0,remain=0,pacRAF=0;
-const photos=[
-  'assets/photos/05-vintage-portrait.jpg','assets/photos/02-mom-and-baby.jpg','assets/photos/03-disney-family.jpg','assets/photos/04-family-living-room.jpg','assets/photos/06-pink-look.jpg',
-  'assets/photos/07-mother-daughter.jpg','assets/photos/08-family-adventure.jpg','assets/photos/09-family-fun.jpg','assets/photos/10-graduation.jpg','assets/photos/11-generations.jpg'
-];
+const photos=["assets/photos/01-young-mom.jpg","assets/photos/02-mom-and-baby.jpg","assets/photos/03-disney-family.jpg","assets/photos/04-family-living-room.jpg","assets/photos/05-vintage-portrait.jpg","assets/photos/06-pink-look.jpg","assets/photos/07-mother-daughter.jpg","assets/photos/08-family-adventure.jpg","assets/photos/09-family-fun.jpg","assets/photos/10-graduation.jpg","assets/photos/11-generations.jpg","assets/photos/12-family-portrait.jpg","assets/photos/13-together-again.jpg","assets/photos/14-recent-selfie.jpg"];
 function fillWrap(selector, photoIndexes){
   const wrap=document.querySelector(selector+' .photo-wrap');
   wrap.innerHTML='';
   photoIndexes.forEach((p,i)=>{
     const card=document.createElement('div');card.className='photo-card';card.style.setProperty('--rot', ((i%2?1:-1)*(Math.random()*5+1)).toFixed(1)+'deg');
     const img=document.createElement('img');img.src=photos[p];img.alt='Family photo';
-    const label=document.createElement('div');label.className='label';label.textContent=['LOVE','FAMILY','55','MOM','QUEEN','US'][i%6];
-    card.append(img,label);wrap.append(card);
+    card.append(img);wrap.append(card);
   });
 }
-fillWrap('#carouselA',[0,1,2,3,4]);
-fillWrap('#carouselB',[5,6,7,8]);
-fillWrap('#carouselC',[1,3,4,6,8,9]);
+fillWrap('#carouselA',[0,1,4,5,6]);
+fillWrap('#carouselB',[2,3,7,8]);
+fillWrap('#carouselC',[9,10,11,12,13,1]);
 function showPhotoCards(scene){
   scene.querySelectorAll('.photo-card').forEach((card,i)=>{
     setTimeout(()=>card.classList.add('show'), 110*i);
