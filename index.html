@@ -218,21 +218,31 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 .collage-scene .collage-grid img{animation:none}
 @media(max-width:768px){.memory-grid,.memory-grid.three{width:90vw;height:min(48dvh,460px);gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}.memory-grid.one{width:min(70vw,330px)}.memory-grid.three{grid-template-rows:repeat(2,minmax(0,1fr))}.memory-grid.three .memory-card:first-child{grid-row:span 2}.memory-card{padding:5px 5px 22px}.memory-card .photo-sticker{font-size:10px}.memory-scene h2{font-size:clamp(1.65rem,7vw,2.8rem)}}
 @media(max-width:768px) and (max-height:690px){.memory-grid,.memory-grid.three{height:37dvh}}
+
+/* FAST MINIMAL CUT: images first, no additional editorial text */
+#slotOpening .slot-stage{gap:clamp(6px,1.4vh,12px)}
+#slotOpening #slotResult{font-size:clamp(1.8rem,5.5vw,4.3rem)}
+.memory-scene{gap:0;justify-content:center}
+.memory-grid{height:min(73vh,710px);width:min(91vw,1150px)}
+.memory-grid.one{width:min(70vw,550px)}
+.memory-card{padding:clamp(5px,.7vw,9px);border-bottom:0;background:#fff3e7}
+.memory-card img{object-fit:contain}
+.collage-scene .collage-grid{height:min(75vh,720px)}
+.finale-scene{gap:clamp(12px,4vh,40px)}
+.finale-scene h2{font-size:clamp(2.6rem,8vw,7rem)}
+@media(max-width:768px){
+ .memory-grid,.memory-grid.three{height:min(64dvh,610px);width:93vw}
+ .memory-grid.one{width:min(79vw,370px)}
+ .collage-scene .collage-grid{height:min(65dvh,600px)}
+ .finale-scene h2{font-size:clamp(2.4rem,10vw,4.4rem)}
+}
 </style></head>
 <body>
 <main id="show">
-<div class="stars"></div><div id="status">FABULOUS 55 · FAST CUT V7</div>
-<section class="scene active" id="slotOpening" data-duration="5100"><div class="slot-stage"><div class="eyebrow">Welcome to the Fabulous 55 Casino</div><h2>SPIN TO WIN</h2><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2><p class="subtitle">The birthday queen has hit the jackpot!</p></div></section><section class="scene" data-duration="3600">
-<div class="eyebrow">Tonight's main event</div><h1>FABULOUS<br>55</h1>
-<div class="subtitle">The queen of the night has arrived.</div>
-<div class="pills"><span class="pill">✦ Purple glamour</span><span class="pill">♠ Vegas magic</span><span class="pill">♥ All the love</span></div>
-</section>
-<section class="scene" data-duration="3600"><div class="eyebrow">Welcome to the celebration</div><div class="marquee"><h2>55 & STILL<br>THE JACKPOT!</h2></div><p class="subtitle">A lifetime of love. A winning hand. One unforgettable woman.</p><div class="reels"><div class="reel">5</div><div class="reel">5</div><div class="reel">♥</div></div></section>
-<section class="scene level-scene" data-duration="3800"><div class="eyebrow">Player one is legendary</div><div class="level-heading"><h2>LEVEL</h2><div class="big-number">55</div></div><div class="arcade"><div class="arcade-track"><span class="level-pac" aria-hidden="true"></span><span class="level-dots" aria-hidden="true">● ● ● ● ● ●</span><span class="level-ghost" aria-hidden="true">♥</span><span class="level-star" aria-hidden="true">★</span></div></div><p class="subtitle">New level unlocked. More life. More laughter. More adventure.</p></section>
-<section class="scene" data-duration="8500"><div class="eyebrow">A star, then and now</div><h2>Beautiful at Every Age</h2><div class="frame" id="photoFrame"><div class="placeholder">✦ Her favorite photo goes here ✦</div></div><p class="subtitle">Some people just get more iconic every year.</p></section>
-<section class="scene" data-duration="8000"><div class="eyebrow">Vintage sweetheart energy</div><h2>Sweet. Sassy.<br>Unforgettable.</h2><p class="subtitle">A little Betty Boop charm, a whole lot of purple sparkle, and a personality nobody could ever duplicate.</p><div class="pills"><span class="pill">♥</span><span class="pill">✦</span><span class="pill">♥</span></div></section>
-
-<section class="scene" data-duration="5500"><div class="eyebrow">And the celebration continues</div><h2>Happy 55th Birthday!</h2><p class="subtitle">May this next chapter be full of joy, peace, laughter, luck, and every beautiful thing you deserve.</p><div class="marquee"><h2>WE LOVE YOU! ♥</h2></div><div class="eyebrow">The best is still ahead</div></section>
+<div class="stars"></div><div id="status">FABULOUS 55</div>
+<section class="scene active" id="slotOpening" data-duration="3900"><div class="slot-stage"><div class="slot-machine" id="slotMachine"><div class="slot-window"><div class="slot-strip" id="slotA"></div></div><div class="slot-window"><div class="slot-strip" id="slotB"></div></div></div><h2 id="slotResult">JACKPOT! 55!</h2></div></section><section class="scene level-scene" data-duration="1900"><div class="level-heading"><h2>LEVEL</h2><div class="big-number">55</div></div></section>
+<section class="scene" id="photoAnchor" data-duration="1000"></section>
+<section class="scene finale-scene" data-duration="3700"><h2>Happy 55th Birthday!</h2><div class="marquee"><h2>♥</h2></div></section>
 <div id="pacTransition" aria-hidden="true"><div class="pac-lane" id="pelletLane"></div><div id="pacHero"><svg class="ms-pac-svg" viewBox="-8 -25 125 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path class="ms-face" d="M 50 50 L 96 16 A 48 48 0 1 0 96 84 Z" fill="#ffdb19" stroke="#c68b00" stroke-width="1.6"/>
 <ellipse cx="64" cy="25" rx="5" ry="8" transform="rotate(17 64 25)" fill="#161023"/>
@@ -242,7 +252,7 @@ h2{font-size:clamp(2.4rem,7vw,6rem);color:var(--gold);line-height:1.04;text-shad
 <path d="M 104 74 Q 108 80 103 84" fill="none" stroke="#9c1446" stroke-width="1.5"/>
 </svg></div><div id="transitionLabel">Next Level</div></div><div id="particles" aria-hidden="true"></div><div id="progress"></div>
 <div id="controls"><button id="prev" aria-label="Previous scene">◀ Back</button><button id="pause" aria-label="Pause slideshow">Ⅱ Pause</button><button id="next" aria-label="Next scene">Next ▶</button><button id="sound" aria-label="Mute sound">♫ Sound on</button><button id="fullscreen" aria-label="Enter fullscreen">⛶ Fullscreen</button></div>
-<div id="startScreen"><div class="eyebrow">A very special birthday presentation</div><h1>FABULOUS<br>55</h1><p class="subtitle">Purple glam · Vegas sparkle · Arcade nostalgia · Family love</p><button class="start-btn" id="start">▶ START THE SHOW</button><p class="subtitle" style="font-size:13px;opacity:.8">Tap Start to enjoy the birthday show. It loops automatically.</p></div>
+<div id="startScreen"><h1>FABULOUS<br>55</h1><button class="start-btn" id="start">▶ START THE SHOW</button></div>
 </main>
 <script>
 'use strict';
@@ -339,42 +349,33 @@ function createScene(){
   return s;
 }
 function buildPlaylist(){
- const template=document.querySelector('#photoFrame')?.closest('.scene');
- if(!template)throw Error('Photo anchor unavailable');
- const sets=[
-  {title:'The Early Years',ids:[4,1],caption:'Every story starts with love.'},
-  {title:'Memories We Made',ids:[2,3,6],caption:'The adventures, laughter, and memories.'},
-  {title:'Always an Icon',ids:[0,5,13],caption:'Style, strength, and that unforgettable smile.'},
-  {title:'Adventures Together',ids:[7,8],caption:'More places. More laughter. More memories.'},
-  {title:'A Proud Moment',ids:[9],caption:'Always growing. Always glowing.'},
-  {title:'Love Through the Years',ids:[10,11,12],caption:'Family is everything.'}
- ];
- for(const set of sets){
-  const scene=createScene();scene.classList.add('memory-scene','photo-scene');scene.dataset.duration=set.ids.length===3?'5000':'4400';
-  const tag=document.createElement('div');tag.className='eyebrow';tag.textContent='55 Years of Memories';
-  const title=document.createElement('h2');title.textContent=set.title;
-  const grid=document.createElement('div');grid.className='memory-grid '+(set.ids.length===3?'three':set.ids.length===1?'one':'two');
-  set.ids.forEach((id,i)=>{
+ const anchor=document.getElementById('photoAnchor');
+ if(!anchor)throw Error('Photo anchor unavailable');
+ const groups=[[4,1],[2,3,6],[0,5,13],[7,8],[9],[10,11,12]];
+ for(const ids of groups){
+  const s=createScene();
+  s.classList.add('memory-scene','photo-scene');
+  s.dataset.duration=ids.length===3?'3000':'2700';
+  const grid=document.createElement('div');
+  grid.className='memory-grid '+(ids.length===3?'three':ids.length===1?'one':'two');
+  for(let i=0;i<ids.length;i++){
+   const item=PHOTOS[ids[i]];
    const card=document.createElement('div');card.className='memory-card';
-   const img=document.createElement('img');img.src=PHOTOS[id].src;img.alt=PHOTOS[id].caption;img.loading='eager';
-   const sticker=document.createElement('span');sticker.className='photo-sticker';sticker.textContent=['♥','✦','55'][i%3];
-   card.append(img,sticker);grid.append(card);
-  });
-  const caption=document.createElement('p');caption.className='slide-caption';caption.textContent=set.caption;
-  scene.append(tag,title,grid,caption);template.before(scene);
+   const img=document.createElement('img');img.src=item.src;img.alt='Family photograph';img.loading='eager';
+   card.append(img);grid.append(card);
+  }
+  s.append(grid);
+  anchor.before(s);
  }
- template.remove();
- const collage=createScene();collage.classList.add('collage-scene','photo-scene');collage.dataset.duration='6500';
- const label=document.createElement('div');label.className='eyebrow';label.textContent='The Greatest Gift';
- const head=document.createElement('h2');head.textContent='Family Is Everything';
+ anchor.remove();
+ const collage=createScene();collage.classList.add('collage-scene','photo-scene');
+ collage.dataset.duration='3500';
  const grid=document.createElement('div');grid.className='collage-grid';
- ['03-disney-family','04-family-living-room','08-family-adventure','11-generations','12-family-portrait','13-together-again'].forEach(id=>{
-  const img=document.createElement('img');img.src='assets/photos/'+id+'.jpg';img.alt='Family memory';grid.append(img)
- });
- const cap=document.createElement('p');cap.className='slide-caption';cap.textContent='Every chapter. Every memory. Every generation. So much love.';
- collage.append(label,head,grid,cap);
- const finale=[...document.querySelectorAll('.scene')].find(s=>s.textContent.includes('Happy 55th Birthday!'));
- if(finale)finale.before(collage);
+ for(const name of ['03-disney-family','04-family-living-room','08-family-adventure','11-generations','12-family-portrait','13-together-again']){
+  const img=document.createElement('img');img.src='assets/photos/'+name+'.jpg';img.alt='Family photograph';img.loading='eager';grid.append(img);
+ }
+ collage.append(grid);
+ document.querySelector('.finale-scene').before(collage);
  playlist=[...document.querySelectorAll('.scene')];
 }
 buildPlaylist();
@@ -397,12 +398,12 @@ function spinOpening(){
     requestAnimationFrame(()=>{
       requestAnimationFrame(()=>{
         const h=strip.firstElementChild.getBoundingClientRect().height;
-        strip.style.transition='transform '+(2.0+i*.4)+'s cubic-bezier(.12,.7,.19,1)';
+        strip.style.transition='transform '+(1.5+i*.35)+'s cubic-bezier(.12,.7,.19,1)';
         strip.style.transform='translateY(-'+(symbols.length*h)+'px)';
       });
     });
   });
-  spinTimers.push(setTimeout(()=>{machine.classList.add('winning');result.classList.add('revealed');confetti(45)},3100));
+  spinTimers.push(setTimeout(()=>{machine.classList.add('winning');result.classList.add('revealed');confetti(45)},2350));
 }
 function confetti(n=25){
   const chars=['✦','★','♥','◆','✧'];
@@ -425,7 +426,7 @@ function animatePellets(){
  hero.style.animation='none';
  const draw=now=>{
   if(!transitioning)return;
-  const fraction=Math.min(1,(now-start)/1750);
+  const fraction=Math.min(1,(now-start)/850);
   const x=-hw+(width+hw*2)*fraction;
   hero.style.left=x+'px';
   const mouth=x+hw*.9;
@@ -447,12 +448,12 @@ function pacCut(next){
  changeTimers.forEach(clearTimeout);changeTimers=[];
  transition.classList.remove('running');void transition.offsetWidth;transition.classList.add('running');
  animatePellets();playPacSound();
- changeTimers.push(setTimeout(()=>activate(target),850));
+ changeTimers.push(setTimeout(()=>activate(target),430));
  changeTimers.push(setTimeout(()=>{
   stopPellets();transition.classList.remove('running');transitioning=false;
   pacAudio.pause();if(currentPacSource){try{currentPacSource.stop()}catch(e){}currentPacSource=null}
   if(running)playCurrent();
- },1800));
+ },900));
 }
 function activate(n){
   index=(n+playlist.length)%playlist.length;
